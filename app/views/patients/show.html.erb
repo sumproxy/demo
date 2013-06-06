@@ -1,0 +1,35 @@
+<p id="notice" class="noprint"><%= notice %></p>
+
+<p>
+  <b>Last name:</b>
+  <%= @patient.last_name %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @patient.first_name %>
+</p>
+
+<p>
+  <b>Patronymic:</b>
+  <%= @patient.patronymic %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @patient.dob %>
+</p>
+
+<p>
+  <b>Liver condition:</b>
+  <%= @patient.liver_condition.condition %>
+</p>
+
+<p class="noprint">
+  <%= link_to 'Edit', edit_patient_path(@patient) %> |
+  <%= link_to 'Back', patients_path %>
+</p>
+
+<p class="noprint">
+  <input type="button" id="print" onclick="javascript:print()" value="Печать" />
+</p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  last_name: MyString
+  first_name: MyString
+  patronymic: MyString
+  dob: 2013-06-02
+  liver_condition: 
+
+two:
+  last_name: MyString
+  first_name: MyString
+  patronymic: MyString
+  dob: 2013-06-02
+  liver_condition: 
