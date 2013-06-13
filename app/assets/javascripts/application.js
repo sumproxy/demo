@@ -11,5 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.autocomplete
+//= require jquery.ui.datepicker
+//= require jquery.ui.datepicker-ru
 //= require jquery_ujs
 //= require_tree .

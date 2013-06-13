@@ -1,8 +1,25 @@
 <script type="text/javascript">
-window.onload = function() {
-  document.getElementById('patient_last_name').focus();
-}
+  // перевести фокус на поле с фамилией
+  $(function() {
+    $("#patient_last_name").focus();
+  });
+
+  // инициализировать календарь
+  $(function() {
+    $('#datepicker').datepicker(
+      $.extend(      
+        $.datepicker.regional[ "ru" ],
+        {
+          dateFormat: "yy-mm-dd",
+          yearRange: "-113:+0",
+          changeMonth: true,
+          changeYear: true
+        }
+      )
+    );
+  });
 </script>
+
 <%= form_for(@patient) do |f| %>
   <% if @patient.errors.any? %>
     <p>
@@ -33,7 +50,7 @@ window.onload = function() {
   </div>
   <div class="field">
     <%= f.label :dob %><br />
-    <%= f.date_select :dob %>
+    <%= f.text_field :dob, :id => "datepicker" %>
   </div>
   <div class="field">
     <%= f.label :liver_condition %><br />
