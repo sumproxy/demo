@@ -7,8 +7,13 @@ class SearchController < ApplicationController
         args[i] ||= ''
         args[i] += '%'
       end
-      condition = 'last_name LIKE ? and first_name LIKE ? and patronymic LIKE ? and dob LIKE ?'
-      @patients = Patient.where(condition, *args).limit(5)
+      condition = 'last_name LIKE ? AND first_name LIKE ? AND patronymic LIKE ? AND dob LIKE ?'
+      fields = [:id, :last_name, :first_name, :patronymic, :dob]
+      result = Patient.select(fields).where(condition, *args).limit(5)
+      @patients = []
+      result.each do |item|
+        @patients << {"id" => item.id, "label" => fields[1..-1].map{|f| item.send(f) }.join(' ') }
+      end
     end
     
     respond_to do |format|

@@ -12,7 +12,7 @@
       minLength: 1,
       select: function( event, ui ) {
         log( ui.item ?
-          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          ui.item.label + " id: " + ui.item.id :
           "Nothing selected, input was " + this.value );
       }
     });
@@ -20,11 +20,11 @@
 </script>
  
 <div class="ui-widget">
-  <label for="birds">Patients: </label>
+  <label for="birds">Введите ФИО пациента: </label>
   <input id="birds" />
 </div>
  
 <div class="ui-widget" style="margin-top: 2em; font-family: Arial;">
-  Result:
+  Результат:
   <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
 </div>
