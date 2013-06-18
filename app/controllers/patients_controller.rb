@@ -26,6 +26,13 @@ class PatientsController < ApplicationController
   # GET /patients/new.json
   def new
     @patient = Patient.new
+    if params[:term]
+      data = params[:term].split
+      @patient.last_name = data[0]
+      @patient.first_name = data[1]
+      @patient.patronymic = data[2]
+      @patient.dob = data[3]
+    end
 
     respond_to do |format|
       format.html # new.html.erb

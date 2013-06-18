@@ -5,11 +5,11 @@ one:
   first_name: MyString
   patronymic: MyString
   dob: 2013-06-02
-  liver_condition: 
+  sex: 
 
 two:
   last_name: MyString
   first_name: MyString
   patronymic: MyString
   dob: 2013-06-02
-  liver_condition: 
+  sex: 

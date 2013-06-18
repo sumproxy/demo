@@ -7,5 +7,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-LiverCondition.create(condition: 'без изменений')
-LiverCondition.create(condition: 'увеличена')
+Sex.create(value: 'мужской')
+Sex.create(value: 'женский')

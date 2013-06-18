@@ -1,28 +1,18 @@
 <p id="notice" class="noprint"><%= notice %></p>
 
 <p>
-  <b>Last name:</b>
-  <%= @patient.last_name %>
+  <b>ФИО:</b>
+  <%= [@patient.last_name, @patient.first_name, @patient.patronymic].join(' ') %>
 </p>
 
 <p>
-  <b>First name:</b>
-  <%= @patient.first_name %>
+  <b>Возраст:</b>
+  <%= age(@patient.dob) %>
 </p>
 
 <p>
-  <b>Patronymic:</b>
-  <%= @patient.patronymic %>
-</p>
-
-<p>
-  <b>Dob:</b>
-  <%= @patient.dob %>
-</p>
-
-<p>
-  <b>Liver condition:</b>
-  <%= @patient.liver_condition.condition %>
+  <b>Пол:</b>
+  <%= @patient.sex.value %>
 </p>
 
 <p class="noprint">

@@ -1,30 +1,56 @@
 <script>
   $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
+    function encode_url(url, parameters) {
+      var parametersEncoded = $.param(parameters);
+      var seperator = url.indexOf('?') == -1 ? "?" : "&";
+  
+      return(url + seperator + parametersEncoded);
     }
- 
-    $( "#birds" ).autocomplete({
-      autoFocus: true,
-      delay: 10,
-      source: "<%= search_index_path(:json) %>", // expands to "/search/index.json",
-      minLength: 1,
+
+
+    $("#autocomplete").autocomplete({
+      autoFocus: false,
+      delay: 1,
+      source: "<%= search_index_path(:json) %>", // то же самое что и "/search/index.json",
+      minLength: 2,
       select: function( event, ui ) {
-        log( ui.item ?
-          ui.item.label + " id: " + ui.item.id :
-          "Nothing selected, input was " + this.value );
+        // просмотр данных существующего пациента: GET /patients/:id
+        var url = "<%= patients_path %>" + "/" + ui.item.id;
+        $(location).attr("href", url);
+      }
+    });
+    
+    $("#autocomplete").keypress(function(e) {
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+      if(keycode == 13)
+      {
+        var val = $("#autocomplete").val();
+        // создание нового пациента: GET /patients/new + параметр term
+        url = "<%= new_patient_path %>"
+        url = encode_url(url, {term: val});
+        $(location).attr("href", url);
       }
     });
   });
 </script>
- 
-<div class="ui-widget">
-  <label for="birds">Введите ФИО пациента: </label>
-  <input id="birds" />
-</div>
- 
-<div class="ui-widget" style="margin-top: 2em; font-family: Arial;">
-  Результат:
-  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+<style>
+body {
+  text-align: center;
+  margin: 0 auto;
+}
+.autocomplete_field {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -250px;
+  margin-top: -150px;
+}
+ul.ui-autocomplete li.ui-menu-item {
+  text-align:left;
+}
+</style>
+
+<div class="autocomplete_field">
+  <label for="autocomplete">Введите данные пациента (Ф.И.О., дата рождения) или выберите из базы: </label><br />
+  <input id="autocomplete" size="70"/>
 </div>
