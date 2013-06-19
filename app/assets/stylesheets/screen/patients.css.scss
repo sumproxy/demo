@@ -36,3 +36,11 @@ tr.alt {
 td {
   font: 13px 'Lucida Grande', 'Lucida Sans Unicode', Arial, Helvetica, sans-serif;
 }
+
+.on_one_line
+{
+  text-align: left;
+  display: table-cell;
+  min-width: 10px;
+  padding-right: 10px;
+}

@@ -1,5 +1,5 @@
 <p id="notice" class="noprint"><%= notice %></p>
-
+<h1>Карта пациента</h1>
 <p>
   <b>ФИО:</b>
   <%= [@patient.last_name, @patient.first_name, @patient.patronymic].join(' ') %>
@@ -13,6 +13,11 @@
 <p>
   <b>Пол:</b>
   <%= @patient.sex.value %>
+</p>
+
+<p>
+  <b>Телефон:</b>
+  <%= @patient.phone %>
 </p>
 
 <p class="noprint">

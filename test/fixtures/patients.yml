@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  last_name: MyString
-  first_name: MyString
-  patronymic: MyString
+  last_name: MyString1
+  first_name: MyString1
+  patronymic: MyString1
   dob: 2013-06-02
-  sex: 
+  phone: 20-20-20
+  sex_id: 1
 
 two:
-  last_name: MyString
-  first_name: MyString
-  patronymic: MyString
+  last_name: MyString2
+  first_name: MyString2
+  patronymic: MyString2
   dob: 2013-06-02
-  sex: 
+  phone: +7(912)536-19-40
+  sex_id: 2

@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  value: MyString
+  id: 1
+  value: "мужской"
 
 two:
-  value: MyString
+  id: 2
+  value: "женский"

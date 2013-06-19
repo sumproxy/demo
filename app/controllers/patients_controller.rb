@@ -26,6 +26,8 @@ class PatientsController < ApplicationController
   # GET /patients/new.json
   def new
     @patient = Patient.new
+    @patient.build_address
+
     if params[:term]
       data = params[:term].split
       @patient.last_name = data[0]
@@ -49,6 +51,7 @@ class PatientsController < ApplicationController
   # POST /patients.json
   def create
     @patient = Patient.new(params[:patient])
+    @patient.build_address
 
     respond_to do |format|
       if @patient.save
