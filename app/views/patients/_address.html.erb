@@ -1,7 +1,7 @@
 <div class="field">
   <span class="on_one_line">
     <%= f.label :city %><br />
-    <%= f.text_field :city, :size => 15, :value => "Киров" %>
+    <%= f.text_field :city, :size => 15, :value => @patient.address.city || "Киров" %>
   </span>
   <span class="on_one_line">
     <%= f.label :street %><br />
