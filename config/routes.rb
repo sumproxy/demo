@@ -1,4 +1,7 @@
 Demo::Application.routes.draw do
+  resources :gynecologic_examinations
+
+
   get "search/index"
 
   resources :patients

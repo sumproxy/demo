@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Menstruation date:</b>
+  <%= @gynecologic_examination.menstruation_date %>
+</p>
+
+<p>
+  <b>Menstruation day:</b>
+  <%= @gynecologic_examination.menstruation_day %>
+</p>
+
+<p>
+  <b>Uterine length:</b>
+  <%= @gynecologic_examination.uterine_length %>
+</p>
+
+<p>
+  <b>Uterine anteroposterior:</b>
+  <%= @gynecologic_examination.uterine_anteroposterior %>
+</p>
+
+<p>
+  <b>Uterine width:</b>
+  <%= @gynecologic_examination.uterine_width %>
+</p>
+
+<p>
+  <b>Endometrial thickness:</b>
+  <%= @gynecologic_examination.endometrial_thickness %>
+</p>
+
+
+<%= link_to 'Edit', edit_gynecologic_examination_path(@gynecologic_examination) %> |
+<%= link_to 'Back', gynecologic_examinations_path %>

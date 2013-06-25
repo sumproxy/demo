@@ -1,0 +1,33 @@
+<h1>Listing gynecologic_examinations</h1>
+
+<table>
+  <tr>
+    <th>Menstruation date</th>
+    <th>Menstruation day</th>
+    <th>Uterine length</th>
+    <th>Uterine anteroposterior</th>
+    <th>Uterine width</th>
+    <th>Endometrial thickness</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gynecologic_examinations.each do |gynecologic_examination| %>
+  <tr>
+    <td><%= gynecologic_examination.menstruation_date %></td>
+    <td><%= gynecologic_examination.menstruation_day %></td>
+    <td><%= gynecologic_examination.uterine_length %></td>
+    <td><%= gynecologic_examination.uterine_anteroposterior %></td>
+    <td><%= gynecologic_examination.uterine_width %></td>
+    <td><%= gynecologic_examination.endometrial_thickness %></td>
+    <td><%= link_to 'Show', gynecologic_examination %></td>
+    <td><%= link_to 'Edit', edit_gynecologic_examination_path(gynecologic_examination) %></td>
+    <td><%= link_to 'Destroy', gynecologic_examination, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gynecologic examination', new_gynecologic_examination_path %>

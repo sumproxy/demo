@@ -11,13 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619142732) do
+ActiveRecord::Schema.define(:version => 20130625123754) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
     t.string   "street"
     t.string   "house"
     t.integer  "appartment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examinations", :force => true do |t|
+    t.date     "menstruation_date"
+    t.integer  "menstruation_day"
+    t.integer  "uterine_length"
+    t.integer  "uterine_anteroposterior"
+    t.integer  "uterine_width"
+    t.integer  "endometrial_thickness"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "uterine_boundary_id"
+  end
+
+  create_table "patient_examinations", :force => true do |t|
+    t.integer  "patient_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -38,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20130619142732) do
   add_index "patients", ["sex_id"], :name => "index_patients_on_sex_id"
 
   create_table "sexes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "uterine_boundaries", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

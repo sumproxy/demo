@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  menstruation_date: 2013-06-25
+  menstruation_day: 1
+  uterine_length: 1
+  uterine_anteroposterior: 1
+  uterine_width: 1
+  endometrial_thickness: 1
+
+two:
+  menstruation_date: 2013-06-25
+  menstruation_day: 1
+  uterine_length: 1
+  uterine_anteroposterior: 1
+  uterine_width: 1
+  endometrial_thickness: 1

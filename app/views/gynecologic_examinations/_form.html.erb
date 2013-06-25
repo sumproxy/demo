@@ -1,0 +1,45 @@
+<%= form_for(@gynecologic_examination) do |f| %>
+  <% if @gynecologic_examination.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gynecologic_examination.errors.count, "error") %> prohibited this gynecologic_examination from being saved:</h2>
+
+      <ul>
+      <% @gynecologic_examination.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :menstruation_date %><br />
+    <%= f.text_field :menstruation_date, :id => "datepicker", :size => 10 %>
+  </div>
+  <div class="field">
+    <%= f.label :menstruation_day %><br />
+    <%= f.number_field :menstruation_day, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_length %><br />
+    <%= f.number_field :uterine_length, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_anteroposterior %><br />
+    <%= f.number_field :uterine_anteroposterior, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_width %><br />
+    <%= f.number_field :uterine_width, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :endometrial_thickness %><br />
+    <%= f.number_field :endometrial_thickness, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_boundary %><br />
+    <%= f.collection_select :uterine_boundary_id, UterineBoundary.all, :id, :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
