@@ -37,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label :uterine_boundary %><br />
-    <%= f.collection_select :uterine_boundary_id, UterineBoundary.all, :id, :value %>
+    <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
   </div>
   <div class="actions">
     <%= f.submit %>

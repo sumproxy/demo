@@ -11,13 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625123754) do
+ActiveRecord::Schema.define(:version => 20130627104342) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
     t.string   "street"
     t.string   "house"
     t.integer  "appartment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_boundaries", :force => true do |t|
+    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -56,12 +62,6 @@ ActiveRecord::Schema.define(:version => 20130625123754) do
   add_index "patients", ["sex_id"], :name => "index_patients_on_sex_id"
 
   create_table "sexes", :force => true do |t|
-    t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "uterine_boundaries", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

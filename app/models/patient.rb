@@ -24,7 +24,7 @@ class Patient < ActiveRecord::Base
 
   def phone_format
     return true if phone.nil? || phone.empty?
-    value = phone.gsub(/\s/, '').gsub(/-/, '').gsub(/\(/,'').gsub(/\)/,'')
+    value = phone.gsub(/\s|-|\(|\)/,'') # remove spaces, dashes, parentheses
     errors.add(:phone, "неверный формат данных: #{phone}") unless value =~ /^((\+7|8)\d{10}|^((\+7|8)8332)?\d{6})/
   end
 end

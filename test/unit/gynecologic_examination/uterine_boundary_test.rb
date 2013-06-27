@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UterineBoundaryTest < ActiveSupport::TestCase
+class GynecologicExamination::UterineBoundaryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
