@@ -39,6 +39,50 @@
     <%= f.label :uterine_boundary %><br />
     <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
   </div>
+  <div class="field">
+    <%= f.label :uterine_adumbration %><br />
+    <%= f.collection_select :uterine_adumbration_id, GynecologicExamination::UterineAdumbration.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_shape %><br />
+    <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_size %><br />
+    <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :endometrial_boundary %><br />
+    <%= f.collection_select :endometrial_boundary_id, GynecologicExamination::EndometrialBoundary.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :endometrial_adumbration %><br />
+    <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :endometrium_phase %><br />
+    <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_cavity_deformation %><br />
+    <%= f.collection_select :uterine_cavity_deformation_id, GynecologicExamination::UterineCavityDeformation.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_cavity_size %><br />
+    <%= f.collection_select :uterine_cavity_size_id, GynecologicExamination::UterineCavitySize.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :cervix_visibility %><br />
+    <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :cervix_size %><br />
+    <%= f.collection_select :cervix_size_id, GynecologicExamination::CervixSize.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :cervix_structure_change %><br />
+    <%= f.collection_select :cervix_structure_change_id, GynecologicExamination::CervixStructureChange.all, :id, :value %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

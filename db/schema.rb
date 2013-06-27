@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627104342) do
+ActiveRecord::Schema.define(:version => 20130627131613) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -22,7 +22,73 @@ ActiveRecord::Schema.define(:version => 20130627104342) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "gynecologic_examination_cervix_sizes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_cervix_structure_changes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_cervix_visibilities", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrial_adumbrations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrial_boundaries", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrium_phases", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_adumbrations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "gynecologic_examination_uterine_boundaries", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_cavity_deformations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_cavity_sizes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_shapes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_sizes", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -35,9 +101,20 @@ ActiveRecord::Schema.define(:version => 20130627104342) do
     t.integer  "uterine_anteroposterior"
     t.integer  "uterine_width"
     t.integer  "endometrial_thickness"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "uterine_boundary_id"
+    t.integer  "uterine_adumbration_id"
+    t.integer  "uterine_shape_id"
+    t.integer  "uterine_size_id"
+    t.integer  "endometrial_boundary_id"
+    t.integer  "endometrial_adumbration_id"
+    t.integer  "endometrium_phase_id"
+    t.integer  "uterine_cavity_deformation_id"
+    t.integer  "uterine_cavity_size_id"
+    t.integer  "cervix_visibility_id"
+    t.integer  "cervix_size_id"
+    t.integer  "cervix_structure_change_id"
   end
 
   create_table "patient_examinations", :force => true do |t|
