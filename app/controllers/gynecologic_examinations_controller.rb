@@ -25,6 +25,8 @@ class GynecologicExaminationsController < ApplicationController
   # GET /gynecologic_examinations/new.json
   def new
     @gynecologic_examination = GynecologicExamination.new
+    @gynecologic_examination.build_left_ovary
+    @gynecologic_examination.build_right_ovary
 
     respond_to do |format|
       format.html # new.html.erb

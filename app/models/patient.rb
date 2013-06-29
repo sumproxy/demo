@@ -3,6 +3,7 @@ class Patient < ActiveRecord::Base
   belongs_to :sex
   belongs_to :address, :dependent => :destroy
   has_many :patient_examinations, :dependent => :destroy
+  has_many :gynecologic_examinations, :through => :patient_examinations
   accepts_nested_attributes_for :address, :allow_destroy => true
   attr_accessible :dob, :first_name, :last_name, :patronymic, :phone, :sex_id, :address_id, :address_attributes
   validates :last_name, :first_name, :patronymic, :dob, :sex_id, :presence => true
@@ -24,7 +25,7 @@ class Patient < ActiveRecord::Base
 
   def phone_format
     return true if phone.nil? || phone.empty?
-    value = phone.gsub(/\s|-|\(|\)/,'') # remove spaces, dashes, parentheses
+    value = phone.gsub(/\s|-|\(|\)/,'') # удалить пробелы, тире, скобки
     errors.add(:phone, "неверный формат данных: #{phone}") unless value =~ /^((\+7|8)\d{10}|^((\+7|8)8332)?\d{6})/
   end
 end

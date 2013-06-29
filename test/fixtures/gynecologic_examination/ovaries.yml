@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  length: 1
+  thickness: 1
+  width: 1
+
+two:
+  length: 1
+  thickness: 1
+  width: 1

@@ -63,3 +63,16 @@ if GynecologicExamination::CervixStructureChange.all.empty?
   GynecologicExamination::CervixStructureChange.create(value: 'не изменена')
   GynecologicExamination::CervixStructureChange.create(value: 'изменена')
 end
+if GynecologicExamination::Ovary::Visibility.all.empty?
+  GynecologicExamination::Ovary::Visibility.create(value: 'определяется')
+  GynecologicExamination::Ovary::Visibility.create(value: 'не определяется')
+end
+if GynecologicExamination::Ovary::Size.all.empty?
+  GynecologicExamination::Ovary::Size.create(value: 'обычные')
+  GynecologicExamination::Ovary::Size.create(value: 'увеличены')
+  GynecologicExamination::Ovary::Size.create(value: 'уменьшены')
+end
+if GynecologicExamination::Ovary::Structure.all.empty?
+  GynecologicExamination::Ovary::Structure.create(value: 'обычная')
+  GynecologicExamination::Ovary::Structure.create(value: 'изменена')
+end

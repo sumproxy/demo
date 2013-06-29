@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627131613) do
+ActiveRecord::Schema.define(:version => 20130628090834) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -53,6 +53,35 @@ ActiveRecord::Schema.define(:version => 20130627131613) do
   end
 
   create_table "gynecologic_examination_endometrium_phases", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovaries", :force => true do |t|
+    t.integer  "length"
+    t.integer  "thickness"
+    t.integer  "width"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "visibility_id"
+    t.integer  "size_id"
+    t.integer  "structure_id"
+  end
+
+  create_table "gynecologic_examination_ovary_sizes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_structures", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_visibilities", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -115,6 +144,8 @@ ActiveRecord::Schema.define(:version => 20130627131613) do
     t.integer  "cervix_visibility_id"
     t.integer  "cervix_size_id"
     t.integer  "cervix_structure_change_id"
+    t.integer  "left_ovary_id"
+    t.integer  "right_ovary_id"
   end
 
   create_table "patient_examinations", :force => true do |t|

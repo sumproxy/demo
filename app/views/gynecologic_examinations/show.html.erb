@@ -89,5 +89,20 @@
   <b>Cervix Structure Change</b>
   <%= @gynecologic_examination.cervix_structure_change.value %>
 </p>
+
+<p>
+  <b>Left Ovary</b>
+  <%= lo = @gynecologic_examination.left_ovary;
+    [lo.length, lo.thickness, lo.width, lo.visibility.value, lo.size.value, lo.structure.value].join(' ')
+  %>
+</p>
+
+<p>
+  <b>Right Ovary</b>
+  <%= ro = @gynecologic_examination.right_ovary;
+    [ro.length, ro.thickness, ro.width, ro.visibility.value, ro.size.value, ro.structure.value].join(' ')
+   %>
+</p>
+
 <%= link_to 'Edit', edit_gynecologic_examination_path(@gynecologic_examination) %> |
 <%= link_to 'Back', gynecologic_examinations_path %>

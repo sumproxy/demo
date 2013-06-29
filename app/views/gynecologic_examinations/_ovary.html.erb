@@ -1,0 +1,26 @@
+<div class="field">
+  <span class="on_one_line">
+    <%= f.label :length %><br />
+    <%= f.number_field :length, :style => "width:50px;" %>
+  </span>
+  <span class="on_one_line">
+    <%= f.label :thickness %><br />
+    <%= f.number_field :thickness, :style => "width:50px;" %>
+  </span>
+  <span class="on_one_line">
+    <%= f.label :width %><br />
+    <%= f.number_field :width, :style => "width:50px;" %>
+  </span>
+  <span class="on_one_line">
+    <%= f.label :visibility %><br />
+    <%= f.collection_select :visibility_id, GynecologicExamination::Ovary::Visibility.all, :id, :value %>
+  </span>
+  <span class="on_one_line">
+    <%= f.label :size %><br />
+    <%= f.collection_select :size_id, GynecologicExamination::Ovary::Size.all, :id, :value %>
+  </span>
+  <span class="on_one_line">
+    <%= f.label :structure %><br />
+    <%= f.collection_select :structure_id, GynecologicExamination::Ovary::Structure.all, :id, :value %>
+  </span>
+</div>

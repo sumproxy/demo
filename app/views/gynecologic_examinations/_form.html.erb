@@ -83,6 +83,18 @@
     <%= f.label :cervix_structure_change %><br />
     <%= f.collection_select :cervix_structure_change_id, GynecologicExamination::CervixStructureChange.all, :id, :value %>
   </div>
+  <div class="field">
+    Left Ovary:
+    <%= f.fields_for :left_ovary do |builder| %>
+      <%= render "ovary", :f => builder %>
+    <% end %>
+  </div>
+  <div class="field">
+    Right Ovary:
+    <%= f.fields_for :right_ovary do |builder| %>
+      <%= render "ovary", :f => builder %>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
