@@ -1,14 +1,11 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Menstruation date:</b>
-  <%= @gynecologic_examination.menstruation_date %>
-</p>
-
-<p>
-  <b>Menstruation day:</b>
-  <%= @gynecologic_examination.menstruation_day %>
-</p>
+<h3>Протокол ультразвукового исследования
+  на аппарате Sono Ace R3 фирмы Medison</h3>
+<p>(ул. Розы Люксембург, д.77, тел. 46-15-10)</p>
+Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
+Дата последней менструации
+<%= l(@gynecologic_examination.menstruation_date, :format => :long) %>,
+(<%= @gynecologic_examination.menstruation_day %>-й день)
 
 <p>
   <b>Uterine length:</b>

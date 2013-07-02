@@ -3,7 +3,7 @@ class Patient < ActiveRecord::Base
   belongs_to :sex
   belongs_to :address, :dependent => :destroy
   has_many :patient_examinations, :dependent => :destroy
-  has_many :gynecologic_examinations, :through => :patient_examinations
+  has_many :gynecologic_examinations, :through => :patient_examinations, :dependent => :destroy
   accepts_nested_attributes_for :address, :allow_destroy => true
   attr_accessible :dob, :first_name, :last_name, :patronymic, :phone, :sex_id, :address_id, :address_attributes
   validates :last_name, :first_name, :patronymic, :dob, :sex_id, :presence => true

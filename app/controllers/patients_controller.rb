@@ -51,7 +51,6 @@ class PatientsController < ApplicationController
   # POST /patients.json
   def create
     @patient = Patient.new(params[:patient])
-    @patient.build_address
 
     respond_to do |format|
       if @patient.save
@@ -84,6 +83,10 @@ class PatientsController < ApplicationController
   # DELETE /patients/1.json
   def destroy
     @patient = Patient.find(params[:id])
+    PatientExamination.where(:patient_id => @patient.id).each do |pe|
+      pe.examination.destroy
+      pe.destroy
+    end
     @patient.destroy
 
     respond_to do |format|

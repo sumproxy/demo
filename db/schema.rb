@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130628090834) do
+ActiveRecord::Schema.define(:version => 20130701085007) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -150,8 +150,9 @@ ActiveRecord::Schema.define(:version => 20130628090834) do
 
   create_table "patient_examinations", :force => true do |t|
     t.integer  "patient_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "gynecologic_examination_id"
   end
 
   create_table "patients", :force => true do |t|

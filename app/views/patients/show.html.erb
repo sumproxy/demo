@@ -20,6 +20,19 @@
   <%= format_address(@patient.address) %>
 </p>
 
+<p>
+  <b>Предыдущие обследования:</b><br />
+  <% @patient.patient_examinations.order(:created_at).each do |pe| %>
+    <%= link_to pe.examination_type.to_s, gynecologic_examination_path(:id => pe.examination, :patient_id => @patient.id) %>
+    <%= l pe.created_at.in_time_zone("Moscow"), :format => :long %><br />
+  <% end %>
+  
+</p>
+
+<p class="noprint">
+  <%= link_to 'New Gynecologic Examination', new_gynecologic_examination_path(:patient_id => @patient.id) %>
+<p>
+
 <p class="noprint">
   <%= link_to 'Edit', edit_patient_path(@patient) %> |
   <%= link_to 'Back', patients_path %>

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class GynecologicExaminationsController < ApplicationController
   # GET /gynecologic_examinations
   # GET /gynecologic_examinations.json
@@ -14,6 +15,7 @@ class GynecologicExaminationsController < ApplicationController
   # GET /gynecologic_examinations/1.json
   def show
     @gynecologic_examination = GynecologicExamination.find(params[:id])
+    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,6 +29,8 @@ class GynecologicExaminationsController < ApplicationController
     @gynecologic_examination = GynecologicExamination.new
     @gynecologic_examination.build_left_ovary
     @gynecologic_examination.build_right_ovary
+    # передаем значение @patient.id через hidden_field_tag для gynecologic_examinations#create
+    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,15 +47,19 @@ class GynecologicExaminationsController < ApplicationController
   # POST /gynecologic_examinations.json
   def create
     @gynecologic_examination = GynecologicExamination.new(params[:gynecologic_examination])
-
-    respond_to do |format|
-      if @gynecologic_examination.save
-        format.html { redirect_to @gynecologic_examination, notice: 'Gynecologic examination was successfully created.' }
-        format.json { render json: @gynecologic_examination, status: :created, location: @gynecologic_examination }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @gynecologic_examination.errors, status: :unprocessable_entity }
+    if params[:patient_id]
+      respond_to do |format|
+        if @gynecologic_examination.save
+          PatientExamination.create(:patient_id => params[:patient_id], :gynecologic_examination_id => @gynecologic_examination.id).save
+          format.html { redirect_to @gynecologic_examination, notice: 'Gynecologic examination was successfully created.' }
+          format.json { render json: @gynecologic_examination, status: :created, location: @gynecologic_examination }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @gynecologic_examination.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to :root, notice: 'Невозможно создать отчет без привязки к пациенту. Для создания отчета используйте карту пациента.'
     end
   end
 
@@ -75,6 +83,7 @@ class GynecologicExaminationsController < ApplicationController
   # DELETE /gynecologic_examinations/1.json
   def destroy
     @gynecologic_examination = GynecologicExamination.find(params[:id])
+    PatientExamination.where(:gynecologic_examination_id => @gynecologic_examination.id).each {|exam| exam.destroy }
     @gynecologic_examination.destroy
 
     respond_to do |format|

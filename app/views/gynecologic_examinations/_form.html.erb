@@ -95,6 +95,7 @@
       <%= render "ovary", :f => builder %>
     <% end %>
   </div>
+  <%= hidden_field_tag 'patient_id', @patient.id %>
   <div class="actions">
     <%= f.submit %>
   </div>
