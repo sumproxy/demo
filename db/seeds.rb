@@ -55,10 +55,10 @@ if GynecologicExamination::UterineCavityDeformation.all.empty?
   GynecologicExamination::UterineCavityDeformation.create(value: 'деформирована')
   GynecologicExamination::UterineCavityDeformation.create(value: '-- не задано --')
 end
-if GynecologicExamination::UterineCavitySize.all.empty?
-  GynecologicExamination::UterineCavitySize.create(value: 'не расширена')
-  GynecologicExamination::UterineCavitySize.create(value: 'расширена')
-  GynecologicExamination::UterineCavitySize.create(value: '-- не задано --')
+if GynecologicExamination::UterineCavitySizeChange.all.empty?
+  GynecologicExamination::UterineCavitySizeChange.create(value: 'не расширена')
+  GynecologicExamination::UterineCavitySizeChange.create(value: 'расширена')
+  GynecologicExamination::UterineCavitySizeChange.create(value: '-- не задано --')
 end
 if GynecologicExamination::CervixVisibility.all.empty?
   GynecologicExamination::CervixVisibility.create(value: 'определяется')
