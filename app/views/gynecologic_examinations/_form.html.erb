@@ -1,10 +1,10 @@
-<%= nested_form_for(@gynecologic_examination) do |f| %>
-  <% if @gynecologic_examination.errors.any? %>
+<%= nested_form_for(@gyn_exam) do |f| %>
+  <% if @gyn_exam.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@gynecologic_examination.errors.count, "error") %> prohibited this gynecologic_examination from being saved:</h2>
+      <h2><%= pluralize(@gyn_exam.errors.count, "error") %> prohibited this gynecologic_examination from being saved:</h2>
 
       <ul>
-      <% @gynecologic_examination.errors.full_messages.each do |msg| %>
+      <% @gyn_exam.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -99,8 +99,8 @@
     <%= f.collection_select :uterine_cavity_deformation_id, GynecologicExamination::UterineCavityDeformation.all, :id, :value %>
   </div>
   <div class="field">
-    <%= f.label :uterine_cavity_size %><br />
-    <%= f.collection_select :uterine_cavity_size_id, GynecologicExamination::UterineCavitySize.all, :id, :value %>
+    <%= f.label :uterine_cavity_size_change %><br />
+    <%= f.collection_select :uterine_cavity_size_change_id, GynecologicExamination::UterineCavitySizeChange.all, :id, :value %>
   </div>
   <div class="field">
     <%= f.label :cervix_visibility %><br />

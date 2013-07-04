@@ -13,17 +13,17 @@
     <th></th>
   </tr>
 
-<% @gynecologic_examinations.each do |gynecologic_examination| %>
+<% @gyn_exams.each do |gyn_exam| %>
   <tr>
-    <td><%= gynecologic_examination.menstruation_date %></td>
-    <td><%= gynecologic_examination.menstruation_day %></td>
-    <td><%= gynecologic_examination.uterine_length %></td>
-    <td><%= gynecologic_examination.uterine_anteroposterior %></td>
-    <td><%= gynecologic_examination.uterine_width %></td>
-    <td><%= gynecologic_examination.endometrial_thickness %></td>
-    <td><%= link_to 'Show', gynecologic_examination %></td>
-    <td><%= link_to 'Edit', edit_gynecologic_examination_path(gynecologic_examination) %></td>
-    <td><%= link_to 'Destroy', gynecologic_examination, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= gyn_exam.menstruation_date %></td>
+    <td><%= gyn_exam.menstruation_day %></td>
+    <td><%= gyn_exam.uterine_length %></td>
+    <td><%= gyn_exam.uterine_anteroposterior %></td>
+    <td><%= gyn_exam.uterine_width %></td>
+    <td><%= gyn_exam.endometrial_thickness %></td>
+    <td><%= link_to 'Show', gyn_exam %></td>
+    <td><%= link_to 'Edit', edit_gynecologic_examination_path(gyn_exam) %></td>
+    <td><%= link_to 'Destroy', gyn_exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
