@@ -14,65 +14,114 @@ end
 if GynecologicExamination::UterineBoundary.all.empty?
   GynecologicExamination::UterineBoundary.create(value: 'чёткие')
   GynecologicExamination::UterineBoundary.create(value: 'нечёткие')
+  GynecologicExamination::UterineBoundary.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineAdumbration.all.empty?
   GynecologicExamination::UterineAdumbration.create(value: 'ровные')
   GynecologicExamination::UterineAdumbration.create(value: 'неровные')
+  GynecologicExamination::UterineAdumbration.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineShape.all.empty?
   GynecologicExamination::UterineShape.create(value: 'обычная')
   GynecologicExamination::UterineShape.create(value: 'шаровидная')
   GynecologicExamination::UterineShape.create(value: 'неправильная')
+  GynecologicExamination::UterineShape.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineSize.all.empty?
   GynecologicExamination::UterineSize.create(value: 'обычные')
   GynecologicExamination::UterineSize.create(value: 'увеличены')
   GynecologicExamination::UterineSize.create(value: 'уменьшены')
+  GynecologicExamination::UterineSize.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometrialBoundary.all.empty?
   GynecologicExamination::EndometrialBoundary.create(value: 'чёткие')
   GynecologicExamination::EndometrialBoundary.create(value: 'нечёткие')
+  GynecologicExamination::EndometrialBoundary.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometrialAdumbration.all.empty?
   GynecologicExamination::EndometrialAdumbration.create(value: 'ровные')
   GynecologicExamination::EndometrialAdumbration.create(value: 'неровные')
+  GynecologicExamination::EndometrialAdumbration.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometriumPhase.all.empty?
   GynecologicExamination::EndometriumPhase.create(value: 'I')
   GynecologicExamination::EndometriumPhase.create(value: 'периовуляторной')
   GynecologicExamination::EndometriumPhase.create(value: 'II')
   GynecologicExamination::EndometriumPhase.create(value: 'не соответствует')
+  GynecologicExamination::EndometriumPhase.create(value: ' -- не задано --')
 end
 if GynecologicExamination::UterineCavityDeformation.all.empty?
   GynecologicExamination::UterineCavityDeformation.create(value: 'не деформирована')
   GynecologicExamination::UterineCavityDeformation.create(value: 'деформирована')
+  GynecologicExamination::UterineCavityDeformation.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineCavitySize.all.empty?
   GynecologicExamination::UterineCavitySize.create(value: 'не расширена')
   GynecologicExamination::UterineCavitySize.create(value: 'расширена')
+  GynecologicExamination::UterineCavitySize.create(value: '-- не задано --')
 end
 if GynecologicExamination::CervixVisibility.all.empty?
   GynecologicExamination::CervixVisibility.create(value: 'определяется')
   GynecologicExamination::CervixVisibility.create(value: 'не определяется')
+  GynecologicExamination::CervixVisibility.create(value: '-- не задано --')
 end
 if GynecologicExamination::CervixSize.all.empty?
   GynecologicExamination::CervixSize.create(value: 'обычных размеров')
   GynecologicExamination::CervixSize.create(value: 'укорочена')
+  GynecologicExamination::CervixSize.create(value: '-- не задано --')
 end
 if GynecologicExamination::CervixStructureChange.all.empty?
   GynecologicExamination::CervixStructureChange.create(value: 'не изменена')
   GynecologicExamination::CervixStructureChange.create(value: 'изменена')
+  GynecologicExamination::CervixStructureChange.create(value: '-- не задано --')
 end
 if GynecologicExamination::Ovary::Visibility.all.empty?
   GynecologicExamination::Ovary::Visibility.create(value: 'определяется')
   GynecologicExamination::Ovary::Visibility.create(value: 'не определяется')
+  GynecologicExamination::Ovary::Visibility.create(value: '-- не задано --')
 end
 if GynecologicExamination::Ovary::Size.all.empty?
   GynecologicExamination::Ovary::Size.create(value: 'обычные')
   GynecologicExamination::Ovary::Size.create(value: 'увеличены')
   GynecologicExamination::Ovary::Size.create(value: 'уменьшены')
+  GynecologicExamination::Ovary::Size.create(value: '-- не задано --')
 end
 if GynecologicExamination::Ovary::Structure.all.empty?
   GynecologicExamination::Ovary::Structure.create(value: 'обычная')
   GynecologicExamination::Ovary::Structure.create(value: 'изменена')
+  GynecologicExamination::Ovary::Structure.create(value: '-- не задано --')
+end
+if GynecologicExamination::UterineBodyVisibility.all.empty?
+  GynecologicExamination::UterineBodyVisibility.create(value: 'определяется')
+  GynecologicExamination::UterineBodyVisibility.create(value: 'не определяется')
+  GynecologicExamination::UterineBodyVisibility.create(value: '-- не задано --')
+end
+if GynecologicExamination::UterineBodyDetectionPosition.all.empty?
+  GynecologicExamination::UterineBodyDetectionPosition.create(value: 'в обычном положении')
+  GynecologicExamination::UterineBodyDetectionPosition.create(value: 'retroflexio')
+  GynecologicExamination::UterineBodyDetectionPosition.create(value: '-- не задано --')
+end
+if GynecologicExamination::MyometricStructureChange.all.empty?
+  GynecologicExamination::MyometricStructureChange.create(value: 'не изменена')
+  GynecologicExamination::MyometricStructureChange.create(value: 'изменена')
+  GynecologicExamination::MyometricStructureChange.create(value: '-- не задано --')
+end
+if GynecologicExamination::MyometricStructureNode::Localization.all.empty?
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в передней стенке')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в задней стенке')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в правом ребре')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в левом ребре')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в дне')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в области перешейка')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в передней поверхности шейки')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в задней поверхности шейки')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: '-- не задано --')
+end
+if GynecologicExamination::MyometricStructureNode::DepthLocalization.all.empty?
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субсерозно')
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально-субсерозно')
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально')
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально-субмукозно')
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субмукозно')
+  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: '-- не задано --')
 end

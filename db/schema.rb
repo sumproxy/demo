@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701085007) do
+ActiveRecord::Schema.define(:version => 20130704110859) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -58,6 +58,33 @@ ActiveRecord::Schema.define(:version => 20130701085007) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "gynecologic_examination_myometric_structure_changes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_myometric_structure_node_depth_localizations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_myometric_structure_node_localizations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_myometric_structure_nodes", :force => true do |t|
+    t.integer  "size"
+    t.integer  "gynecologic_examination_id"
+    t.integer  "localization_id"
+    t.integer  "depth_localization_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
   create_table "gynecologic_examination_ovaries", :force => true do |t|
     t.integer  "length"
     t.integer  "thickness"
@@ -88,6 +115,18 @@ ActiveRecord::Schema.define(:version => 20130701085007) do
   end
 
   create_table "gynecologic_examination_uterine_adumbrations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_body_detection_positions", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_uterine_body_visibilities", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -130,8 +169,8 @@ ActiveRecord::Schema.define(:version => 20130701085007) do
     t.integer  "uterine_anteroposterior"
     t.integer  "uterine_width"
     t.integer  "endometrial_thickness"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "uterine_boundary_id"
     t.integer  "uterine_adumbration_id"
     t.integer  "uterine_shape_id"
@@ -146,6 +185,9 @@ ActiveRecord::Schema.define(:version => 20130701085007) do
     t.integer  "cervix_structure_change_id"
     t.integer  "left_ovary_id"
     t.integer  "right_ovary_id"
+    t.integer  "uterine_body_visibility_id"
+    t.integer  "uterine_body_detection_position_id"
+    t.integer  "myometric_structure_change_id"
   end
 
   create_table "patient_examinations", :force => true do |t|
@@ -154,6 +196,8 @@ ActiveRecord::Schema.define(:version => 20130701085007) do
     t.datetime "updated_at",                 :null => false
     t.integer  "gynecologic_examination_id"
   end
+
+  add_index "patient_examinations", ["patient_id", "gynecologic_examination_id"], :name => "index_on_patient_id_and_gynecologic_examination_id"
 
   create_table "patients", :force => true do |t|
     t.string   "last_name"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  size: 1
+  gynecologic_examination_id: 1
+  localization_id: 1
+  depth_localization_id: 1
+
+two:
+  size: 1
+  gynecologic_examination_id: 1
+  localization_id: 1
+  depth_localization_id: 1

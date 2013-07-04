@@ -33,7 +33,6 @@ class PatientsController < ApplicationController
       @patient.last_name = data[0]
       @patient.first_name = data[1]
       @patient.patronymic = data[2]
-      @patient.dob = data[3]
     end
 
     respond_to do |format|

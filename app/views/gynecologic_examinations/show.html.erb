@@ -1,90 +1,66 @@
-<p id="notice"><%= notice %></p>
-<h3>Протокол ультразвукового исследования
-  на аппарате Sono Ace R3 фирмы Medison</h3>
-<p>(ул. Розы Люксембург, д.77, тел. 46-15-10)</p>
+<p id="notice" class="noprint"><%= notice %></p>
+<h4>Протокол ультразвукового исследования
+  на аппарате Sono Ace R3 фирмы Medison</h4>
+<p>(ул. Розы Люксембург, д.77, тел. 46-15-10)</p><br />
 Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
-Дата последней менструации
-<%= l(@gynecologic_examination.menstruation_date, :format => :long) %>,
+Дата последней менструации <%= l @gynecologic_examination.menstruation_date, :format => :long %>,
 (<%= @gynecologic_examination.menstruation_day %>-й день)
 
 <p>
-  <b>Uterine length:</b>
-  <%= @gynecologic_examination.uterine_length %>
-</p>
-
-<p>
-  <b>Uterine anteroposterior:</b>
-  <%= @gynecologic_examination.uterine_anteroposterior %>
-</p>
-
-<p>
-  <b>Uterine width:</b>
-  <%= @gynecologic_examination.uterine_width %>
-</p>
-
-<p>
-  <b>Endometrial thickness:</b>
-  <%= @gynecologic_examination.endometrial_thickness %>
-</p>
-
-<p>
-  <b>Uterine Boundaries</b>
-  <%= @gynecologic_examination.uterine_boundary.value %>
-</p>
-
-<p>
-  <b>Uterine Adumbration</b>
-  <%= @gynecologic_examination.uterine_adumbration.value %>
-</p>
-
-<p>
-  <b>Uterine Shape</b>
-  <%= @gynecologic_examination.uterine_shape.value %>
-</p>
-
-<p>
-  <b>Uterine Size</b>
-  <%= @gynecologic_examination.uterine_size.value %>
-</p>
-
-<p>
-  <b>Endometrial Boundaries</b>
-  <%= @gynecologic_examination.endometrial_boundary.value %>
-</p>
-
-<p>
-  <b>Endometrial Adumbration</b>
-  <%= @gynecologic_examination.endometrial_adumbration.value %>
-</p>
-
-<p>
-  <b>Endometrium Phase</b>
-  <%= @gynecologic_examination.endometrium_phase.value %>
-</p>
-
-<p>
-  <b>Uterine Cavity Deformation</b>
-  <%= @gynecologic_examination.uterine_cavity_deformation.value %>
-</p>
-
-<p>
-  <b>Uterine Cavity Size</b>
-  <%= @gynecologic_examination.uterine_cavity_size.value %>
-</p>
-
-<p>
-  <b>Cervix Visibility</b>
-  <%= @gynecologic_examination.cervix_visibility.value %>
-</p>
-
-<p>
-  <b>Cervix Size</b>
-  <%= @gynecologic_examination.cervix_size.value %>
-</p>
-
-<p>
-  <b>Cervix Structure Change</b>
-  <%= @gynecologic_examination.cervix_structure_change.value %>
+  Тело матки: <%= @gynecologic_examination.uterine_body_visibility.value %>
+  <%= @gynecologic_examination.uterine_body_detection_position.value if @gynecologic_examination.uterine_body_visibility.value == 'определяется' %>
+  <% if @gynecologic_examination.uterine_body_visibility.value == 'определяется' %>
+    <p>
+      Границы <%= @gynecologic_examination.uterine_boundary.value %>.
+      Контуры <%= @gynecologic_examination.uterine_adumbration.value %>.
+      Форма <%= @gynecologic_examination.uterine_shape.value %>.
+    </p>
+    <p>
+      Размеры <%= @gynecologic_examination.uterine_size.value %><br />
+      длина: <%= @gynecologic_examination.uterine_length %><br />
+      передне-задний: <%= @gynecologic_examination.uterine_anteroposterior %><br />
+      ширина: <%= @gynecologic_examination.uterine_width %>
+    </p>
+    <p>
+      Структура миометрия: <%= @gynecologic_examination.myometric_structure_change.value -%>
+      <%- if @gynecologic_examination.myometric_structure_change.value == 'изменена' %>, узлы:<br />
+        <% @gynecologic_examination.myometric_structure_nodes.each do |node| %>
+          &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, <%= node.size %> мм<br />
+        <% end %>
+      <% end %><br />
+      М-эхо: толщина <%= @gynecologic_examination.endometrial_thickness %> мм,
+      границы <%= @gynecologic_examination.endometrial_boundary.value %>,
+      контуры <%= @gynecologic_examination.endometrial_adumbration.value %>
+    </p>
+    <p>
+      Эндометрий <%= 'не' if @gynecologic_examination.endometrium_phase.value == 'не соответствует' %> соответствует
+      <%= @gynecologic_examination.endometrium_phase.value unless @gynecologic_examination.endometrium_phase.value == 'не соответствует' %> фазе менструального цикла.
+    </p>
+    <p>
+      <b>Uterine Cavity Deformation</b>
+      <%= @gynecologic_examination.uterine_cavity_deformation.value %>
+    </p>
+    
+    <p>
+      <b>Uterine Cavity Size</b>
+      <%= @gynecologic_examination.uterine_cavity_size.value %>
+    </p>
+    
+    <p>
+      <b>Cervix Visibility</b>
+      <%= @gynecologic_examination.cervix_visibility.value %>
+    </p>
+    
+    <p>
+      <b>Cervix Size</b>
+      <%= @gynecologic_examination.cervix_size.value %>
+    </p>
+    
+    <p>
+      <b>Cervix Structure Change</b>
+      <%= @gynecologic_examination.cervix_structure_change.value %>
+    </p>
+  <% end %>
 </p>
 
 <p>

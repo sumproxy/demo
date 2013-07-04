@@ -15,4 +15,5 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-ru
 //= require jquery_ujs
+//= require jquery_nested_form
 //= require_tree .

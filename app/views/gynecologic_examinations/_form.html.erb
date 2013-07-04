@@ -1,4 +1,4 @@
-<%= form_for(@gynecologic_examination) do |f| %>
+<%= nested_form_for(@gynecologic_examination) do |f| %>
   <% if @gynecologic_examination.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@gynecologic_examination.errors.count, "error") %> prohibited this gynecologic_examination from being saved:</h2>
@@ -20,20 +20,12 @@
     <%= f.number_field :menstruation_day, :style => "width:50px;" %>
   </div>
   <div class="field">
-    <%= f.label :uterine_length %><br />
-    <%= f.number_field :uterine_length, :style => "width:50px;" %>
+    <%= f.label :uterine_body_visibility %><br />
+    <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
   </div>
   <div class="field">
-    <%= f.label :uterine_anteroposterior %><br />
-    <%= f.number_field :uterine_anteroposterior, :style => "width:50px;" %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_width %><br />
-    <%= f.number_field :uterine_width, :style => "width:50px;" %>
-  </div>
-  <div class="field">
-    <%= f.label :endometrial_thickness %><br />
-    <%= f.number_field :endometrial_thickness, :style => "width:50px;" %>
+    <%= f.label :uterine_body_detection_position %><br />
+    <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
   </div>
   <div class="field">
     <%= f.label :uterine_boundary %><br />
@@ -50,6 +42,45 @@
   <div class="field">
     <%= f.label :uterine_size %><br />
     <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_length %><br />
+    <%= f.number_field :uterine_length, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_anteroposterior %><br />
+    <%= f.number_field :uterine_anteroposterior, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :uterine_width %><br />
+    <%= f.number_field :uterine_width, :style => "width:50px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :myometric_structure_change %><br />
+    <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
+  </div>
+  <%= f.fields_for :myometric_structure_nodes do |node_form| %>
+  <div class="field">
+    <span class="on_one_line">
+      <%= node_form.label :localization %><br />
+      <%= node_form.collection_select :localization_id, GynecologicExamination::MyometricStructureNode::Localization.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= node_form.label :depth_localization %><br />
+      <%= node_form.collection_select :depth_localization_id, GynecologicExamination::MyometricStructureNode::DepthLocalization.all, :id, :value %>
+    </span>    <span class="on_one_line">
+      <%= node_form.label :size %><br />
+      <%= node_form.number_field :size, :style => "width:50px;" %>
+    </span>
+    <span class="on_one_line"><br />
+      <%= node_form.link_to_remove "Удалить узел" %>
+    </span>
+  </div>
+  <% end %>
+  <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
+  <div class="field">
+    <%= f.label :endometrial_thickness %><br />
+    <%= f.number_field :endometrial_thickness, :style => "width:50px;" %>
   </div>
   <div class="field">
     <%= f.label :endometrial_boundary %><br />
@@ -95,7 +126,7 @@
       <%= render "ovary", :f => builder %>
     <% end %>
   </div>
-  <%= hidden_field_tag 'patient_id', @patient.id %>
+  <%= hidden_field_tag 'patient_id', params[:patient_id] %>
   <div class="actions">
     <%= f.submit %>
   </div>

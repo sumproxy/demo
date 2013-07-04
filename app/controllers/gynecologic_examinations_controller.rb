@@ -15,7 +15,7 @@ class GynecologicExaminationsController < ApplicationController
   # GET /gynecologic_examinations/1.json
   def show
     @gynecologic_examination = GynecologicExamination.find(params[:id])
-    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
+    @patient = @gynecologic_examination.patients.first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,8 +29,6 @@ class GynecologicExaminationsController < ApplicationController
     @gynecologic_examination = GynecologicExamination.new
     @gynecologic_examination.build_left_ovary
     @gynecologic_examination.build_right_ovary
-    # передаем значение @patient.id через hidden_field_tag для gynecologic_examinations#create
-    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
 
     respond_to do |format|
       format.html # new.html.erb
