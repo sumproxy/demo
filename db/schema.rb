@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704123359) do
+ActiveRecord::Schema.define(:version => 20130705085743) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(:version => 20130704123359) do
   end
 
   create_table "gynecologic_examination_endometrial_boundaries", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrium_echostructure_change_types", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrium_echostructure_changes", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -169,8 +181,8 @@ ActiveRecord::Schema.define(:version => 20130704123359) do
     t.integer  "uterine_anteroposterior"
     t.integer  "uterine_width"
     t.integer  "endometrial_thickness"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "uterine_boundary_id"
     t.integer  "uterine_adumbration_id"
     t.integer  "uterine_shape_id"
@@ -188,6 +200,8 @@ ActiveRecord::Schema.define(:version => 20130704123359) do
     t.integer  "uterine_body_visibility_id"
     t.integer  "uterine_body_detection_position_id"
     t.integer  "myometric_structure_change_id"
+    t.integer  "endometrium_echostructure_change_id"
+    t.integer  "endometrium_echostructure_change_type_id"
   end
 
   create_table "patient_examinations", :force => true do |t|

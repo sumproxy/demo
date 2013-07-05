@@ -91,6 +91,14 @@
     <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
   </div>
   <div class="field">
+    <%= f.label :endometrium_echostructure_change %><br />
+    <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
+  </div>  
+  <div class="field">
+    <%= f.label :endometrium_echostructure_change_type %><br />
+    <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
+  </div>
+  <div class="field">
     <%= f.label :endometrium_phase %><br />
     <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
   </div>

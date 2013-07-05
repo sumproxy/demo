@@ -44,9 +44,9 @@ if GynecologicExamination::EndometrialAdumbration.all.empty?
   GynecologicExamination::EndometrialAdumbration.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometriumPhase.all.empty?
-  GynecologicExamination::EndometriumPhase.create(value: 'I')
+  GynecologicExamination::EndometriumPhase.create(value: 'I-й')
   GynecologicExamination::EndometriumPhase.create(value: 'периовуляторной')
-  GynecologicExamination::EndometriumPhase.create(value: 'II')
+  GynecologicExamination::EndometriumPhase.create(value: 'II-й')
   GynecologicExamination::EndometriumPhase.create(value: 'не соответствует')
   GynecologicExamination::EndometriumPhase.create(value: ' -- не задано --')
 end
@@ -124,4 +124,15 @@ if GynecologicExamination::MyometricStructureNode::DepthLocalization.all.empty?
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально-субмукозно')
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субмукозно')
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: '-- не задано --')
+end
+if GynecologicExamination::EndometriumEchostructureChange.all.empty?
+  GynecologicExamination::EndometriumEchostructureChange.create(value: 'не изменена')
+  GynecologicExamination::EndometriumEchostructureChange.create(value: 'изменена')
+  GynecologicExamination::EndometriumEchostructureChange.create(value: '-- не задано --')
+end
+if GynecologicExamination::EndometriumEchostructureChangeType.all.empty?
+  GynecologicExamination::EndometriumEchostructureChangeType.create(value: 'неоднородное')
+  GynecologicExamination::EndometriumEchostructureChangeType.create(value: 'больше гиперэхогенное')
+  GynecologicExamination::EndometriumEchostructureChangeType.create(value: 'гиперэхогенное включение')
+  GynecologicExamination::EndometriumEchostructureChangeType.create(value: '-- не задано --')
 end
