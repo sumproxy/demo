@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705085743) do
+ActiveRecord::Schema.define(:version => 20130705113749) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -62,6 +62,20 @@ ActiveRecord::Schema.define(:version => 20130705085743) do
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrium_echostructure_hyperechoic_inclusion_localizations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_endometrium_echostructure_hyperechoic_inclusions", :force => true do |t|
+    t.integer  "gynecologic_examination_id"
+    t.integer  "size"
+    t.integer  "localization_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "gynecologic_examination_endometrium_phases", :force => true do |t|

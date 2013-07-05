@@ -32,7 +32,12 @@
       М-эхо: толщина <%= @gyn_exam.endometrial_thickness %> мм,
       границы <%= @gyn_exam.endometrial_boundary.value %>,
       контуры <%= @gyn_exam.endometrial_adumbration.value %>,
-      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>, <%= @gyn_exam.endometrium_echostructure_change_type.value %>.
+      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>, <%= @gyn_exam.endometrium_echostructure_change_type.value -%>
+      <%- if @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %>:<br />
+        <%- @gyn_exam.endometrium_echostructure_hyperechoic_inclusions.each do |inclusion| -%>
+          &bull; <%= inclusion.localization.value %>, <%= inclusion.size %> мм<br />
+        <%- end -%>
+      <%- end -%>
     </p>
     <p>
       Эндометрий <%= 'не' if @gyn_exam.endometrium_phase.value == 'не соответствует' %> соответствует

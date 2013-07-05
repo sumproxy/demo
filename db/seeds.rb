@@ -136,3 +136,9 @@ if GynecologicExamination::EndometriumEchostructureChangeType.all.empty?
   GynecologicExamination::EndometriumEchostructureChangeType.create(value: 'гиперэхогенное включение')
   GynecologicExamination::EndometriumEchostructureChangeType.create(value: '-- не задано --')
 end
+if GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.all.empty?
+  GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в нижней трети')
+  GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в средней трети')
+  GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в дне')
+  GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: '-- не задано --')
+end

@@ -1,0 +1,11 @@
+<span class="on_one_line">
+  <%= f.label :size %><br />
+  <%= f.number_field :size, :style => "width:50px;" %>
+</span>
+<span class="on_one_line">
+  <%= f.label :localization %><br />
+  <%= f.collection_select :localization_id, GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.all, :id, :value %>
+</span>
+<span class="on_one_line"><br />
+  <%= f.link_to_remove "Удалить" %>
+</span>

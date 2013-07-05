@@ -1,0 +1,14 @@
+<span class="on_one_line">
+  <%= f.label :localization %><br />
+  <%= f.collection_select :localization_id, GynecologicExamination::MyometricStructureNode::Localization.all, :id, :value %>
+</span>
+<span class="on_one_line">
+  <%= f.label :depth_localization %><br />
+  <%= f.collection_select :depth_localization_id, GynecologicExamination::MyometricStructureNode::DepthLocalization.all, :id, :value %>
+</span>    <span class="on_one_line">
+  <%= f.label :size %><br />
+  <%= f.number_field :size, :style => "width:50px;" %>
+</span>
+<span class="on_one_line"><br />
+  <%= f.link_to_remove "Удалить узел" %>
+</span>
