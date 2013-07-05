@@ -7,7 +7,7 @@
   <%= f.collection_select :depth_localization_id, GynecologicExamination::MyometricStructureNode::DepthLocalization.all, :id, :value %>
 </span>    <span class="on_one_line">
   <%= f.label :size %><br />
-  <%= f.number_field :size, :style => "width:50px;" %>
+  <%= f.number_field :size, :style => "width:50px;", :step => "any" %>
 </span>
 <span class="on_one_line"><br />
   <%= f.link_to_remove "Удалить узел" %>

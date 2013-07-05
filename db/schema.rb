@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705113749) do
+ActiveRecord::Schema.define(:version => 20130705124821) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20130705113749) do
 
   create_table "gynecologic_examination_endometrium_echostructure_hyperechoic_inclusions", :force => true do |t|
     t.integer  "gynecologic_examination_id"
-    t.integer  "size"
+    t.float    "size"
     t.integer  "localization_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20130705113749) do
   end
 
   create_table "gynecologic_examination_myometric_structure_nodes", :force => true do |t|
-    t.integer  "size"
+    t.float    "size"
     t.integer  "gynecologic_examination_id"
     t.integer  "localization_id"
     t.integer  "depth_localization_id"
@@ -112,9 +112,9 @@ ActiveRecord::Schema.define(:version => 20130705113749) do
   end
 
   create_table "gynecologic_examination_ovaries", :force => true do |t|
-    t.integer  "length"
-    t.integer  "thickness"
-    t.integer  "width"
+    t.float    "length"
+    t.float    "thickness"
+    t.float    "width"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "visibility_id"
@@ -191,10 +191,10 @@ ActiveRecord::Schema.define(:version => 20130705113749) do
   create_table "gynecologic_examinations", :force => true do |t|
     t.date     "menstruation_date"
     t.integer  "menstruation_day"
-    t.integer  "uterine_length"
-    t.integer  "uterine_anteroposterior"
-    t.integer  "uterine_width"
-    t.integer  "endometrial_thickness"
+    t.float    "uterine_length"
+    t.float    "uterine_anteroposterior"
+    t.float    "uterine_width"
+    t.float    "endometrial_thickness"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.integer  "uterine_boundary_id"

@@ -49,23 +49,21 @@
       <% end %>
     </p>
     <p>
-      Шейка матки <%= @gyn_exam.cervix_visibility.value %>,
-      <b>Cervix Size</b>
-      <%= @gyn_exam.cervix_size.value %>
+      Шейка матки <%= @gyn_exam.cervix_visibility.value %>, <%= @gyn_exam.cervix_size.value %>.
       Структура <%= @gyn_exam.cervix_structure_change.value %>
     </p>
   <% end %>
 </p>
 
 <p>
-  <b>Left Ovary</b>
+  Левый яичник
   <%= lo = @gyn_exam.left_ovary;
     [lo.length, lo.thickness, lo.width, lo.visibility.value, lo.size.value, lo.structure.value].join(' ')
   %>
 </p>
 
 <p>
-  <b>Right Ovary</b>
+  Правый яичник
   <%= ro = @gyn_exam.right_ovary;
     [ro.length, ro.thickness, ro.width, ro.visibility.value, ro.size.value, ro.structure.value].join(' ')
    %>
