@@ -1,0 +1,16 @@
+<span class="on_one_line">
+  <%= f.label :uterine_cavity_deformation %><br />
+  <%= f.collection_select :uterine_cavity_deformation_id, GynecologicExamination::UterineCavityDeformation.all, :id, :value %>
+</span>
+<span class="on_one_line">
+  <%= f.label :uterine_cavity_size_change %><br />
+  <%= f.collection_select :uterine_cavity_size_change_id, GynecologicExamination::UterineCavitySizeChange.all, :id, :value %>
+</span>
+<span class="on_one_line">
+  <%= f.label :uterine_cavity_size %><br />
+  <%= f.number_field :uterine_cavity_size, :style => "width:50px;", :step => "any" %>
+</span>
+<span class="on_one_line">
+  <%= f.label :is_uterine_cavity_node_present %><br />
+  <%= f.check_box :is_uterine_cavity_node_present %>
+</span>

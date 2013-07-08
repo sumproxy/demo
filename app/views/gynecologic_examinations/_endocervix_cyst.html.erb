@@ -1,0 +1,16 @@
+<span class="on_one_line">
+  <%= f.label :cervix_structure_change %><br />
+  <%= f.collection_select :cervix_structure_change_id, GynecologicExamination::CervixStructureChange.all, :id, :value %>
+</span>
+<span class="on_one_line">
+  <%= f.label :endocervix_cyst_min_size %><br />
+  <%= f.number_field :endocervix_cyst_min_size, :style => "width: 50px;", :step => "any" %>
+</span>
+<span class="on_one_line">
+  <%= f.label :endocervix_cyst_max_size %><br />
+  <%= f.number_field :endocervix_cyst_max_size, :style => "width: 50px;", :step => "any" %>
+</span>
+<span class="on_one_line">
+  <%= f.label :is_endocervix_cyst_multiple %><br />
+  <%= f.check_box :is_endocervix_cyst_multiple %>
+</span>

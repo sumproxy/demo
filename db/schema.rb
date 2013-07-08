@@ -11,19 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705124821) do
+ActiveRecord::Schema.define(:version => 20130708144708) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
     t.string   "street"
     t.string   "house"
     t.integer  "appartment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "gynecologic_examination_cervix_sizes", :force => true do |t|
-    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -76,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20130705124821) do
     t.integer  "localization_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.text     "comment"
   end
 
   create_table "gynecologic_examination_endometrium_phases", :force => true do |t|
@@ -109,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20130705124821) do
     t.integer  "depth_localization_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.text     "comment"
   end
 
   create_table "gynecologic_examination_ovaries", :force => true do |t|
@@ -207,7 +203,6 @@ ActiveRecord::Schema.define(:version => 20130705124821) do
     t.integer  "uterine_cavity_deformation_id"
     t.integer  "uterine_cavity_size_change_id"
     t.integer  "cervix_visibility_id"
-    t.integer  "cervix_size_id"
     t.integer  "cervix_structure_change_id"
     t.integer  "left_ovary_id"
     t.integer  "right_ovary_id"
@@ -216,6 +211,15 @@ ActiveRecord::Schema.define(:version => 20130705124821) do
     t.integer  "myometric_structure_change_id"
     t.integer  "endometrium_echostructure_change_id"
     t.integer  "endometrium_echostructure_change_type_id"
+    t.float    "myometrium_anterior_wall_thickness"
+    t.float    "myometrium_posterior_wall_thickness"
+    t.float    "uterine_cavity_size"
+    t.boolean  "is_uterine_cavity_node_present"
+    t.float    "endocervix_cyst_min_size"
+    t.float    "endocervix_cyst_max_size"
+    t.boolean  "is_endocervix_cyst_multiple"
+    t.float    "cervix_size"
+    t.boolean  "is_cervix_of_normal_size"
   end
 
   create_table "patient_examinations", :force => true do |t|

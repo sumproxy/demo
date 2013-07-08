@@ -9,7 +9,6 @@ class GynecologicExamination < ActiveRecord::Base
   belongs_to :uterine_cavity_deformation
   belongs_to :uterine_cavity_size_change
   belongs_to :cervix_visibility
-  belongs_to :cervix_size
   belongs_to :cervix_structure_change
   belongs_to :left_ovary, :class_name => 'GynecologicExamination::Ovary', :dependent => :destroy
   belongs_to :right_ovary, :class_name => 'GynecologicExamination::Ovary', :dependent => :destroy
@@ -27,5 +26,58 @@ class GynecologicExamination < ActiveRecord::Base
   has_many :patients, :through => :patient_examinations
   accepts_nested_attributes_for :left_ovary, :allow_destroy => true
   accepts_nested_attributes_for :right_ovary, :allow_destroy => true
-  attr_accessible :endometrial_thickness, :menstruation_date, :menstruation_day, :uterine_anteroposterior, :uterine_length, :uterine_width, :uterine_boundary_id, :uterine_boundary, :uterine_adumbration_id, :uterine_adumbration, :uterine_shape_id, :uterine_shape, :uterine_size_id, :uterine_size, :endometrial_boundary_id, :endometrial_boundary, :endometrial_adumbration_id, :endometrial_adumbration, :endometrium_phase_id, :endometrium_phase, :uterine_cavity_deformation_id, :uterine_cavity_deformation, :uterine_cavity_size_change_id, :uterine_cavity_size_change, :cervix_visibility_id, :cervix_visibility, :cervix_size_id, :cervix_size, :cervix_structure_change_id, :cervix_structure_change, :left_ovary_id, :left_ovary, :right_ovary_id, :right_ovary, :left_ovary_attributes, :right_ovary_attributes, :uterine_body_visibility_id, :uterine_body_visibility, :uterine_body_detection_position_id, :uterine_body_detection_position, :myometric_structure_change_id, :myometric_structure_change, :myometric_structure_nodes_attributes, :endometrium_echostructure_change_id, :endometrium_echostructure_change, :endometrium_echostructure_change_type_id, :endometrium_echostructure_change_type, :endometrium_echostructure_hyperechoic_inclusions_attributes
+  attr_accessible :endometrial_thickness
+  attr_accessible :menstruation_date
+  attr_accessible :menstruation_day
+  attr_accessible :uterine_anteroposterior
+  attr_accessible :uterine_length
+  attr_accessible :uterine_width
+  attr_accessible :uterine_boundary_id
+  attr_accessible :uterine_boundary
+  attr_accessible :uterine_adumbration_id
+  attr_accessible :uterine_adumbration
+  attr_accessible :uterine_shape_id
+  attr_accessible :uterine_shape
+  attr_accessible :uterine_size_id
+  attr_accessible :uterine_size
+  attr_accessible :endometrial_boundary_id
+  attr_accessible :endometrial_boundary
+  attr_accessible :endometrial_adumbration_id
+  attr_accessible :endometrial_adumbration
+  attr_accessible :endometrium_phase_id
+  attr_accessible :endometrium_phase
+  attr_accessible :uterine_cavity_deformation_id
+  attr_accessible :uterine_cavity_deformation
+  attr_accessible :uterine_cavity_size_change_id
+  attr_accessible :uterine_cavity_size_change
+  attr_accessible :cervix_visibility_id
+  attr_accessible :cervix_visibility
+  attr_accessible :cervix_structure_change_id
+  attr_accessible :cervix_structure_change
+  attr_accessible :left_ovary_id
+  attr_accessible :left_ovary
+  attr_accessible :right_ovary_id
+  attr_accessible :right_ovary
+  attr_accessible :left_ovary_attributes
+  attr_accessible :right_ovary_attributes
+  attr_accessible :uterine_body_visibility_id
+  attr_accessible :uterine_body_visibility
+  attr_accessible :uterine_body_detection_position_id
+  attr_accessible :uterine_body_detection_position
+  attr_accessible :myometric_structure_change_id
+  attr_accessible :myometric_structure_change
+  attr_accessible :myometric_structure_nodes_attributes
+  attr_accessible :endometrium_echostructure_change_id
+  attr_accessible :endometrium_echostructure_change
+  attr_accessible :endometrium_echostructure_change_type_id
+  attr_accessible :endometrium_echostructure_change_type
+  attr_accessible :endometrium_echostructure_hyperechoic_inclusions_attributes
+  attr_accessible :myometrium_anterior_wall_thickness
+  attr_accessible :myometrium_posterior_wall_thickness
+  attr_accessible :uterine_cavity_size
+  attr_accessible :endocervix_cyst_min_size
+  attr_accessible :endocervix_cyst_max_size
+  attr_accessible :is_endocervix_cyst_multiple
+  attr_accessible :cervix_size
+  attr_accessible :is_cervix_of_normal_size
 end

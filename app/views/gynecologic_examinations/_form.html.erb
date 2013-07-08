@@ -66,6 +66,14 @@
     <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
   </div>
   <div class="field">
+    <%= f.label :myometrium_anterior_wall_thickness %><br />
+    <%= f.number_field :myometrium_anterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+  </div>
+  <div class="field">
+    <%= f.label :myometrium_posterior_wall_thickness %><br />
+    <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+  </div>  
+  <div class="field">
     <%= f.label :endometrial_thickness %><br />
     <%= f.number_field :endometrial_thickness, :style => "width:50px;", :step => "any" %>
   </div>
@@ -96,24 +104,20 @@
     <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
   </div>
   <div class="field">
-    <%= f.label :uterine_cavity_deformation %><br />
-    <%= f.collection_select :uterine_cavity_deformation_id, GynecologicExamination::UterineCavityDeformation.all, :id, :value %>
+    <%= render "uterine_cavity", :f => f %>
   </div>
   <div class="field">
-    <%= f.label :uterine_cavity_size_change %><br />
-    <%= f.collection_select :uterine_cavity_size_change_id, GynecologicExamination::UterineCavitySizeChange.all, :id, :value %>
+    <span class="on_one_line">
+      <%= f.label :cervix_size %><br />
+      <%= f.number_field :cervix_size, :style => "width: 50px;", :step => "any" %>
+    </span>
+    <span class="on_one_line">
+      <%= f.label :is_cervix_of_normal_size %><br />
+      <%= f.check_box :is_cervix_of_normal_size %>
+    </span>
   </div>
   <div class="field">
-    <%= f.label :cervix_visibility %><br />
-    <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :cervix_size %><br />
-    <%= f.collection_select :cervix_size_id, GynecologicExamination::CervixSize.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :cervix_structure_change %><br />
-    <%= f.collection_select :cervix_structure_change_id, GynecologicExamination::CervixStructureChange.all, :id, :value %>
+    <%= render "endocervix_cyst", :f => f %>
   </div>
   <div class="field">
     Left Ovary:

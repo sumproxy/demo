@@ -24,6 +24,8 @@ end
 if GynecologicExamination::UterineShape.all.empty?
   GynecologicExamination::UterineShape.create(value: 'обычная')
   GynecologicExamination::UterineShape.create(value: 'шаровидная')
+  GynecologicExamination::UterineShape.create(value: 'седловидная')
+  GynecologicExamination::UterineShape.create(value: 'двурогая')
   GynecologicExamination::UterineShape.create(value: 'неправильная')
   GynecologicExamination::UterineShape.create(value: '-- не задано --')
 end
@@ -64,11 +66,6 @@ if GynecologicExamination::CervixVisibility.all.empty?
   GynecologicExamination::CervixVisibility.create(value: 'определяется')
   GynecologicExamination::CervixVisibility.create(value: 'не определяется')
   GynecologicExamination::CervixVisibility.create(value: '-- не задано --')
-end
-if GynecologicExamination::CervixSize.all.empty?
-  GynecologicExamination::CervixSize.create(value: 'обычных размеров')
-  GynecologicExamination::CervixSize.create(value: 'укорочена')
-  GynecologicExamination::CervixSize.create(value: '-- не задано --')
 end
 if GynecologicExamination::CervixStructureChange.all.empty?
   GynecologicExamination::CervixStructureChange.create(value: 'не изменена')

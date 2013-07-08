@@ -6,6 +6,10 @@
   <%= f.label :localization %><br />
   <%= f.collection_select :localization_id, GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.all, :id, :value %>
 </span>
+<span class="on_one_line">
+  <%= f.label :comment %><br />
+  <%= f.text_field :comment %>
+</span>
 <span class="on_one_line"><br />
   <%= f.link_to_remove "Удалить" %>
 </span>
