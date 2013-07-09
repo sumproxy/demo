@@ -1,3 +1,37 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#gynecologic_examination_left_ovary_attributes_is_follicle_visible').change(function(){
+      if (this.checked) {
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').prop('disabled', false);
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').prop('disabled', false);
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').prop('disabled', false);      
+      }
+      else {
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').val('');
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').val('');
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').val('');
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').prop('disabled', true);
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').prop('disabled', true);
+        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').prop('disabled', true);
+      }
+    });
+    $('#gynecologic_examination_right_ovary_attributes_is_follicle_visible').change(function(){
+      if (this.checked) {
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').prop('disabled', false);
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').prop('disabled', false);
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').prop('disabled', false);      
+      }
+      else {
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').val('');
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').val('');
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').val('');
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').prop('disabled', true);
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').prop('disabled', true);
+        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').prop('disabled', true);
+      }
+    });
+  })
+</script>
 <%= nested_form_for(@gyn_exam) do |f| %>
   <% if @gyn_exam.errors.any? %>
     <div id="error_explanation">
@@ -108,11 +142,15 @@
   </div>
   <div class="field">
     <span class="on_one_line">
+      <%= f.label :cervix_visibility %><br />
+      <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
       <%= f.label :cervix_size %><br />
       <%= f.number_field :cervix_size, :style => "width: 50px;", :step => "any" %>
     </span>
-    <span class="on_one_line">
-      <%= f.label :is_cervix_of_normal_size %><br />
+    <span class="on_one_line"><br />
+      <%= f.label :is_cervix_of_normal_size %>
       <%= f.check_box :is_cervix_of_normal_size %>
     </span>
   </div>

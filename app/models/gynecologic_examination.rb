@@ -80,4 +80,5 @@ class GynecologicExamination < ActiveRecord::Base
   attr_accessible :is_endocervix_cyst_multiple
   attr_accessible :cervix_size
   attr_accessible :is_cervix_of_normal_size
+  attr_accessible :is_uterine_cavity_node_present
 end

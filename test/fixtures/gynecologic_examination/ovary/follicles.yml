@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  min_size: 1.5
+  max_size: 1.5
+  amount: MyString
+
+two:
+  min_size: 1.5
+  max_size: 1.5
+  amount: MyString

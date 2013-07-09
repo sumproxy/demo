@@ -24,3 +24,13 @@
     <%= f.collection_select :structure_id, GynecologicExamination::Ovary::Structure.all, :id, :value %>
   </span>
 </div>
+<div class="field">
+  Фолликулы:
+  <%= f.fields_for :follicle do |builder| %>  
+    <span class="on_one_line"><br />
+      <%= f.label :is_follicle_visible %>
+      <%= f.check_box :is_follicle_visible %>
+    </span>
+    <%= render "follicle", :builder => builder %>
+  <% end %>
+</div>

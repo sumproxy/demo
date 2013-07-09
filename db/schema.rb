@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708144708) do
+ActiveRecord::Schema.define(:version => 20130709090844) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -111,11 +111,21 @@ ActiveRecord::Schema.define(:version => 20130708144708) do
     t.float    "length"
     t.float    "thickness"
     t.float    "width"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "visibility_id"
     t.integer  "size_id"
     t.integer  "structure_id"
+    t.integer  "follicle_id"
+    t.boolean  "is_follicle_visible"
+  end
+
+  create_table "gynecologic_examination_ovary_follicles", :force => true do |t|
+    t.float    "min_size"
+    t.float    "max_size"
+    t.string   "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "gynecologic_examination_ovary_sizes", :force => true do |t|

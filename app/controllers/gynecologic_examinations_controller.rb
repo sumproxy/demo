@@ -28,7 +28,9 @@ class GynecologicExaminationsController < ApplicationController
   def new
     @gyn_exam = GynecologicExamination.new
     @gyn_exam.build_left_ovary
+    @gyn_exam.left_ovary.build_follicle
     @gyn_exam.build_right_ovary
+    @gyn_exam.right_ovary.build_follicle
 
     respond_to do |format|
       format.html # new.html.erb
