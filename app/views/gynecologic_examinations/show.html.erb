@@ -8,7 +8,7 @@
 </p>
 <p>
   Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
-  Дата последней менструации <%= l @gyn_exam.menstruation_date, :format => :long %>,
+  Дата последней менструации <%= l @gyn_exam.menstruation_date, :format => :long %>
   (<%= @gyn_exam.menstruation_day %>-й день).
 </p>
 <p>
@@ -41,43 +41,36 @@
       М-эхо: толщина <%= @gyn_exam.endometrial_thickness %> мм,
       границы <%= @gyn_exam.endometrial_boundary.value %>,
       контуры <%= @gyn_exam.endometrial_adumbration.value %>,
-      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>, <%= 'м-эхо' unless @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %> <%= @gyn_exam.endometrium_echostructure_change_type.value -%>
-      <%- if @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %>:<br />
+      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>, <%= @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' ? "#{@gyn_exam.endometrium_echostructure_change_type.value}:" : "м-эхо #{@gyn_exam.endometrium_echostructure_change_type.value}." %>
+      <%- if @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %><br />
         <%- @gyn_exam.endometrium_echostructure_hyperechoic_inclusions.each do |inclusion| -%>
-          &bull; <%= inclusion.localization.value %>, <%= inclusion.size %> мм, <%= inclusion.comment %><br />
+          &bull; <%= inclusion.localization.value %>, <%= inclusion.size %> мм <%= inclusion.comment %><br />
         <%- end -%>
-      <%- end -%>
+      <% end %>
     </p>
     <p>
       Эндометрий <%= 'не' if @gyn_exam.endometrium_phase.value == 'не соответствует' %> соответствует
       <%= @gyn_exam.endometrium_phase.value unless @gyn_exam.endometrium_phase.value == 'не соответствует' %> фазе менструального цикла.
     </p>
     <p>
-      Полость матки <%= @gyn_exam.uterine_cavity_deformation.value %>, <%= @gyn_exam.uterine_cavity_size_change.value %>
-      <% if @gyn_exam.uterine_cavity_size_change.value == 'расширена' %>
-        до <%= @gyn_exam.uterine_cavity_size %> <%= 'за счет узла' if @gyn_exam.is_uterine_cavity_node_present %>
+      Полость матки <%= @gyn_exam.uterine_cavity_deformation.value %>, <%= @gyn_exam.uterine_cavity_size_change.value %><%= '.' if @gyn_exam.uterine_cavity_size_change.value == 'не расширена' %>
+      <% if @gyn_exam.uterine_cavity_size_change.value != 'не расширена' %>
+        до <%= @gyn_exam.uterine_cavity_size %> мм<%= ' за счет узла' if @gyn_exam.is_uterine_cavity_node_present %>.
       <% end %>
     </p>
     <p>
       Шейка матки <%= @gyn_exam.cervix_visibility.value %>, <%= 'обычных размеров' if @gyn_exam.is_cervix_of_normal_size %> <%= @gyn_exam.cervix_size %> мм.
-      Структура <%= @gyn_exam.cervix_structure_change.value %> за счет кист<%= 'ы' unless @gyn_exam.is_endocervix_cyst_multiple %> эндоцервикса <%= "от #{@gyn_exam.endocervix_cyst_min_size}" if @gyn_exam.is_endocervix_cyst_multiple %> до <%= @gyn_exam.endocervix_cyst_max_size || @gyn_exam.endocervix_cyst_min_size %> мм.
+      Структура <%= @gyn_exam.cervix_structure_change.value %> 
+      <% if @gyn_exam.cervix_structure_change.value == 'изменена' %> за счет кист<%= 'ы' unless @gyn_exam.is_endocervix_cyst_multiple %> эндоцервикса <%= "от #{@gyn_exam.endocervix_cyst_min_size}" if @gyn_exam.is_endocervix_cyst_multiple %> до <%= @gyn_exam.endocervix_cyst_max_size || @gyn_exam.endocervix_cyst_min_size %> мм.
+      <% end %>
     </p>
   <% end %>
 </p>
 
-<p>
-  Левый яичник
-  <%= lo = @gyn_exam.left_ovary;
-    [lo.length, lo.thickness, lo.width, lo.visibility.value, lo.size.value, lo.structure.value].join(' ')
-  %>
-</p>
+<%= render :partial => "ovary_display", :locals => { :ovary => @gyn_exam.left_ovary, :orientation => "Левый" } %>
+<%= render :partial => "ovary_display", :locals => { :ovary => @gyn_exam.right_ovary, :orientation => "Правый" } %>
 
-<p>
-  Правый яичник
-  <%= ro = @gyn_exam.right_ovary;
-    [ro.length, ro.thickness, ro.width, ro.visibility.value, ro.size.value, ro.structure.value].join(' ')
-   %>
+<p class="noprint">
+  <%= link_to 'Редактировать', edit_gynecologic_examination_path(@gyn_exam) %> |
+  <%= link_to 'Удалить', @gyn_exam, method: :delete, data: { confirm: 'Вы уверены?' } %>
 </p>
-
-<%= link_to 'Edit', edit_gynecologic_examination_path(@gyn_exam) %> |
-<%= link_to 'Back', gynecologic_examinations_path %>

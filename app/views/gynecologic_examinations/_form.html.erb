@@ -1,35 +1,132 @@
 <script type="text/javascript">
+  function set_disabled_attribute(selector, attributes, state) {
+    $.each(attributes, function(attribute, value) {
+      $(selector + '_' + attribute).prop('disabled', state);
+    });
+  };
+
+  function reset_attributes(selector, attributes) {
+    $.each(attributes, function(attribute, value) {
+      $(selector + '_' + attribute).val(value);
+    });
+  };
+  
+  function set_option(selector, options, position) {
+    $.each(options, function(option, value) {
+      $(selector + '_' + option + ' :' + position).prop('selected', true);
+    });
+  };
+
+  function toggle_follicle_condition(selector, attributes, is_checked) {
+    if (is_checked) {
+      set_disabled_attribute(selector, attributes, false);
+    }
+    else {
+      reset_attributes(selector, attributes); 
+      set_disabled_attribute(selector, attributes, true);
+    }
+  };
+  
+  function toggle_ovary_condition(selector, attributes, options) {
+    if( $(selector + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
+      set_disabled_attribute(selector,
+                             $.extend({}, attributes, options),
+                             true);
+      reset_attributes(selector, attributes);
+      set_option(selector, options, 'last');
+    }
+    if( $(selector + '_' + 'visibility_id option:selected').text() == 'определяется' ) {
+      set_disabled_attribute(selector,
+                             $.extend({}, attributes, options),
+                             false);
+      set_option(selector, options, 'first');
+    }
+  };
+
   $(document).ready(function() {
-    $('#gynecologic_examination_left_ovary_attributes_is_follicle_visible').change(function(){
-      if (this.checked) {
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').prop('disabled', false);
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').prop('disabled', false);
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').prop('disabled', false);      
-      }
-      else {
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').val('');
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').val('');
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').val('');
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_min_size').prop('disabled', true);
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_max_size').prop('disabled', true);
-        $('#gynecologic_examination_left_ovary_attributes_follicle_attributes_amount').prop('disabled', true);
-      }
+    left_ovary_attrs = '#gynecologic_examination_left_ovary_attributes';
+    right_ovary_attrs = '#gynecologic_examination_right_ovary_attributes';
+    follicle_attributes = {'min_size': '', 'max_size': '', 'amount': 0};
+    ovary_attributes = {'length': '', 'thickness': '', 'width': ''};
+    ovary_options = {'size_id': '', 'structure_id': ''};
+    
+    /////////////////////////////////////
+    // initial consistensy
+    /////////////////////////////////////
+        
+    if( !$(left_ovary_attrs + '_' + 'is_follicle_visible').is(":checked") ) {
+      set_disabled_attribute(left_ovary_attrs + '_' + 'follicle_attributes', 
+                             follicle_attributes, 
+                             true);
+    }
+
+    if( $(left_ovary_attrs + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
+      set_disabled_attribute(left_ovary_attrs,
+                             $.extend({}, ovary_attributes, ovary_options),
+                             true);
+    }
+
+    if( !$(right_ovary_attrs + '_' + 'is_follicle_visible').is(":checked") ) {
+      set_disabled_attribute(right_ovary_attrs + '_' + 'follicle_attributes',
+                             follicle_attributes,
+                             true);
+    }
+
+    if( $(right_ovary_attrs + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
+      set_disabled_attribute(right_ovary_attrs,
+                             $.extend({}, ovary_attributes, ovary_options),
+                             true);
+    }
+    
+    /////////////////////////////////////
+    // change detectors
+    /////////////////////////////////////
+    
+    // left ovary
+    $(left_ovary_attrs + '_' + 'is_follicle_visible').change(function() {
+      toggle_follicle_condition(left_ovary_attrs + '_' + 'follicle_attributes',
+                                follicle_attributes,
+                                this.checked);
     });
-    $('#gynecologic_examination_right_ovary_attributes_is_follicle_visible').change(function(){
-      if (this.checked) {
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').prop('disabled', false);
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').prop('disabled', false);
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').prop('disabled', false);      
-      }
-      else {
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').val('');
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').val('');
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').val('');
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_min_size').prop('disabled', true);
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_max_size').prop('disabled', true);
-        $('#gynecologic_examination_right_ovary_attributes_follicle_attributes_amount').prop('disabled', true);
-      }
+    
+    $(left_ovary_attrs + '_' + 'visibility_id').change(function() {
+      toggle_ovary_condition(left_ovary_attrs, ovary_attributes, ovary_options);
     });
+    
+    // right ovary
+    $(right_ovary_attrs + '_' + 'is_follicle_visible').change(function(){
+      toggle_follicle_condition(right_ovary_attrs + '_' + 'follicle_attributes',
+                                follicle_attributes,
+                                this.checked);
+    });
+    
+    $(right_ovary_attrs + '_' + 'visibility_id').change(function() {
+      toggle_ovary_condition(right_ovary_attrs, ovary_attributes, ovary_options);
+    });
+    
+    /////////////////////////////////////
+    // reenable attributes before submit
+    /////////////////////////////////////
+    
+    $('form').submit(function(){
+      // left ovary
+      set_disabled_attribute(left_ovary_attrs + '_' + 'follicle_attributes', 
+                             follicle_attributes, 
+                             false);
+                             
+      set_disabled_attribute(left_ovary_attrs,
+                             $.extend({}, ovary_attributes, ovary_options),
+                             false);
+                             
+      // right ovary
+      set_disabled_attribute(right_ovary_attrs + '_' + 'follicle_attributes',
+                             follicle_attributes,
+                             false);
+                             
+      set_disabled_attribute(right_ovary_attrs,
+                             $.extend({}, ovary_attributes, ovary_options),
+                             false);
+    })
   })
 </script>
 <%= nested_form_for(@gyn_exam) do |f| %>
@@ -157,19 +254,20 @@
   <div class="field">
     <%= render "endocervix_cyst", :f => f %>
   </div>
-  <div class="field">
-    Left Ovary:
+  <fieldset>
+    <legend>Левый яичник</legend>
     <%= f.fields_for :left_ovary do |builder| %>
       <%= render "ovary", :f => builder %>
     <% end %>
-  </div>
-  <div class="field">
-    Right Ovary:
+  </fieldset>
+  <fieldset>
+    <legend>Правый яичник</legend>
     <%= f.fields_for :right_ovary do |builder| %>
       <%= render "ovary", :f => builder %>
     <% end %>
-  </div>
+  </fieldset>
   <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>

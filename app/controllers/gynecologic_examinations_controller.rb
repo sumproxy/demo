@@ -83,11 +83,12 @@ class GynecologicExaminationsController < ApplicationController
   # DELETE /gynecologic_examinations/1.json
   def destroy
     @gyn_exam = GynecologicExamination.find(params[:id])
+    @patient = @gyn_exam.patients.first
     PatientExamination.where(:gynecologic_examination_id => @gyn_exam.id).each {|exam| exam.destroy }
     @gyn_exam.destroy
 
     respond_to do |format|
-      format.html { redirect_to gynecologic_examinations_url }
+      format.html { redirect_to patient_path(@patient) }
       format.json { head :no_content }
     end
   end

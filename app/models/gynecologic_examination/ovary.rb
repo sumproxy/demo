@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class GynecologicExamination::Ovary < ActiveRecord::Base
   has_one :gynecologic_examination
   belongs_to :visibility
@@ -14,4 +15,32 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
   attr_accessible :follicle_id
   attr_accessible :is_follicle_visible
   attr_accessible :follicle_attributes
+
+  validate :check_visible_follicle_amount
+  validate :check_follicle_size_is_set
+  
+  def check_follicle_size_is_set
+    if is_follicle_visible
+      if follicle.amount =~ /^1$/ && (follicle.min_size.nil? && follicle.max_size.nil?)
+        errors.add(:follicle, "Не задан размер фолликула")
+        follicle.errors.add(:min_size)
+        follicle.errors.add(:max_size)
+        return false
+      end
+      if follicle.is_multiple? && (follicle.min_size.nil? || follicle.max_size.nil?)
+        errors.add(:follicle, "Не задан размер фолликула")
+        follicle.errors.add(:min_size) if follicle.min_size.nil?
+        follicle.errors.add(:max_size) if follicle.max_size.nil?
+        return false
+      end
+    end
+  end
+  
+  def check_visible_follicle_amount
+    if is_follicle_visible && follicle.amount =~ /^0+$/
+      errors.add(:follicle, "Число определяемых фолликулов не может быть равно нулю.")
+      follicle.errors.add(:amount)
+      return false
+    end
+  end
 end

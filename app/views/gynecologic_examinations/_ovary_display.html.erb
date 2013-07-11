@@ -1,0 +1,13 @@
+<p>
+  <%= orientation %> яичник <%= ovary.visibility.value %>.
+  <% if ovary.visibility.value == 'определяется' %>
+    Размеры <%= ovary.size.value %>.<br />
+    Длина <%= ovary.length %> мм.<br />
+    Толщина <%= ovary.thickness %> мм.<br />
+    Ширина <%= ovary.width %> мм.<br />
+    Структура <%= ovary.structure.value %>.<br />
+    <% if ovary.structure.value == 'обычная' && ovary.is_follicle_visible %>
+      Фолликул<%= "ы (#{ovary.follicle.amount}) от #{ovary.follicle.min_size} до " if ovary.follicle.is_multiple? %> <%= ovary.follicle.max_size || ovary.follicle.min_size %> мм.
+    <% end %>
+  <% end %>
+</p>
