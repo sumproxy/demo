@@ -5,9 +5,15 @@
     });
   };
 
-  function reset_attributes(selector, attributes) {
+  function set_value(selector, attributes) {
     $.each(attributes, function(attribute, value) {
-      $(selector + '_' + attribute).val(value);
+      var sel = selector + '_' + attribute;
+      if($(sel).prop('type') == 'checkbox') {
+        $(sel).prop('checked', value);
+      }
+      else {
+        $(sel).val(value);
+      }
     });
   };
   
@@ -22,30 +28,73 @@
       set_disabled_attribute(selector, attributes, false);
     }
     else {
-      reset_attributes(selector, attributes); 
+      set_value(selector, attributes); 
       set_disabled_attribute(selector, attributes, true);
     }
   };
   
   function toggle_ovary_condition(selector, attributes, options) {
-    if( $(selector + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
+    if( $(selector + '_' + 'visibility_id :selected').text() == 'не определяется' ) {
+      $(selector + '_' + 'is_follicle_visible').prop('checked', false);
+      toggle_follicle_condition(selector + '_' + 'follicle_attributes',
+                                follicle_attributes,
+                                false);
       set_disabled_attribute(selector,
-                             $.extend({}, attributes, options),
+                             $.extend({'is_follicle_visible': ''}, attributes, options),
                              true);
-      reset_attributes(selector, attributes);
+      set_value(selector, attributes);
       set_option(selector, options, 'last');
     }
-    if( $(selector + '_' + 'visibility_id option:selected').text() == 'определяется' ) {
+    if( $(selector + '_' + 'visibility_id :selected').text() == 'определяется' ) {
       set_disabled_attribute(selector,
-                             $.extend({}, attributes, options),
+                             $.extend({'is_follicle_visible': ''}, attributes, options),
                              false);
       set_option(selector, options, 'first');
     }
   };
+  
+  function toggle_cervix_structure_condition() {
+    var selector = endocervix_cyst_selector;
+    var attributes = endocervix_cyst_attributes;
+    
+    if( $(selector + '_' + 'cervix_structure_change_id :selected').text() == 'не изменена' ||
+        $(selector + '_' + 'cervix_structure_change_id :selected').text() == '-- не задано --'
+    ) {
+      set_value(selector, attributes);
+      set_disabled_attribute(selector, attributes, true);
+    }
+    if( $(selector + '_' + 'cervix_structure_change_id :selected').text() == 'изменена' ) {
+      set_disabled_attribute(selector, attributes, false);
+    }
+  };
+  
+  function toggle_cervix_condition(selector, attributes) {
+    var sel_text = $(selector + '_' + 'cervix_visibility_id :selected').text();
+    if( sel_text == 'не определяется' || sel_text == '-- не задано --' ){
+      set_value(selector, attributes);
+      set_disabled_attribute(selector,
+                             $.extend({'cervix_structure_change_id': ''}, attributes),
+                             true);
+      set_option(selector, {'cervix_structure_change_id': ''}, 'last');
+      toggle_cervix_structure_condition();
+    }
+    if( sel_text == 'определяется' ){
+      set_disabled_attribute(selector, 
+                             $.extend({'cervix_structure_change_id': ''}, attributes),
+                             false);
+      set_option(selector, {'cervix_structure_change_id': ''}, 'first');
+      toggle_cervix_structure_condition();
+    }
+  };
 
   $(document).ready(function() {
-    left_ovary_attrs = '#gynecologic_examination_left_ovary_attributes';
-    right_ovary_attrs = '#gynecologic_examination_right_ovary_attributes';
+    default_selector = '#gynecologic_examination';
+    cervix_selector = default_selector;
+    cervix_attributes = {'cervix_size': '', 'is_cervix_of_normal_size': false};
+    endocervix_cyst_selector = default_selector;
+    endocervix_cyst_attributes = {'endocervix_cyst_min_size': '', 'endocervix_cyst_max_size': '', 'is_endocervix_cyst_multiple': false};
+    left_ovary_selector = '#gynecologic_examination_left_ovary_attributes';
+    right_ovary_selector = '#gynecologic_examination_right_ovary_attributes';
     follicle_attributes = {'min_size': '', 'max_size': '', 'amount': 0};
     ovary_attributes = {'length': '', 'thickness': '', 'width': ''};
     ovary_options = {'size_id': '', 'structure_id': ''};
@@ -53,28 +102,52 @@
     /////////////////////////////////////
     // initial consistensy
     /////////////////////////////////////
-        
-    if( !$(left_ovary_attrs + '_' + 'is_follicle_visible').is(":checked") ) {
-      set_disabled_attribute(left_ovary_attrs + '_' + 'follicle_attributes', 
+    
+    // cervix
+    if( $(endocervix_cyst_selector + '_' + 'cervix_structure_change_id :selected').text() == 'не изменена' ) {
+      set_disabled_attribute(endocervix_cyst_selector,
+                             endocervix_cyst_attributes,
+                             true);
+    };
+    
+    if( $(cervix_selector + '_' + 'cervix_visibility_id :selected').text() == 'не определяется' ){
+      set_disabled_attribute(cervix_selector,
+                             $.extend({'cervix_structure_change_id': ''}, cervix_attributes),
+                             true);
+      set_disabled_attribute(endocervix_cyst_selector,
+                             endocervix_cyst_attributes,
+                             true);
+    };
+    
+    // left ovary    
+    if( !$(left_ovary_selector + '_' + 'is_follicle_visible').is(":checked") ) {
+      set_disabled_attribute(left_ovary_selector + '_' + 'follicle_attributes', 
                              follicle_attributes, 
                              true);
     }
 
-    if( $(left_ovary_attrs + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
-      set_disabled_attribute(left_ovary_attrs,
-                             $.extend({}, ovary_attributes, ovary_options),
+    if( $(left_ovary_selector + '_' + 'visibility_id :selected').text() == 'не определяется' ) {
+      set_disabled_attribute(left_ovary_selector,
+                             $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
                              true);
-    }
-
-    if( !$(right_ovary_attrs + '_' + 'is_follicle_visible').is(":checked") ) {
-      set_disabled_attribute(right_ovary_attrs + '_' + 'follicle_attributes',
+      set_disabled_attribute(left_ovary_selector + '_' + 'follicle_attributes',
                              follicle_attributes,
                              true);
     }
 
-    if( $(right_ovary_attrs + '_' + 'visibility_id option:selected').text() == 'не определяется' ) {
-      set_disabled_attribute(right_ovary_attrs,
-                             $.extend({}, ovary_attributes, ovary_options),
+    // right ovary
+    if( !$(right_ovary_selector + '_' + 'is_follicle_visible').is(":checked") ) {
+      set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
+                             follicle_attributes,
+                             true);
+    }
+
+    if( $(right_ovary_selector + '_' + 'visibility_id :selected').text() == 'не определяется' ) {
+      set_disabled_attribute(right_ovary_selector,
+                             $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
+                             true);
+      set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
+                             follicle_attributes,
                              true);
     }
     
@@ -82,26 +155,36 @@
     // change detectors
     /////////////////////////////////////
     
+    // cervix
+    $(endocervix_cyst_selector + '_' + 'cervix_structure_change_id').change(function() {
+      toggle_cervix_structure_condition();
+    });
+    
+    $(cervix_selector + '_' + 'cervix_visibility_id').change(function() {
+      toggle_cervix_condition(cervix_selector,
+                              cervix_attributes);
+    });
+    
     // left ovary
-    $(left_ovary_attrs + '_' + 'is_follicle_visible').change(function() {
-      toggle_follicle_condition(left_ovary_attrs + '_' + 'follicle_attributes',
+    $(left_ovary_selector + '_' + 'is_follicle_visible').change(function() {
+      toggle_follicle_condition(left_ovary_selector + '_' + 'follicle_attributes',
                                 follicle_attributes,
                                 this.checked);
     });
     
-    $(left_ovary_attrs + '_' + 'visibility_id').change(function() {
-      toggle_ovary_condition(left_ovary_attrs, ovary_attributes, ovary_options);
+    $(left_ovary_selector + '_' + 'visibility_id').change(function() {
+      toggle_ovary_condition(left_ovary_selector, ovary_attributes, ovary_options);
     });
     
     // right ovary
-    $(right_ovary_attrs + '_' + 'is_follicle_visible').change(function(){
-      toggle_follicle_condition(right_ovary_attrs + '_' + 'follicle_attributes',
+    $(right_ovary_selector + '_' + 'is_follicle_visible').change(function(){
+      toggle_follicle_condition(right_ovary_selector + '_' + 'follicle_attributes',
                                 follicle_attributes,
                                 this.checked);
     });
     
-    $(right_ovary_attrs + '_' + 'visibility_id').change(function() {
-      toggle_ovary_condition(right_ovary_attrs, ovary_attributes, ovary_options);
+    $(right_ovary_selector + '_' + 'visibility_id').change(function() {
+      toggle_ovary_condition(right_ovary_selector, ovary_attributes, ovary_options);
     });
     
     /////////////////////////////////////
@@ -109,22 +192,31 @@
     /////////////////////////////////////
     
     $('form').submit(function(){
+      // cervix
+      set_disabled_attribute(endocervix_cyst_selector,
+                             endocervix_cyst_attributes,
+                             false);
+      
+      set_disabled_attribute(cervix_selector,
+                             $.extend({'cervix_structure_change_id': ''}, cervix_attributes),
+                             false);
+      
       // left ovary
-      set_disabled_attribute(left_ovary_attrs + '_' + 'follicle_attributes', 
+      set_disabled_attribute(left_ovary_selector + '_' + 'follicle_attributes', 
                              follicle_attributes, 
                              false);
                              
-      set_disabled_attribute(left_ovary_attrs,
-                             $.extend({}, ovary_attributes, ovary_options),
+      set_disabled_attribute(left_ovary_selector,
+                             $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
                              false);
                              
       // right ovary
-      set_disabled_attribute(right_ovary_attrs + '_' + 'follicle_attributes',
+      set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
                              follicle_attributes,
                              false);
                              
-      set_disabled_attribute(right_ovary_attrs,
-                             $.extend({}, ovary_attributes, ovary_options),
+      set_disabled_attribute(right_ovary_selector,
+                             $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
                              false);
     })
   })
@@ -143,117 +235,125 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :menstruation_date %><br />
-    <%= f.text_field :menstruation_date, :id => "datepicker", :size => 10 %>
-  </div>
-  <div class="field">
-    <%= f.label :menstruation_day %><br />
-    <%= f.number_field :menstruation_day, :style => "width:50px;" %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_body_visibility %><br />
-    <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_body_detection_position %><br />
-    <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_boundary %><br />
-    <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_adumbration %><br />
-    <%= f.collection_select :uterine_adumbration_id, GynecologicExamination::UterineAdumbration.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_shape %><br />
-    <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_size %><br />
-    <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_length %><br />
-    <%= f.number_field :uterine_length, :style => "width:50px;", :step => "any" %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_anteroposterior %><br />
-    <%= f.number_field :uterine_anteroposterior, :style => "width:50px;", :step => "any" %>
-  </div>
-  <div class="field">
-    <%= f.label :uterine_width %><br />
-    <%= f.number_field :uterine_width, :style => "width:50px;", :step => "any" %>
-  </div>
-  <div class="field">
-    <%= f.label :myometric_structure_change %><br />
-    <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.fields_for :myometric_structure_nodes do |node_form| %>
-      <%= render "myometric_structure_node", :f => node_form %>
-    <% end %>
-    <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
-  </div>
-  <div class="field">
-    <%= f.label :myometrium_anterior_wall_thickness %><br />
-    <%= f.number_field :myometrium_anterior_wall_thickness, :style => "width:50px;", :step => "any" %>
-  </div>
-  <div class="field">
-    <%= f.label :myometrium_posterior_wall_thickness %><br />
-    <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
-  </div>  
-  <div class="field">
-    <%= f.label :endometrial_thickness %><br />
-    <%= f.number_field :endometrial_thickness, :style => "width:50px;", :step => "any" %>
-  </div>
-  <div class="field">
-    <%= f.label :endometrial_boundary %><br />
-    <%= f.collection_select :endometrial_boundary_id, GynecologicExamination::EndometrialBoundary.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :endometrial_adumbration %><br />
-    <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.label :endometrium_echostructure_change %><br />
-    <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
-  </div>  
-  <div class="field">
-    <%= f.label :endometrium_echostructure_change_type %><br />
-    <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= f.fields_for :endometrium_echostructure_hyperechoic_inclusions do |inclusion_form| %>
-      <%= render "endometrium_echostructure_hyperechoic_inclusion", :f => inclusion_form %>
-    <% end %>
-    <%= f.link_to_add "Добавить гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
-  </div>
-  <div class="field">
-    <%= f.label :endometrium_phase %><br />
-    <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
-  </div>
-  <div class="field">
-    <%= render "uterine_cavity", :f => f %>
-  </div>
-  <div class="field">
     <span class="on_one_line">
-      <%= f.label :cervix_visibility %><br />
-      <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
+      <%= f.label :menstruation_date %><br />
+      <%= f.text_field :menstruation_date, :id => "datepicker", :size => 10 %>
     </span>
     <span class="on_one_line">
-      <%= f.label :cervix_size %><br />
-      <%= f.number_field :cervix_size, :style => "width: 50px;", :step => "any" %>
-    </span>
-    <span class="on_one_line"><br />
-      <%= f.label :is_cervix_of_normal_size %>
-      <%= f.check_box :is_cervix_of_normal_size %>
+      <%= f.label :menstruation_day %><br />
+      <%= f.number_field :menstruation_day, :style => "width:50px;" %>
     </span>
   </div>
-  <div class="field">
-    <%= render "endocervix_cyst", :f => f %>
-  </div>
+  <fieldset>
+    <legend>Тело матки</legend>
+    <div class="field">
+      <%= f.label :uterine_body_visibility %><br />
+      <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_body_detection_position %><br />
+      <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_boundary %><br />
+      <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_adumbration %><br />
+      <%= f.collection_select :uterine_adumbration_id, GynecologicExamination::UterineAdumbration.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_shape %><br />
+      <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_size %><br />
+      <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_length %><br />
+      <%= f.number_field :uterine_length, :style => "width:50px;", :step => "any" %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_anteroposterior %><br />
+      <%= f.number_field :uterine_anteroposterior, :style => "width:50px;", :step => "any" %>
+    </div>
+    <div class="field">
+      <%= f.label :uterine_width %><br />
+      <%= f.number_field :uterine_width, :style => "width:50px;", :step => "any" %>
+    </div>
+    <div class="field">
+      <%= f.label :myometric_structure_change %><br />
+      <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.fields_for :myometric_structure_nodes do |node_form| %>
+        <%= render "myometric_structure_node", :f => node_form %>
+      <% end %>
+      <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
+    </div>
+    <div class="field">
+      <%= f.label :myometrium_anterior_wall_thickness %><br />
+      <%= f.number_field :myometrium_anterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+    </div>
+    <div class="field">
+      <%= f.label :myometrium_posterior_wall_thickness %><br />
+      <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+    </div>  
+    <div class="field">
+      <%= f.label :endometrial_thickness %><br />
+      <%= f.number_field :endometrial_thickness, :style => "width:50px;", :step => "any" %>
+    </div>
+    <div class="field">
+      <%= f.label :endometrial_boundary %><br />
+      <%= f.collection_select :endometrial_boundary_id, GynecologicExamination::EndometrialBoundary.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :endometrial_adumbration %><br />
+      <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.label :endometrium_echostructure_change %><br />
+      <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
+    </div>  
+    <div class="field">
+      <%= f.label :endometrium_echostructure_change_type %><br />
+      <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= f.fields_for :endometrium_echostructure_hyperechoic_inclusions do |inclusion_form| %>
+        <%= render "endometrium_echostructure_hyperechoic_inclusion", :f => inclusion_form %>
+      <% end %>
+      <%= f.link_to_add "Добавить гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
+    </div>
+    <div class="field">
+      <%= f.label :endometrium_phase %><br />
+      <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
+    </div>
+    <div class="field">
+      <%= render "uterine_cavity", :f => f %>
+    </div>
+    <fieldset>
+      <legend>Шейка матки</legend>
+      <div class="field">
+        <span class="on_one_line">
+          <%= f.label :cervix_visibility %><br />
+          <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :cervix_size %><br />
+          <%= f.number_field :cervix_size, :style => "width: 50px;", :step => "any" %>
+        </span>
+        <span class="on_one_line"><br />
+          <%= f.label :is_cervix_of_normal_size %>
+          <%= f.check_box :is_cervix_of_normal_size %>
+        </span>
+      </div>
+      <div class="field">
+        <%= render "endocervix_cyst", :f => f %>
+      </div>
+    </fieldset>
+  </fieldset>
   <fieldset>
     <legend>Левый яичник</legend>
     <%= f.fields_for :left_ovary do |builder| %>

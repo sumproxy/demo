@@ -75,7 +75,6 @@ end
 if GynecologicExamination::Ovary::Visibility.all.empty?
   GynecologicExamination::Ovary::Visibility.create(value: 'определяется')
   GynecologicExamination::Ovary::Visibility.create(value: 'не определяется')
-  GynecologicExamination::Ovary::Visibility.create(value: '-- не задано --')
 end
 if GynecologicExamination::Ovary::Size.all.empty?
   GynecologicExamination::Ovary::Size.create(value: 'обычные')
@@ -91,7 +90,6 @@ end
 if GynecologicExamination::UterineBodyVisibility.all.empty?
   GynecologicExamination::UterineBodyVisibility.create(value: 'определяется')
   GynecologicExamination::UterineBodyVisibility.create(value: 'не определяется')
-  GynecologicExamination::UterineBodyVisibility.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineBodyDetectionPosition.all.empty?
   GynecologicExamination::UterineBodyDetectionPosition.create(value: 'в обычном положении')

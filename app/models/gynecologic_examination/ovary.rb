@@ -16,8 +16,39 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
   attr_accessible :is_follicle_visible
   attr_accessible :follicle_attributes
 
+  validate :check_ovary_attributes
   validate :check_visible_follicle_amount
   validate :check_follicle_size_is_set
+  
+  def check_ovary_attributes
+    if visibility.value == 'определяется'
+      flag = false
+      if length.nil?
+        errors.add(:length, "Длина не может быть равна нулю.")
+        flag = true
+      end
+      if thickness.nil?
+        errors.add(:thickness, "Толщина не может быть равна нулю.")
+        flag = true
+      end
+      if width.nil?
+        errors.add(:width, "Ширина не может быть равна нулю.")
+        flag = true
+      end
+      if structure.value == '-- не задано --'
+        errors.add(:structure, "Необходимо описать структуру")
+        errors.add(:structure_id, "Не может быть -- не задано --")
+        flag = true
+      end
+      if size.value == '-- не задано --'
+        errors.add(:size, "Необходимо задать размеры")
+        errors.add(:size_id, "Не может быть -- не задано --")
+        flag = true
+      end
+      return false if flag
+    end
+    return true
+  end
   
   def check_follicle_size_is_set
     if is_follicle_visible

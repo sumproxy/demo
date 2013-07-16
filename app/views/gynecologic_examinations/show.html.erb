@@ -59,9 +59,12 @@
       <% end %>
     </p>
     <p>
-      Шейка матки <%= @gyn_exam.cervix_visibility.value %>, <%= 'обычных размеров' if @gyn_exam.is_cervix_of_normal_size %> <%= @gyn_exam.cervix_size %> мм.
-      Структура <%= @gyn_exam.cervix_structure_change.value %> 
-      <% if @gyn_exam.cervix_structure_change.value == 'изменена' %> за счет кист<%= 'ы' unless @gyn_exam.is_endocervix_cyst_multiple %> эндоцервикса <%= "от #{@gyn_exam.endocervix_cyst_min_size}" if @gyn_exam.is_endocervix_cyst_multiple %> до <%= @gyn_exam.endocervix_cyst_max_size || @gyn_exam.endocervix_cyst_min_size %> мм.
+      Шейка матки <%= @gyn_exam.cervix_visibility.value %>
+      <% if @gyn_exam.cervix_visibility.value == 'определяется' %>
+        <%= ', обычных размеров' if @gyn_exam.is_cervix_of_normal_size %> <%= @gyn_exam.cervix_size %> мм.
+        Структура <%= @gyn_exam.cervix_structure_change.value %> 
+        <% if @gyn_exam.cervix_structure_change.value == 'изменена' %> за счет кист<%= 'ы' unless @gyn_exam.is_endocervix_cyst_multiple %> эндоцервикса <%= "от #{@gyn_exam.endocervix_cyst_min_size}" if @gyn_exam.is_endocervix_cyst_multiple %> до <%= @gyn_exam.endocervix_cyst_max_size || @gyn_exam.endocervix_cyst_min_size %> мм.
+        <% end %>
       <% end %>
     </p>
   <% end %>

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class GynecologicExamination < ActiveRecord::Base
   belongs_to :uterine_boundary
   belongs_to :uterine_adumbration
@@ -81,4 +82,28 @@ class GynecologicExamination < ActiveRecord::Base
   attr_accessible :cervix_size
   attr_accessible :is_cervix_of_normal_size
   attr_accessible :is_uterine_cavity_node_present
+  
+  validate :cervix_attributes
+  validate :cervix_structure_attributes
+  
+  def cervix_attributes
+    if cervix_visibility.value == 'определяется' 
+      errors.add(:cervix_size, "Необходимо указать размер") if cervix_size.nil?
+      if cervix_structure_change.value == '-- не задано --'
+        errors.add(:cervix_structure_change_id, "Необходимо описать характер структуры")
+        errors.add(:cervix_structure_change, "Необходимо описать характер структуры")
+      end
+    end
+  end
+  
+  def cervix_structure_attributes
+    if cervix_structure_change.value == 'изменена'
+      if endocervix_cyst_min_size.nil? && endocervix_cyst_max_size.nil?
+        errors.add(:endocervix_cyst_min_size, "Необходимо указать размер кисты эндоцервикса")
+        errors.add(:endocervix_cyst_max_size, "Необходимо указать размер кисты эндоцервикса")
+        return false
+      end
+    end
+    return true
+  end
 end
