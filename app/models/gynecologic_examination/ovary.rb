@@ -23,15 +23,15 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
   def check_ovary_attributes
     if visibility.value == 'определяется'
       flag = false
-      if length.nil?
+      if length.nil? || length == 0
         errors.add(:length, "Длина не может быть равна нулю.")
         flag = true
       end
-      if thickness.nil?
+      if thickness.nil? || thickness == 0
         errors.add(:thickness, "Толщина не может быть равна нулю.")
         flag = true
       end
-      if width.nil?
+      if width.nil? || width == 0
         errors.add(:width, "Ширина не может быть равна нулю.")
         flag = true
       end
@@ -63,6 +63,10 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
         follicle.errors.add(:min_size) if follicle.min_size.nil?
         follicle.errors.add(:max_size) if follicle.max_size.nil?
         return false
+      elsif follicle.is_multiple? && !follicle.min_size.nil? && !follicle.max_size.nil? && (follicle.min_size > follicle.max_size)
+        errors.add(:follicle, "Минимальный размер фолликула не может превышать максимальный")
+        follicle.errors.add(:min_size)
+        follicle.errors.add(:max_size)
       end
     end
   end

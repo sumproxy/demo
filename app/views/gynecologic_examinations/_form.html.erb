@@ -76,19 +76,52 @@
                              $.extend({'cervix_structure_change_id': ''}, attributes),
                              true);
       set_option(selector, {'cervix_structure_change_id': ''}, 'last');
-      toggle_cervix_structure_condition();
     }
     if( sel_text == 'определяется' ){
       set_disabled_attribute(selector, 
                              $.extend({'cervix_structure_change_id': ''}, attributes),
                              false);
       set_option(selector, {'cervix_structure_change_id': ''}, 'first');
-      toggle_cervix_structure_condition();
     }
+    toggle_cervix_structure_condition();
   };
+  
+  function toggle_endometrium_echostructure_inclusion_condition() {
+    var visible_remove_links = $('a[class=remove_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions]').filter(function() {
+      return $(this).parent().parent().css('display') != 'none';
+    });
+    var add_endometrium_hyperechoic_inclusion_link = $('a[class=add_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions][data-blueprint-id=endometrium_echostructure_hyperechoic_inclusions_fields_blueprint]');
+    if( $('#gynecologic_examination_endometrium_echostructure_change_type_id :selected').text() == 'гиперэхогенное включение' ) {
+      add_endometrium_hyperechoic_inclusion_link.show();
+      if( visible_remove_links.size() == 0 ) {
+        add_endometrium_hyperechoic_inclusion_link.click();
+      }
+    }
+    else {
+      add_endometrium_hyperechoic_inclusion_link.hide();
+      visible_remove_links.click();
+    }
+  }
+  
+  function toggle_endometrium_echostructure_condition() {
+    var selector = endometrium_echostructure_selector;
+    var options = endometrium_echostructure_options;
+    if($('#gynecologic_examination_endometrium_echostructure_change_id :selected').text() != 'изменена' ) {
+      set_option(selector, options, 'last');
+      set_disabled_attribute(selector, options, true);
+      toggle_endometrium_echostructure_inclusion_condition();
+    }
+    else {
+      set_option(selector, options, 'first');
+      set_disabled_attribute(selector, options, false);
+      toggle_endometrium_echostructure_inclusion_condition();
+    }
+  }
 
   $(document).ready(function() {
     default_selector = '#gynecologic_examination';
+    endometrium_echostructure_selector = default_selector;
+    endometrium_echostructure_options = {'endometrium_echostructure_change_type_id': ''};
     cervix_selector = default_selector;
     cervix_attributes = {'cervix_size': '', 'is_cervix_of_normal_size': false};
     endocervix_cyst_selector = default_selector;
@@ -102,8 +135,20 @@
     /////////////////////////////////////
     // initial consistensy
     /////////////////////////////////////
-    
-    // cervix
+
+    // структура эндометрия
+    if($('#gynecologic_examination_endometrium_echostructure_change_id :selected').text() != 'изменена' ) {
+      set_disabled_attribute(endometrium_echostructure_selector,
+                             endometrium_echostructure_options,
+                             true);
+    }
+        
+    // гиперэхогенные включения
+    if( $('#gynecologic_examination_endometrium_echostructure_change_type_id :selected').text() != 'гиперэхогенное включение' ) {
+      $('a[class=add_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions][data-blueprint-id=endometrium_echostructure_hyperechoic_inclusions_fields_blueprint]').hide();
+    }
+      
+    // шейка
     if( $(endocervix_cyst_selector + '_' + 'cervix_structure_change_id :selected').text() == 'не изменена' ) {
       set_disabled_attribute(endocervix_cyst_selector,
                              endocervix_cyst_attributes,
@@ -119,7 +164,7 @@
                              true);
     };
     
-    // left ovary    
+    // левый яичник    
     if( !$(left_ovary_selector + '_' + 'is_follicle_visible').is(":checked") ) {
       set_disabled_attribute(left_ovary_selector + '_' + 'follicle_attributes', 
                              follicle_attributes, 
@@ -135,7 +180,7 @@
                              true);
     }
 
-    // right ovary
+    // правый яичник
     if( !$(right_ovary_selector + '_' + 'is_follicle_visible').is(":checked") ) {
       set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
                              follicle_attributes,
@@ -155,7 +200,17 @@
     // change detectors
     /////////////////////////////////////
     
-    // cervix
+    // структура эндометрия
+    $('#gynecologic_examination_endometrium_echostructure_change_id').change(function() {
+      toggle_endometrium_echostructure_condition();
+    });
+    
+    // гиперэхогенные включения
+    $('#gynecologic_examination_endometrium_echostructure_change_type_id').change(function() {
+      toggle_endometrium_echostructure_inclusion_condition();
+    });
+    
+    // шейка
     $(endocervix_cyst_selector + '_' + 'cervix_structure_change_id').change(function() {
       toggle_cervix_structure_condition();
     });
@@ -165,7 +220,7 @@
                               cervix_attributes);
     });
     
-    // left ovary
+    // левый яичник
     $(left_ovary_selector + '_' + 'is_follicle_visible').change(function() {
       toggle_follicle_condition(left_ovary_selector + '_' + 'follicle_attributes',
                                 follicle_attributes,
@@ -176,7 +231,7 @@
       toggle_ovary_condition(left_ovary_selector, ovary_attributes, ovary_options);
     });
     
-    // right ovary
+    // правый яичник
     $(right_ovary_selector + '_' + 'is_follicle_visible').change(function(){
       toggle_follicle_condition(right_ovary_selector + '_' + 'follicle_attributes',
                                 follicle_attributes,
@@ -192,7 +247,13 @@
     /////////////////////////////////////
     
     $('form').submit(function(){
-      // cervix
+      
+      // структура эндометрия
+      set_disabled_attribute(endometrium_echostructure_selector,
+                             endometrium_echostructure_options,
+                             false);
+      
+      // шейка
       set_disabled_attribute(endocervix_cyst_selector,
                              endocervix_cyst_attributes,
                              false);
@@ -201,7 +262,7 @@
                              $.extend({'cervix_structure_change_id': ''}, cervix_attributes),
                              false);
       
-      // left ovary
+      // левый яичник
       set_disabled_attribute(left_ovary_selector + '_' + 'follicle_attributes', 
                              follicle_attributes, 
                              false);
@@ -210,7 +271,7 @@
                              $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
                              false);
                              
-      // right ovary
+      // правый яичник
       set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
                              follicle_attributes,
                              false);
@@ -299,40 +360,49 @@
     <div class="field">
       <%= f.label :myometrium_posterior_wall_thickness %><br />
       <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
-    </div>  
-    <div class="field">
-      <%= f.label :endometrial_thickness %><br />
-      <%= f.number_field :endometrial_thickness, :style => "width:50px;", :step => "any" %>
     </div>
-    <div class="field">
-      <%= f.label :endometrial_boundary %><br />
-      <%= f.collection_select :endometrial_boundary_id, GynecologicExamination::EndometrialBoundary.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.label :endometrial_adumbration %><br />
-      <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.label :endometrium_echostructure_change %><br />
-      <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
-    </div>  
-    <div class="field">
-      <%= f.label :endometrium_echostructure_change_type %><br />
-      <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.fields_for :endometrium_echostructure_hyperechoic_inclusions do |inclusion_form| %>
-        <%= render "endometrium_echostructure_hyperechoic_inclusion", :f => inclusion_form %>
-      <% end %>
-      <%= f.link_to_add "Добавить гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
-    </div>
-    <div class="field">
-      <%= f.label :endometrium_phase %><br />
-      <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %>
-    </div>
-    <div class="field">
+    <br />
+    <fieldset>
+      <legend>Эндометрий</legend>
+      <div class="fields">
+        <span class="on_one_line">
+          <%= f.label :endometrium_echostructure_change %><br />
+          <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
+        </span> 
+        <span class="on_one_line">
+          <%= f.label :endometrial_thickness %><br />
+          <%= f.number_field :endometrial_thickness, :style => "width:50px;", :step => "any" %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :endometrial_boundary %><br />
+          <%= f.collection_select :endometrial_boundary_id, GynecologicExamination::EndometrialBoundary.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :endometrial_adumbration %><br />
+          <%= f.collection_select :endometrial_adumbration_id, GynecologicExamination::EndometrialAdumbration.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :endometrium_phase %><br />
+          <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %> фазе менструального цикла
+        </span>
+      </div>
+      <div class="field">
+        <%= f.label :endometrium_echostructure_change_type %><br />
+        <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
+      </div>
+      <div class="field">
+        <%= f.fields_for :endometrium_echostructure_hyperechoic_inclusions do |inclusion_form| %>
+          <%= render "endometrium_echostructure_hyperechoic_inclusion", :f => inclusion_form %>
+        <% end %>
+        <%= f.link_to_add "Добавить гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
+      </div>
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>Полость матки</legend>
       <%= render "uterine_cavity", :f => f %>
-    </div>
+    </fieldset>
+    <br />
     <fieldset>
       <legend>Шейка матки</legend>
       <div class="field">
@@ -354,12 +424,14 @@
       </div>
     </fieldset>
   </fieldset>
+  <br />
   <fieldset>
     <legend>Левый яичник</legend>
     <%= f.fields_for :left_ovary do |builder| %>
       <%= render "ovary", :f => builder %>
     <% end %>
   </fieldset>
+  <br />
   <fieldset>
     <legend>Правый яичник</legend>
     <%= f.fields_for :right_ovary do |builder| %>

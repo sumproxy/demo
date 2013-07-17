@@ -41,11 +41,14 @@
       М-эхо: толщина <%= @gyn_exam.endometrial_thickness %> мм,
       границы <%= @gyn_exam.endometrial_boundary.value %>,
       контуры <%= @gyn_exam.endometrial_adumbration.value %>,
-      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>, <%= @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' ? "#{@gyn_exam.endometrium_echostructure_change_type.value}:" : "м-эхо #{@gyn_exam.endometrium_echostructure_change_type.value}." %>
-      <%- if @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %><br />
-        <%- @gyn_exam.endometrium_echostructure_hyperechoic_inclusions.each do |inclusion| -%>
-          &bull; <%= inclusion.localization.value %>, <%= inclusion.size %> мм <%= inclusion.comment %><br />
-        <%- end -%>
+      эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>
+      <% if @gyn_exam.endometrium_echostructure_change.value == 'изменена' %>
+        <%= @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' ? "#{@gyn_exam.endometrium_echostructure_change_type.value}:" : "м-эхо #{@gyn_exam.endometrium_echostructure_change_type.value}." %>
+        <%- if @gyn_exam.endometrium_echostructure_change_type.value == 'гиперэхогенное включение' %><br />
+          <%- @gyn_exam.endometrium_echostructure_hyperechoic_inclusions.each do |inclusion| -%>
+            &bull; <%= inclusion.localization.value %>, <%= inclusion.size %> мм <%= inclusion.comment %><br />
+          <%- end -%>
+        <% end %>
       <% end %>
     </p>
     <p>

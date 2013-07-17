@@ -135,5 +135,4 @@ if GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localiz
   GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в нижней трети')
   GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в средней трети')
   GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в дне')
-  GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: '-- не задано --')
 end
