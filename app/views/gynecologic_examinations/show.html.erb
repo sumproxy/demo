@@ -8,8 +8,10 @@
 </p>
 <p>
   Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
-  Дата последней менструации <%= l @gyn_exam.menstruation_date, :format => :long %>
-  (<%= @gyn_exam.menstruation_day %>-й день).
+  <% unless @gyn_exam.menstruation_date.nil? %>
+    Дата последней менструации <%= l @gyn_exam.menstruation_date, :format => :long %>
+    (<%= @gyn_exam.menstruation_day %>-й день).
+  <% end %>
 </p>
 <p>
   Тело матки: <%= @gyn_exam.uterine_body_visibility.value %>
@@ -30,7 +32,7 @@
       Структура миометрия: <%= @gyn_exam.myometric_structure_change.value -%>
       <%- if @gyn_exam.myometric_structure_change.value == 'изменена' %>:<br />
         <% @gyn_exam.myometric_structure_nodes.each do |node| %>
-          &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, <%= node.size %> мм, <%= node.comment %><br />
+          &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, <%= node.size %> мм<%= ", #{node.comment}" unless node.comment.nil? || node.comment.empty? %><br />
         <% end %>
         <% unless @gyn_exam.myometric_structure_change.value == 'изменена' %><br /><% end %>
         Толщина передней стенки <%= @gyn_exam.myometrium_anterior_wall_thickness %> мм.<br />

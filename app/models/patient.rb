@@ -5,7 +5,10 @@ class Patient < ActiveRecord::Base
   has_many :patient_examinations
   has_many :gynecologic_examinations, :through => :patient_examinations
   accepts_nested_attributes_for :address, :allow_destroy => true
-  attr_accessible :dob, :first_name, :last_name, :patronymic, :phone, :sex_id, :address_id, :address_attributes
+  attr_accessible :dob, :first_name, :last_name, :patronymic, :phone
+  attr_accessible :sex_id, :sex
+  attr_accessible :address_id, :address
+  attr_accessible :address_attributes
   validates :last_name, :first_name, :patronymic, :dob, :sex_id, :presence => true
   validates_uniqueness_of :last_name, :scope => [:first_name, :patronymic, :dob], :message => 'Пациент с такими данными уже есть в базе'
   validate :dob_check

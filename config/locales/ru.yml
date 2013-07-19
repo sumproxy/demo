@@ -167,6 +167,73 @@ ru:
       create: Создать %{model}
       submit: Сохранить %{model}
       update: Сохранить %{model}
+    label:
+      patient:
+        dob: Дата рождения
+        first_name: Имя
+        last_name: Фамилия
+        patronymic: Отчество
+        phone: Телефон
+        sex: Пол
+        address: Адрес
+      address:
+        city: Город
+        street: Улица
+        house: Номер дома
+        appartment: Квартира
+      gynecologic_examination:
+        menstruation_date: Дата последней менструации
+        menstruation_day: День менструального цикла
+        uterine_body_visibility: визуализация
+        uterine_body_detection_position: в каком положении
+        uterine_boundary: границы
+        uterine_adumbration: контуры
+        uterine_shape: форма
+        uterine_size: размеры
+        uterine_length: длина
+        uterine_anteroposterior: передне-задний
+        uterine_width: ширина
+        myometric_structure_change: структура
+        myometrium_anterior_wall_thickness: толщина передней стенки
+        myometrium_posterior_wall_thickness: толщина задней стенки
+        endometrium_echostructure_change: эхоструктура
+        endometrial_thickness: толщина
+        endometrial_boundary: границы
+        endometrial_adumbration: контуры
+        endometrium_phase: эндометрий соответствует
+        endometrium_echostructure_change_type: характер изменений м-эхо
+        uterine_cavity_deformation: деформации
+        uterine_cavity_size_change: изменения в размерах
+        uterine_cavity_size: размеры
+        is_uterine_cavity_node_present: узел
+        cervix_visibility: визуализация
+        cervix_size: размер
+        is_cervix_of_normal_size: обычных размеров
+        cervix_structure_change: структура
+        endocervix_cyst_min_size: от
+        endocervix_cyst_max_size: до
+        is_endocervix_cyst_multiple: множественная
+      gynecologic_examination/ovary:
+        visibility: визуализация
+        length: длина
+        thickness: толщина
+        width: ширина
+        size: размеры
+        structure: структура
+        is_follicle_visible: определяются
+      gynecologic_examination/ovary/follicle:
+        min_size: от
+        max_size: до
+        amount: количество
+      gynecologic_examination/myometric_structure_node:
+        localization: локализация
+        depth_localization: по глубине
+        size: размер
+        comment: комментарий
+      gynecologic_examination/endometrium_echostructure_hyperechoic_inclusion:
+        size: размер
+        localization: локализация
+        comment: комментарий
   number:
     currency:
       format:
@@ -257,3 +324,97 @@ ru:
       <<: *errors
     models:
       gynecologic_examination: гинекологическое обследование
+      patient: пациент
+    attributes:
+      gynecologic_examination:
+        menstruation_date: Дата последней менструации
+        menstruation_day: День менструального цикла
+        uterine_body_visibility: Визуализация тела матки
+        uterine_body_visibility_id: Визуализация тела матки
+        uterine_body_detection_position: Положение, в котором определяется тело матки
+        uterine_body_detection_position_id: Положение, в котором определяется тело матки
+        uterine_boundary: Границы матки
+        uterine_boundary_id: Границы матки
+        uterine_adumbration: Контуры матки
+        uterine_adumbration_id: Контуры матки
+        uterine_shape_id: Форма матки
+        uterine_shape: Форма матки
+        uterine_size_id: Размеры матки
+        uterine_size: Размеры матки
+        uterine_length: Длина матки
+        uterine_anteroposterior: Передне-задний матки
+        uterine_width: Ширина матки
+        myometric_structure_change_id: Изменения в структуре миометрия
+        myometric_structure_change: Изменения в структуре миометрия
+        myometrium_anterior_wall_thickness: Толщина передней стенки миометрия
+        myometrium_posterior_wall_thickness: Толщина задней стенки миометрия
+        endometrium_echostructure_change_id: Изменения эхоструктуры эндометрия
+        endometrium_echostructure_change: Изменения эхоструктуры эндометрия
+        endometrial_thickness: Толщина эндометрия
+        endometrial_boundary: Границы эндометрия
+        endometrial_boundary_id: Границы эндометрия
+        endometrial_adumbration: Контуры эндометрия
+        endometrial_adumbration_id: Контуры эндометрия
+        endometrium_phase: Соответствие эндометрия фазе м.ц.
+        endometrium_phase_id: Соответствие эндометрия фазе м.ц.
+        endometrium_echostructure_change_type: Характер изменений эхоструктуры эндометрия
+        endometrium_echostructure_change_type_id: Характер изменений эхоструктуры эндометрия
+        uterine_cavity_deformation: Деформации полости матки
+        uterine_cavity_deformation_id: Деформации полости матки
+        uterine_cavity_size_change: Изменения в размерах полости матки
+        uterine_cavity_size_change_id: Изменения в размерах полости матки
+        uterine_cavity_size: Размеры полости матки
+        is_uterine_cavity_node_present: Наличие узла в полости матки
+        cervix_visibility: Визуализация шейки
+        cervix_visibility_id: Визуализация шейки
+        cervix_size: Размеры шейки
+        is_cervix_of_normal_size: Шейка обычных размеров
+        cervix_structure_change: Изменения в структуре шейки
+        cervix_structure_change_id: Изменения в структуре шейки
+        endocervix_cyst_min_size: Минимальный размер кисты эндоцервикса
+        endocervix_cyst_max_size: Максимальный размер кисты эндоцервикса
+        is_endocervix_cyst_multiple: Множественность кисты эндоцервикса
+      gynecologic_examination/myometric_structure_nodes:
+        localization: Локализация узла миометрия
+        localization_id: Локализация узла миометрия
+        depth_localization: Локализация узла миометрия по глубине
+        depth_localization_id: Локализация узла миометрия по глубине
+        size: Размер узла миометрия
+        comment: Комментарий к узлу миометрия
+      gynecologic_examination/endometrium_echostructure_hyperechoic_inclusions:
+        localization: Локализация гиперэхогенного включения в эндометрии
+        localization_id: Локализация гиперэхогенного включения в эндометрии
+        size: Размер гиперэхогенного включения в эндометрии
+        comment: Комментарий к гиперэхогенному включению в эндометрии
+      gynecologic_examination/left_ovary:
+        visibility: Визуализация левого яичника
+        visibility_id: Визуализация левого яичника
+        length: Длина левого яичника
+        thickness: Толщина левого яичника
+        width: Ширина левого яичника
+        size: Размеры левого яичника
+        size_id: Размеры левого яичника
+        structure: Структура левого яичника
+        structure_id: Структура левого яичника
+        is_follicle_visible: Фолликул(ы) в левом яичнике
+        follicle: Фолликул(ы) в левом яичнике
+      gynecologic_examination/left_ovary/follicle:
+        amount: Количество фолликулов левого яичника
+        min_size: Минимальный размер фолликула левого яичника
+        max_size: Максимальный размер фолликула левого яичника
+      gynecologic_examination/right_ovary:
+        visibility: Визуализация правого яичника
+        visibility_id: Визуализация правого яичника
+        length: Длина правого яичника
+        thickness: Толщина правого яичника
+        width: Ширина правого яичника
+        size: Размеры правого яичника
+        size_id: Размеры правого яичника
+        structure: Структура правого яичника
+        structure_id: Структура правого яичника
+        is_follicle_visible: Фолликул(ы) в правом яичнике
+        follicle: Фолликул(ы) в правом яичнике
+      gynecologic_examination/right_ovary/follicle:
+        amount: Количество фолликулов правого яичника
+        min_size: Минимальный размер фолликула правого яичника
+        max_size: Максимальный размер фолликула правого яичника

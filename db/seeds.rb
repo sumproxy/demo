@@ -110,7 +110,6 @@ if GynecologicExamination::MyometricStructureNode::Localization.all.empty?
   GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в области перешейка')
   GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в передней поверхности шейки')
   GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в задней поверхности шейки')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: '-- не задано --')
 end
 if GynecologicExamination::MyometricStructureNode::DepthLocalization.all.empty?
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субсерозно')
@@ -118,7 +117,6 @@ if GynecologicExamination::MyometricStructureNode::DepthLocalization.all.empty?
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально')
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'интерстициально-субмукозно')
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субмукозно')
-  GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometriumEchostructureChange.all.empty?
   GynecologicExamination::EndometriumEchostructureChange.create(value: 'не изменена')

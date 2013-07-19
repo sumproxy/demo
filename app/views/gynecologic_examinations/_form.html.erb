@@ -56,28 +56,29 @@
   function toggle_cervix_structure_condition() {
     var selector = endocervix_cyst_selector;
     var attributes = endocervix_cyst_attributes;
+    var selector_text = $(selector + '_' + 'cervix_structure_change_id :selected').text()
     
-    if( $(selector + '_' + 'cervix_structure_change_id :selected').text() == 'не изменена' ||
-        $(selector + '_' + 'cervix_structure_change_id :selected').text() == '-- не задано --'
+    if( selector_text == 'не изменена' ||
+        selector_text == '-- не задано --'
     ) {
       set_value(selector, attributes);
       set_disabled_attribute(selector, attributes, true);
     }
-    if( $(selector + '_' + 'cervix_structure_change_id :selected').text() == 'изменена' ) {
+    if( selector_text == 'изменена' ) {
       set_disabled_attribute(selector, attributes, false);
     }
   };
   
   function toggle_cervix_condition(selector, attributes) {
-    var sel_text = $(selector + '_' + 'cervix_visibility_id :selected').text();
-    if( sel_text == 'не определяется' || sel_text == '-- не задано --' ){
+    var selector_text = $(selector + '_' + 'cervix_visibility_id :selected').text();
+    if( selector_text == 'не определяется' || selector_text == '-- не задано --' ){
       set_value(selector, attributes);
       set_disabled_attribute(selector,
                              $.extend({'cervix_structure_change_id': ''}, attributes),
                              true);
       set_option(selector, {'cervix_structure_change_id': ''}, 'last');
     }
-    if( sel_text == 'определяется' ){
+    if( selector_text == 'определяется' ){
       set_disabled_attribute(selector, 
                              $.extend({'cervix_structure_change_id': ''}, attributes),
                              false);
@@ -90,15 +91,15 @@
     var visible_remove_links = $('a[class=remove_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions]').filter(function() {
       return $(this).parent().parent().css('display') != 'none';
     });
-    var add_endometrium_hyperechoic_inclusion_link = $('a[class=add_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions][data-blueprint-id=endometrium_echostructure_hyperechoic_inclusions_fields_blueprint]');
+    var add_inclusion_link = $('a[class=add_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions][data-blueprint-id=endometrium_echostructure_hyperechoic_inclusions_fields_blueprint]');
     if( $('#gynecologic_examination_endometrium_echostructure_change_type_id :selected').text() == 'гиперэхогенное включение' ) {
-      add_endometrium_hyperechoic_inclusion_link.show();
+      add_inclusion_link.show();
       if( visible_remove_links.size() == 0 ) {
-        add_endometrium_hyperechoic_inclusion_link.click();
+        add_inclusion_link.click();
       }
     }
     else {
-      add_endometrium_hyperechoic_inclusion_link.hide();
+      add_inclusion_link.hide();
       visible_remove_links.click();
     }
   }
@@ -117,9 +118,33 @@
       toggle_endometrium_echostructure_inclusion_condition();
     }
   }
+  
+  function toggle_myometric_structure_condition() {
+    var selector = myometrium_selector
+    var attributes = myometrium_attributes
+    var add_node_link = $('a[class=add_nested_fields][data-association=myometric_structure_nodes][data-blueprint-id=myometric_structure_nodes_fields_blueprint]');
+    var visible_remove_links = $('a[class=remove_nested_fields][data-association=myometric_structure_nodes]').filter(function() {
+      return $(this).parent().parent().css('display') != 'none';
+    });
+    if( $('#gynecologic_examination_myometric_structure_change_id :selected').text() != 'изменена' ) {
+      set_disabled_attribute(selector, attributes, true);
+      set_value(selector, attributes);
+      visible_remove_links.click();
+      add_node_link.hide();
+    }
+    else {
+      set_disabled_attribute(selector, attributes, false);
+      add_node_link.show();
+      if( visible_remove_links.size() == 0 ) {
+        add_node_link.click();
+      }
+    }
+  }
 
   $(document).ready(function() {
     default_selector = '#gynecologic_examination';
+    myometrium_selector = default_selector;
+    myometrium_attributes = {'myometrium_anterior_wall_thickness': '', 'myometrium_posterior_wall_thickness': '' }
     endometrium_echostructure_selector = default_selector;
     endometrium_echostructure_options = {'endometrium_echostructure_change_type_id': ''};
     cervix_selector = default_selector;
@@ -135,17 +160,32 @@
     /////////////////////////////////////
     // initial consistensy
     /////////////////////////////////////
+    
+    // миометрий
+    if( $('#gynecologic_examination_myometric_structure_change_id :selected').text() != 'изменена' ) {
+      set_disabled_attribute(myometrium_selector,
+                             myometrium_attributes,
+                             true);
+      $('a[class=add_nested_fields][data-association=myometric_structure_nodes][data-blueprint-id=myometric_structure_nodes_fields_blueprint]').hide();
+      var visible_remove_links = $('a[class=remove_nested_fields][data-association=myometric_structure_nodes]').filter(function() {
+        return $(this).parent().parent().css('display') != 'none';
+      });
+      visible_remove_links.click();
+    };
 
-    // структура эндометрия
+    // эндометрий
     if($('#gynecologic_examination_endometrium_echostructure_change_id :selected').text() != 'изменена' ) {
       set_disabled_attribute(endometrium_echostructure_selector,
                              endometrium_echostructure_options,
                              true);
     }
         
-    // гиперэхогенные включения
     if( $('#gynecologic_examination_endometrium_echostructure_change_type_id :selected').text() != 'гиперэхогенное включение' ) {
       $('a[class=add_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions][data-blueprint-id=endometrium_echostructure_hyperechoic_inclusions_fields_blueprint]').hide();
+      var visible_remove_links = $('a[class=remove_nested_fields][data-association=endometrium_echostructure_hyperechoic_inclusions]').filter(function() {
+        return $(this).parent().parent().css('display') != 'none';
+      });
+      visible_remove_links.click();
     }
       
     // шейка
@@ -200,12 +240,16 @@
     // change detectors
     /////////////////////////////////////
     
-    // структура эндометрия
+    // миометрий
+    $('#gynecologic_examination_myometric_structure_change_id').change(function() {
+      toggle_myometric_structure_condition();
+    });
+    
+    // эндометрий
     $('#gynecologic_examination_endometrium_echostructure_change_id').change(function() {
       toggle_endometrium_echostructure_condition();
     });
     
-    // гиперэхогенные включения
     $('#gynecologic_examination_endometrium_echostructure_change_type_id').change(function() {
       toggle_endometrium_echostructure_inclusion_condition();
     });
@@ -248,7 +292,12 @@
     
     $('form').submit(function(){
       
-      // структура эндометрия
+      // миометрий
+      set_disabled_attribute(myometrium_selector,
+                             myometrium_attributes,
+                             false);
+      
+      // эндометрий
       set_disabled_attribute(endometrium_echostructure_selector,
                              endometrium_echostructure_options,
                              false);
@@ -307,60 +356,73 @@
   </div>
   <fieldset>
     <legend>Тело матки</legend>
-    <div class="field">
-      <%= f.label :uterine_body_visibility %><br />
-      <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
+    <br />
+    <div class="fields">
+      <span class="on_one_line">
+        <%= f.label :uterine_body_visibility %><br />
+        <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_body_detection_position %><br />
+        <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
+      </span>
     </div>
-    <div class="field">
-      <%= f.label :uterine_body_detection_position %><br />
-      <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
+    <div class="fields">
+      <span class="on_one_line">
+        <%= f.label :uterine_boundary %><br />
+        <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_adumbration %><br />
+        <%= f.collection_select :uterine_adumbration_id, GynecologicExamination::UterineAdumbration.all, :id, :value %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_shape %><br />
+        <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
+      </span>
     </div>
-    <div class="field">
-      <%= f.label :uterine_boundary %><br />
-      <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
+    <div class="fields">
+      <span class="on_one_line">
+        <%= f.label :uterine_size %><br />
+        <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_length %><br />
+        <%= f.number_field :uterine_length, :style => "width:50px;", :step => "any" %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_width %><br />
+        <%= f.number_field :uterine_width, :style => "width:50px;", :step => "any" %>
+      </span>
+      <span class="on_one_line">
+        <%= f.label :uterine_anteroposterior %><br />
+        <%= f.number_field :uterine_anteroposterior, :style => "width:50px;", :step => "any" %>
+      </span>
     </div>
-    <div class="field">
-      <%= f.label :uterine_adumbration %><br />
-      <%= f.collection_select :uterine_adumbration_id, GynecologicExamination::UterineAdumbration.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.label :uterine_shape %><br />
-      <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.label :uterine_size %><br />
-      <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.label :uterine_length %><br />
-      <%= f.number_field :uterine_length, :style => "width:50px;", :step => "any" %>
-    </div>
-    <div class="field">
-      <%= f.label :uterine_anteroposterior %><br />
-      <%= f.number_field :uterine_anteroposterior, :style => "width:50px;", :step => "any" %>
-    </div>
-    <div class="field">
-      <%= f.label :uterine_width %><br />
-      <%= f.number_field :uterine_width, :style => "width:50px;", :step => "any" %>
-    </div>
-    <div class="field">
-      <%= f.label :myometric_structure_change %><br />
-      <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
-    </div>
-    <div class="field">
-      <%= f.fields_for :myometric_structure_nodes do |node_form| %>
-        <%= render "myometric_structure_node", :f => node_form %>
-      <% end %>
-      <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
-    </div>
-    <div class="field">
-      <%= f.label :myometrium_anterior_wall_thickness %><br />
-      <%= f.number_field :myometrium_anterior_wall_thickness, :style => "width:50px;", :step => "any" %>
-    </div>
-    <div class="field">
-      <%= f.label :myometrium_posterior_wall_thickness %><br />
-      <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
-    </div>
+    <br />
+    <fieldset>
+      <legend>Миометрий</legend>
+      <div class="field">
+        <span class="on_one_line">
+          <%= f.label :myometric_structure_change %><br />
+          <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :myometrium_anterior_wall_thickness %><br />
+          <%= f.number_field :myometrium_anterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :myometrium_posterior_wall_thickness %><br />
+          <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
+        </span>
+      </div>
+      <div class="field">
+        <%= f.fields_for :myometric_structure_nodes do |node_form| %>
+          <%= render "myometric_structure_node", :f => node_form %>
+        <% end %>
+        <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
+      </div>
+    </fieldset>
     <br />
     <fieldset>
       <legend>Эндометрий</legend>
