@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ovary: 
+  shape_id: 1
+  boundary_id: 1
+  adumbration_id: 1
+  size: 1.5
+  structure_id: 1
+  content_id: 1
+  wall_thickness: 1.5
+  comment: MyText
+
+two:
+  ovary: 
+  shape_id: 1
+  boundary_id: 1
+  adumbration_id: 1
+  size: 1.5
+  structure_id: 1
+  content_id: 1
+  wall_thickness: 1.5
+  comment: MyText

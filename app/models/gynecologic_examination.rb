@@ -77,23 +77,18 @@ class GynecologicExamination < ActiveRecord::Base
       # тело матки
       if uterine_body_detection_position.value == '-- не задано --'
         errors.add(:uterine_body_detection_position_id, "Не задано значение")
-        errors.add(:uterine_body_detection_position, "Не задано значение")
       end
       if uterine_boundary.value == '-- не задано --'
         errors.add(:uterine_boundary_id, "Не задано значение")
-        errors.add(:uterine_boundary, "Не задано значение")
       end
       if uterine_adumbration.value == '-- не задано --'
         errors.add(:uterine_adumbration_id, "Не задано значение")
-        errors.add(:uterine_adumbration, "Не задано значение")
       end
       if uterine_shape.value == '-- не задано --'
         errors.add(:uterine_shape_id, "Не задано значение")
-        errors.add(:uterine_shape, "Не задано значение")
       end
       if uterine_size.value == '-- не задано --'
         errors.add(:uterine_size_id, "Не задано значение")
-        errors.add(:uterine_size, "Не задано значение")
       end
       if uterine_length.nil? || uterine_length == 0
         errors.add(:uterine_length, "Значение не задано или недопустимо")
@@ -103,6 +98,13 @@ class GynecologicExamination < ActiveRecord::Base
       end
       if uterine_width.nil? || uterine_width == 0
         errors.add(:uterine_width, "Значение не задано или недопустимо")
+      end
+      
+      if uterine_cavity_size_change.value == 'расширена'
+        if uterine_cavity_size.nil? && !is_uterine_cavity_node_present
+          errors.add(:uterine_cavity_size, "Не задано значение")
+          errors.add(:is_uterine_cavity_node_present, "Не задано значение")
+        end
       end
       
       # миометрий
@@ -118,23 +120,18 @@ class GynecologicExamination < ActiveRecord::Base
       # эндометрий
       if endometrium_echostructure_change.value == '-- не задано --'
         errors.add(:endometrium_echostructure_change_id, "Не задано значение")
-        errors.add(:endometrium_echostructure_change, "Не задано значение")
       end
       if endometrium_echostructure_change.value == 'изменена' && endometrium_echostructure_change_type.value == '-- не задано --'
         errors.add(:endometrium_echostructure_change_type_id, "Не задано значение")
-        errors.add(:endometrium_echostructure_change_type, "Не задано значение")
       end
       if endometrium_phase.value == '-- не задано --'
         errors.add(:endometrium_phase_id, "Не задано значение")
-        errors.add(:endometrium_phase, "Не задано значение")
       end
       if endometrial_boundary.value == '-- не задано --'
         errors.add(:endometrial_boundary_id, "Не задано значение")
-        errors.add(:endometrial_boundary, "Не задано значение")
       end
       if endometrial_adumbration.value == '-- не задано --'
         errors.add(:endometrial_adumbration_id, "Не задано значение")
-        errors.add(:endometrial_adumbration, "Не задано значение")
       end
       if endometrial_thickness.nil? || endometrial_thickness == 0
         errors.add(:endometrial_thickness, "Не задано значение")
@@ -143,14 +140,9 @@ class GynecologicExamination < ActiveRecord::Base
       # полость матки
       if uterine_cavity_deformation.value == '-- не задано --'
         errors.add(:uterine_cavity_deformation_id, "Не задано значение")
-        errors.add(:uterine_cavity_deformation, "Не задано значение")
       end
       if uterine_cavity_size_change.value == '-- не задано --'
         errors.add(:uterine_cavity_size_change_id, "Не задано значение")
-        errors.add(:uterine_cavity_size_change, "Не задано значение")
-      end
-      if uterine_cavity_size.nil? || uterine_cavity_size == 0
-        errors.add(:uterine_cavity_size, "Значение не задано или недопустимо")
       end
 
       # шейка
@@ -160,7 +152,6 @@ class GynecologicExamination < ActiveRecord::Base
         end
         if cervix_structure_change.value == '-- не задано --'
           errors.add(:cervix_structure_change_id, "Не задано значение")
-          errors.add(:cervix_structure_change, "Не задано значение")
         end
         if cervix_structure_change.value == 'изменена'
           if (endocervix_cyst_min_size.nil? || endocervix_cyst_min_size == 0 ) && 

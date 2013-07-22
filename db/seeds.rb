@@ -134,3 +134,29 @@ if GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localiz
   GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в средней трети')
   GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.create(value: 'в дне')
 end
+if GynecologicExamination::Ovary::Formation::Shape.all.empty?
+  GynecologicExamination::Ovary::Formation::Shape.create(value: "округлая")
+  GynecologicExamination::Ovary::Formation::Shape.create(value: "овальная")
+  GynecologicExamination::Ovary::Formation::Shape.create(value: "колбасовидная")
+  GynecologicExamination::Ovary::Formation::Shape.create(value: "неправильная")
+end
+if GynecologicExamination::Ovary::Formation::Boundary.all.empty?
+  GynecologicExamination::Ovary::Formation::Boundary.create(value: "чёткие")
+  GynecologicExamination::Ovary::Formation::Boundary.create(value: "нечёткие")
+end
+if GynecologicExamination::Ovary::Formation::Adumbration.all.empty?
+  GynecologicExamination::Ovary::Formation::Adumbration(value: "ровные")
+  GynecologicExamination::Ovary::Formation::Adumbration(value: "неровные")
+end
+if GynecologicExamination::Ovary::Formation::Structure.all.empty?
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "анэхогенная")
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "изоэхогенная")
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "гиперэхогенная")
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "сетчатая")
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "неоднородная")
+  GynecologicExamination::Ovary::Formation::Structure.create(value: "солидная")
+end
+if GynecologicExamination::Ovary::Formation::Content.all.empty?
+  GynecologicExamination::Ovary::Formation::Content.create(value: "однокамерное")
+  GynecologicExamination::Ovary::Formation::Content.create(value: "многокамерное")
+end

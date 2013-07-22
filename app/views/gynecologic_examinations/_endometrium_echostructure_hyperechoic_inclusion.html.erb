@@ -3,7 +3,7 @@
   <%= f.number_field :size, :style => "width:50px;", :step => "any" %>
 </span>
 <span class="on_one_line">
-  <%= f.label :localization %><br />
+  <%= f.label :localization_id %><br />
   <%= f.collection_select :localization_id, GynecologicExamination::EndometriumEchostructureHyperechoicInclusion::Localization.all, :id, :value %>
 </span>
 <span class="on_one_line">

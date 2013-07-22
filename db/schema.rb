@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709090844) do
+ActiveRecord::Schema.define(:version => 20130722152744) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -127,6 +127,52 @@ ActiveRecord::Schema.define(:version => 20130709090844) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "gynecologic_examination_ovary_formation_adumbrations", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_boundaries", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_contents", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_shapes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_structures", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formations", :force => true do |t|
+    t.integer  "ovary_id"
+    t.integer  "shape_id"
+    t.integer  "boundary_id"
+    t.integer  "adumbration_id"
+    t.float    "size"
+    t.integer  "structure_id"
+    t.integer  "content_id"
+    t.float    "wall_thickness"
+    t.text     "comment"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "gynecologic_examination_ovary_formations", ["ovary_id"], :name => "index_gynecologic_examination_ovary_formations_on_ovary_id"
 
   create_table "gynecologic_examination_ovary_sizes", :force => true do |t|
     t.string   "value"

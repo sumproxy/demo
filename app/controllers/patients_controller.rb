@@ -53,7 +53,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
+        format.html { redirect_to @patient, notice: 'Учетная карточка пациента заведена.' }
         format.json { render json: @patient, status: :created, location: @patient }
       else
         format.html { render action: "new" }
@@ -69,7 +69,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.update_attributes(params[:patient])
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
+        format.html { redirect_to @patient, notice: 'Данные пациента обновлены.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

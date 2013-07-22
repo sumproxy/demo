@@ -9,5 +9,11 @@
     <% if ovary.structure.value == 'обычная' && ovary.is_follicle_visible %>
       Фолликул<%= "ы (#{ovary.follicle.amount}) от #{ovary.follicle.min_size} до " if ovary.follicle.is_multiple? %> <%= ovary.follicle.max_size || ovary.follicle.min_size %> мм.
     <% end %>
+    Образования:<br />
+    <% if ovary.structure.value == 'изменена' %>
+      <% ovary.formations.each do |formation| %>
+        &bull; Форма <%= formation.shape.value %>, границы <%= formation.boundary.value %>, контуры <%= formation.adumbration.value %> размер <%= formation.size %> мм, структура <%= formation.structure.value %>, содержимое <%= formation.content.value %>, толщина стенки <%= formation.wall_thickness %> мм<%= ", #{formation.comment}" unless formation.comment.nil? || formation.comment.empty? %><br />
+      <% end %>
+    <% end %>
   <% end %>
 </p>

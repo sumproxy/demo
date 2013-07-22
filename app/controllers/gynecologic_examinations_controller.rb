@@ -51,7 +51,7 @@ class GynecologicExaminationsController < ApplicationController
       respond_to do |format|
         if @gyn_exam.save
           PatientExamination.create(:patient_id => params[:patient_id], :gynecologic_examination_id => @gyn_exam.id).save
-          format.html { redirect_to @gyn_exam, notice: 'Gynecologic examination was successfully created.' }
+          format.html { redirect_to @gyn_exam, notice: 'Гинекологическое обследование успешно создано.' }
           format.json { render json: @gyn_exam, status: :created, location: @gyn_exam }
         else
           format.html { render action: "new" }
@@ -70,7 +70,7 @@ class GynecologicExaminationsController < ApplicationController
 
     respond_to do |format|
       if @gyn_exam.update_attributes(params[:gynecologic_examination])
-        format.html { redirect_to @gyn_exam, notice: 'Gynecologic examination was successfully updated.' }
+        format.html { redirect_to @gyn_exam, notice: 'Данные гинекологического обследования успешно обновлены.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

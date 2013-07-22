@@ -184,55 +184,64 @@ ru:
       gynecologic_examination:
         menstruation_date: Дата последней менструации
         menstruation_day: День менструального цикла
-        uterine_body_visibility: визуализация
-        uterine_body_detection_position: в каком положении
-        uterine_boundary: границы
-        uterine_adumbration: контуры
-        uterine_shape: форма
-        uterine_size: размеры
+        uterine_body_visibility_id: визуализация
+        uterine_body_detection_position_id: в каком положении
+        uterine_boundary_id: границы
+        uterine_adumbration_id: контуры
+        uterine_shape_id: форма
+        uterine_size_id: размеры
         uterine_length: длина
         uterine_anteroposterior: передне-задний
         uterine_width: ширина
-        myometric_structure_change: структура
+        myometric_structure_change_id: структура
         myometrium_anterior_wall_thickness: толщина передней стенки
         myometrium_posterior_wall_thickness: толщина задней стенки
-        endometrium_echostructure_change: эхоструктура
+        endometrium_echostructure_change_id: эхоструктура
         endometrial_thickness: толщина
-        endometrial_boundary: границы
-        endometrial_adumbration: контуры
-        endometrium_phase: эндометрий соответствует
-        endometrium_echostructure_change_type: характер изменений м-эхо
-        uterine_cavity_deformation: деформации
-        uterine_cavity_size_change: изменения в размерах
+        endometrial_boundary_id: границы
+        endometrial_adumbration_id: контуры
+        endometrium_phase_id: эндометрий соответствует
+        endometrium_echostructure_change_type_id: характер изменений м-эхо
+        uterine_cavity_deformation_id: деформации
+        uterine_cavity_size_change_id: изменения в размерах
         uterine_cavity_size: размеры
         is_uterine_cavity_node_present: узел
-        cervix_visibility: визуализация
+        cervix_visibility_id: визуализация
         cervix_size: размер
         is_cervix_of_normal_size: обычных размеров
-        cervix_structure_change: структура
+        cervix_structure_change_id: структура
         endocervix_cyst_min_size: от
         endocervix_cyst_max_size: до
         is_endocervix_cyst_multiple: множественная
       gynecologic_examination/ovary:
-        visibility: визуализация
+        visibility_id: визуализация
         length: длина
         thickness: толщина
         width: ширина
-        size: размеры
-        structure: структура
+        size_id: размеры
+        structure_id: структура
         is_follicle_visible: определяются
       gynecologic_examination/ovary/follicle:
         min_size: от
         max_size: до
         amount: количество
+      gynecologic_examination/ovary/formation:
+        shape_id: форма
+        boundary_id: границы
+        adumbration_id: контуры
+        structure_id: структура
+        content_id: содержимое
+        size: размеры
+        wall_thickness: толщина стенки
+        comment: комментарий
       gynecologic_examination/myometric_structure_node:
-        localization: локализация
-        depth_localization: по глубине
+        localization_id: локализация
+        depth_localization_id: по глубине
         size: размер
         comment: комментарий
       gynecologic_examination/endometrium_echostructure_hyperechoic_inclusion:
         size: размер
-        localization: локализация
+        localization_id: локализация
         comment: комментарий
   number:
     currency:
@@ -402,6 +411,15 @@ ru:
         amount: Количество фолликулов левого яичника
         min_size: Минимальный размер фолликула левого яичника
         max_size: Максимальный размер фолликула левого яичника
+      gynecologic_examination/left_ovary/formations:
+        shape_id: Форма образование в левом яичнике
+        boundary_id: Границы образования в левом яичнике
+        adumbration_id: Контуры образования в левом яичнике
+        structure_id: Структура образования в левом яичнике
+        content_id: Содержимое образования в левом яичнике
+        size: Размеры образования в левом яичнике
+        wall_thickness: Толщина стенки образования в левом яичнике
+        comment: Комментарий к образованию в левом яичнике
       gynecologic_examination/right_ovary:
         visibility: Визуализация правого яичника
         visibility_id: Визуализация правого яичника
@@ -418,3 +436,12 @@ ru:
         amount: Количество фолликулов правого яичника
         min_size: Минимальный размер фолликула правого яичника
         max_size: Максимальный размер фолликула правого яичника
+      gynecologic_examination/right_ovary/formations:
+        shape_id: Форма образование в правом яичнике
+        boundary_id: Границы образования в правом яичнике
+        adumbration_id: Контуры образования в правом яичнике
+        structure_id: Структура образования в правом яичнике
+        content_id: Содержимое образования в правом яичнике
+        size: Размеры образования в правом яичнике
+        wall_thickness: Толщина стенки образования в правом яичнике
+        comment: Комментарий к образованию в правом яичнике

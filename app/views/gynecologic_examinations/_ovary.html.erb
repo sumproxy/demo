@@ -1,6 +1,6 @@
-<div class="field">
+<div class="fields">
   <span class="on_one_line">
-    <%= f.label :visibility %><br />
+    <%= f.label :visibility_id %><br />
     <%= f.collection_select :visibility_id, GynecologicExamination::Ovary::Visibility.all, :id, :value %>
   </span>
   <span class="on_one_line">
@@ -16,15 +16,15 @@
     <%= f.number_field :width, :style => "width:50px;", :step => "any" %>
   </span>
   <span class="on_one_line">
-    <%= f.label :size %><br />
+    <%= f.label :size_id %><br />
     <%= f.collection_select :size_id, GynecologicExamination::Ovary::Size.all, :id, :value %>
   </span>
   <span class="on_one_line">
-    <%= f.label :structure %><br />
+    <%= f.label :structure_id %><br />
     <%= f.collection_select :structure_id, GynecologicExamination::Ovary::Structure.all, :id, :value %>
   </span>
 </div>
-<div class="field">
+<div class="fields">
   Фолликул(ы):
   <%= f.fields_for :follicle do |builder| %>  
     <span class="on_one_line"><br />
@@ -33,4 +33,45 @@
     </span>
     <%= render "follicle", :builder => builder %>
   <% end %>
+</div>
+<div class="fields">
+  Образования:
+  <%= f.fields_for :formations do |builder| %>
+    <span class="on_one_line">
+      <%= builder.label :shape_id %><br />
+      <%= builder.collection_select :shape_id, GynecologicExamination::Ovary::Formation::Shape.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :boundary_id %><br />
+      <%= builder.collection_select :boundary_id, GynecologicExamination::Ovary::Formation::Boundary.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :adumbration_id %><br />
+      <%= builder.collection_select :adumbration_id, GynecologicExamination::Ovary::Formation::Adumbration.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :structure_id %><br />
+      <%= builder.collection_select :structure_id, GynecologicExamination::Ovary::Formation::Structure.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :content_id %><br />
+      <%= builder.collection_select :content_id, GynecologicExamination::Ovary::Formation::Content.all, :id, :value %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :size %><br />
+      <%= builder.number_field :size, :style => "width:50px;", :step => "any" %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :wall_thickness %><br />
+      <%= builder.number_field :wall_thickness, :style => "width:50px;", :step => "any" %>
+    </span>
+    <span class="on_one_line">
+      <%= builder.label :comment %><br />
+      <%= builder.text_field :comment, :size => 30 %>
+    </span>
+    <span class="on_one_line"><br />
+      <%= f.link_to_remove "Удалить" %>
+    </span>
+  <% end %>
+  <%= f.link_to_add "Добавить образование", :formations %>
 </div>
