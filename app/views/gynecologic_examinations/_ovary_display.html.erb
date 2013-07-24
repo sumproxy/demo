@@ -13,6 +13,9 @@
     <% if ovary.structure.value == 'изменена' %>
       <% ovary.formations.each do |formation| %>
         &bull; Форма <%= formation.shape.value %>, границы <%= formation.boundary.value %>, контуры <%= formation.adumbration.value %> размер <%= formation.size %> мм, структура <%= formation.structure.value %>, содержимое <%= formation.content.value %>, толщина стенки <%= formation.wall_thickness %> мм<%= ", #{formation.comment}" unless formation.comment.nil? || formation.comment.empty? %><br />
+        <% formation.chambers.each do |chamber| %>
+          &#09;&#09; Размер <%= chamber.size %><br />
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

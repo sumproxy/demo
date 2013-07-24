@@ -5,6 +5,10 @@ class GynecologicExamination::Ovary::Formation < ActiveRecord::Base
   belongs_to :content
   belongs_to :structure
   belongs_to :shape
+  
+  has_many :chambers, :class_name => 'GynecologicExamination::Ovary::Formation::Chamber', :dependent => :destroy
+  accepts_nested_attributes_for :chambers, :allow_destroy => true
+  
   attr_accessible :adumbration_id, :adumbration
   attr_accessible :boundary_id, :boundary
   attr_accessible :content_id, :content
@@ -13,7 +17,8 @@ class GynecologicExamination::Ovary::Formation < ActiveRecord::Base
   attr_accessible :structure_id, :structure
   attr_accessible :wall_thickness
   attr_accessible :comment
+  attr_accessible :chambers_attributes
   
-  validates :size, :numericality => {:greater_than => 0}
-  validates :wall_thickness, :numericality => {:greater_than => 0}
+  #validates :size, :numericality => {:greater_than => 0}
+  #validates :wall_thickness, :numericality => {:greater_than => 0}
 end

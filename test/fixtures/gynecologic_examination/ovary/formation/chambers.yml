@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  formation: 
+  size: 1.5
+  suspension_id: 1
+  inner_surface_id: 1
+  comment: MyText
+
+two:
+  formation: 
+  size: 1.5
+  suspension_id: 1
+  inner_surface_id: 1
+  comment: MyText
