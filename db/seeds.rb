@@ -145,8 +145,8 @@ if GynecologicExamination::Ovary::Formation::Boundary.all.empty?
   GynecologicExamination::Ovary::Formation::Boundary.create(value: "нечёткие")
 end
 if GynecologicExamination::Ovary::Formation::Adumbration.all.empty?
-  GynecologicExamination::Ovary::Formation::Adumbration(value: "ровные")
-  GynecologicExamination::Ovary::Formation::Adumbration(value: "неровные")
+  GynecologicExamination::Ovary::Formation::Adumbration.create(value: "ровные")
+  GynecologicExamination::Ovary::Formation::Adumbration.create(value: "неровные")
 end
 if GynecologicExamination::Ovary::Formation::Structure.all.empty?
   GynecologicExamination::Ovary::Formation::Structure.create(value: "анэхогенная")
