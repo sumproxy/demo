@@ -203,7 +203,7 @@ ru:
         endometrium_phase_id: эндометрий соответствует
         endometrium_echostructure_change_type_id: характер изменений м-эхо
         uterine_cavity_deformation_id: деформации
-        uterine_cavity_size_change_id: изменения в размерах
+        uterine_cavity_size_change_id: изменения
         uterine_cavity_size: размеры
         is_uterine_cavity_node_present: узел
         cervix_visibility_id: визуализация
@@ -233,6 +233,11 @@ ru:
         content_id: содержимое
         size: размеры
         wall_thickness: толщина стенки
+        comment: комментарий
+      gynecologic_examination/ovary/formation/chamber:
+        size: размер
+        suspension_id: взвесь
+        inner_surface_id: внут. поверхность
         comment: комментарий
       gynecologic_examination/myometric_structure_node:
         localization_id: локализация

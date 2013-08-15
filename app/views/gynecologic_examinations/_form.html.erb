@@ -246,6 +246,7 @@
       set_disabled_attribute(endometrium_echostructure_selector,
                              endometrium_echostructure_options,
                              true);
+      toggle_endometrium_echostructure_condition();
     }
         
     if( $('#gynecologic_examination_endometrium_echostructure_change_type_id :selected').text() != 'гиперэхогенное включение' ) {
@@ -287,6 +288,14 @@
                              follicle_attributes,
                              true);
     }
+    
+    if( $(left_ovary_selector + '_' + 'structure_id :selected').text() != 'изменена' ) {
+      $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=left_ovary_formations_fields_blueprint]').hide();
+      var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
+        return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(/^gynecologic_examination_left_ovary_attributes/) != null;
+      });
+      visible_remove_links.click();
+    }
 
     // правый яичник
     if( !$(right_ovary_selector + '_' + 'is_follicle_visible').is(":checked") ) {
@@ -302,6 +311,14 @@
       set_disabled_attribute(right_ovary_selector + '_' + 'follicle_attributes',
                              follicle_attributes,
                              true);
+    }
+
+    if( $(right_ovary_selector + '_' + 'structure_id :selected').text() != 'изменена' ) {
+      $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=right_ovary_formations_fields_blueprint]').hide();
+      var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
+        return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(/^gynecologic_examination_right_ovary_attributes/) != null;
+      });
+      visible_remove_links.click();
     }
     
     /////////////////////////////////////
@@ -352,6 +369,11 @@
       toggle_ovary_condition(left_ovary_selector, ovary_attributes, ovary_options);
     });
     
+    $(left_ovary_selector + '_' + 'structure_id').change(function() {
+      //toggle_ovary_formation_condition();
+      //TODO
+    });
+    
     // правый яичник
     $(right_ovary_selector + '_' + 'is_follicle_visible').change(function(){
       toggle_follicle_condition(right_ovary_selector + '_' + 'follicle_attributes',
@@ -361,6 +383,10 @@
     
     $(right_ovary_selector + '_' + 'visibility_id').change(function() {
       toggle_ovary_condition(right_ovary_selector, ovary_attributes, ovary_options);
+    });
+    
+    $(right_ovary_selector + '_' + 'structure_id').change(function() {
+      //TODO
     });
     
     /////////////////////////////////////
@@ -430,7 +456,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="fieldset">
     <span class="on_one_line">
       <%= f.label :menstruation_date %><br />
       <%= f.text_field :menstruation_date, :id => "datepicker", :size => 10 %>
@@ -443,7 +469,7 @@
   <fieldset>
     <legend>Тело матки</legend>
     <br />
-    <div class="fields">
+    <div class="fieldset">
       <span class="on_one_line">
         <%= f.label :uterine_body_visibility_id %><br />
         <%= f.collection_select :uterine_body_visibility_id, GynecologicExamination::UterineBodyVisibility.all, :id, :value %>
@@ -453,7 +479,7 @@
         <%= f.collection_select :uterine_body_detection_position_id, GynecologicExamination::UterineBodyDetectionPosition.all, :id, :value %>
       </span>
     </div>
-    <div class="fields">
+    <div class="fieldset">
       <span class="on_one_line">
         <%= f.label :uterine_boundary_id %><br />
         <%= f.collection_select :uterine_boundary_id, GynecologicExamination::UterineBoundary.all, :id, :value %>
@@ -467,7 +493,7 @@
         <%= f.collection_select :uterine_shape_id, GynecologicExamination::UterineShape.all, :id, :value %>
       </span>
     </div>
-    <div class="fields">
+    <div class="fieldset">
       <span class="on_one_line">
         <%= f.label :uterine_size_id %><br />
         <%= f.collection_select :uterine_size_id, GynecologicExamination::UterineSize.all, :id, :value %>
@@ -488,7 +514,7 @@
     <br />
     <fieldset>
       <legend>Миометрий</legend>
-      <div class="field">
+      <div class="fieldset">
         <span class="on_one_line">
           <%= f.label :myometric_structure_change_id %><br />
           <%= f.collection_select :myometric_structure_change_id, GynecologicExamination::MyometricStructureChange.all, :id, :value %>
@@ -502,17 +528,17 @@
           <%= f.number_field :myometrium_posterior_wall_thickness, :style => "width:50px;", :step => "any" %>
         </span>
       </div>
-      <div class="field">
+      <div class="fieldset">
         <%= f.fields_for :myometric_structure_nodes do |node_form| %>
           <%= render "myometric_structure_node", :f => node_form %>
         <% end %>
-        <%= f.link_to_add "Добавить узел", :myometric_structure_nodes %>
+        <%= f.link_to_add "[+] узел", :myometric_structure_nodes %>
       </div>
     </fieldset>
     <br />
     <fieldset>
       <legend>Эндометрий</legend>
-      <div class="fields">
+      <div class="fieldset">
         <span class="on_one_line">
           <%= f.label :endometrium_echostructure_change_id %><br />
           <%= f.collection_select :endometrium_echostructure_change_id, GynecologicExamination::EndometriumEchostructureChange.all, :id, :value %>
@@ -534,15 +560,15 @@
           <%= f.collection_select :endometrium_phase_id, GynecologicExamination::EndometriumPhase.all, :id, :value %> фазе менструального цикла
         </span>
       </div>
-      <div class="field">
+      <div class="fieldset">
         <%= f.label :endometrium_echostructure_change_type_id %><br />
         <%= f.collection_select :endometrium_echostructure_change_type_id, GynecologicExamination::EndometriumEchostructureChangeType.all, :id, :value %>
       </div>
-      <div class="field">
+      <div class="fieldset">
         <%= f.fields_for :endometrium_echostructure_hyperechoic_inclusions do |inclusion_form| %>
           <%= render "endometrium_echostructure_hyperechoic_inclusion", :f => inclusion_form %>
         <% end %>
-        <%= f.link_to_add "Добавить гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
+        <%= f.link_to_add "[+] гиперэхогенное включение", :endometrium_echostructure_hyperechoic_inclusions %>
       </div>
     </fieldset>
     <br />
@@ -553,7 +579,7 @@
     <br />
     <fieldset>
       <legend>Шейка матки</legend>
-      <div class="field">
+      <div class="fieldset">
         <span class="on_one_line">
           <%= f.label :cervix_visibility_id %><br />
           <%= f.collection_select :cervix_visibility_id, GynecologicExamination::CervixVisibility.all, :id, :value %>
@@ -567,7 +593,7 @@
           <%= f.check_box :is_cervix_of_normal_size %>
         </span>
       </div>
-      <div class="field">
+      <div class="fieldset">
         <%= render "endocervix_cyst", :f => f %>
       </div>
     </fieldset>

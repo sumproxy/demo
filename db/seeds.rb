@@ -160,3 +160,11 @@ if GynecologicExamination::Ovary::Formation::Content.all.empty?
   GynecologicExamination::Ovary::Formation::Content.create(value: "однокамерное")
   GynecologicExamination::Ovary::Formation::Content.create(value: "многокамерное")
 end
+if GynecologicExamination::Ovary::Formation::Chamber::Suspension.all.empty?
+  GynecologicExamination::Ovary::Formation::Chamber::Suspension.create(value: "единичная")
+  GynecologicExamination::Ovary::Formation::Chamber::Suspension.create(value: "несмещаемая")
+end
+if GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.all.empty?
+  GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.create(value: "ровная")
+  GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.create(value: "неровная")
+end

@@ -1,4 +1,4 @@
-<div class="fields">
+<div class="fieldset">
   <span class="on_one_line">
     <%= f.label :visibility_id %><br />
     <%= f.collection_select :visibility_id, GynecologicExamination::Ovary::Visibility.all, :id, :value %>
@@ -24,7 +24,7 @@
     <%= f.collection_select :structure_id, GynecologicExamination::Ovary::Structure.all, :id, :value %>
   </span>
 </div>
-<div class="fields">
+<div class="fieldset">
   Фолликул(ы):
   <%= f.fields_for :follicle do |builder| %>  
     <span class="on_one_line"><br />
@@ -34,7 +34,7 @@
     <%= render "follicle", :builder => builder %>
   <% end %>
 </div>
-<div class="fields">
+<div class="fieldset">
   Образования:
   <%= f.fields_for :formations do |builder| %>
     <span class="on_one_line">
@@ -70,22 +70,37 @@
       <%= builder.text_field :comment, :size => 30 %>
     </span>
     <span class="on_one_line"><br />
-      <%= f.link_to_remove "Удалить" %>
+      <%= builder.link_to_remove "[-] образование" %>
     </span>
-    <div class="fields">
+    <div class="fieldset">
+      <span class="on_one_line">
+        Камеры:
+      </span>
       <%= builder.fields_for :chambers do |ch| %>
-        <span class="on_one_line">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="on_one_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
         <span class="on_one_line">
           <%= ch.label :size %><br />
           <%= ch.number_field :size, :style => "width:50px;", :step => "any" %>
         </span>
+        <span class="on_one_line">
+          <%= ch.label :suspension_id %><br />
+          <%= ch.collection_select :suspension_id, GynecologicExamination::Ovary::Formation::Chamber::Suspension.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= ch.label :inner_surface_id %><br />
+          <%= ch.collection_select :inner_surface_id, GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.all, :id, :value %>
+        </span>
+        <span class="on_one_line">
+          <%= ch.label :comment %><br />
+          <%= ch.text_field :comment, :size => 30 %>
+        </span>
         <span class="on_one_line"><br />
-          <%= ch.link_to_remove "Удалить" %>
+          <%= ch.link_to_remove "[-] камера" %>
         </span>
       <% end %>
-      <%= builder.link_to_add "Добавить камеру", :chambers %>
+      <%= builder.link_to_add "[+] камера", :chambers %>
     </div>
   <% end %>
-  <%= f.link_to_add "Добавить образование", :formations %>
+  <%= f.link_to_add "[+] образование", :formations %>
 </div>

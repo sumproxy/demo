@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723101600) do
+ActiveRecord::Schema.define(:version => 20130812102520) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -135,6 +135,18 @@ ActiveRecord::Schema.define(:version => 20130723101600) do
   end
 
   create_table "gynecologic_examination_ovary_formation_boundaries", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_chamber_inner_surfaces", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gynecologic_examination_ovary_formation_chamber_suspensions", :force => true do |t|
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

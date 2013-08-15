@@ -9,13 +9,19 @@
     <% if ovary.structure.value == 'обычная' && ovary.is_follicle_visible %>
       Фолликул<%= "ы (#{ovary.follicle.amount}) от #{ovary.follicle.min_size} до " if ovary.follicle.is_multiple? %> <%= ovary.follicle.max_size || ovary.follicle.min_size %> мм.
     <% end %>
-    Образования:<br />
     <% if ovary.structure.value == 'изменена' %>
-      <% ovary.formations.each do |formation| %>
-        &bull; Форма <%= formation.shape.value %>, границы <%= formation.boundary.value %>, контуры <%= formation.adumbration.value %> размер <%= formation.size %> мм, структура <%= formation.structure.value %>, содержимое <%= formation.content.value %>, толщина стенки <%= formation.wall_thickness %> мм<%= ", #{formation.comment}" unless formation.comment.nil? || formation.comment.empty? %><br />
-        <% formation.chambers.each do |chamber| %>
-          &#09;&#09; Размер <%= chamber.size %><br />
+    Образования:<br />
+      <% ovary.formations.each.with_index do |formation, fidx| %>
+        &bull; Форма <%= formation.shape.value %>, границы <%= formation.boundary.value %>, контуры <%= formation.adumbration.value %> размер <%= formation.size %> мм, структура <%= formation.structure.value %>, содержимое <%= formation.content.value %>, толщина стенки <%= formation.wall_thickness %> мм<br />
+        Камеры:<br />
+        <% formation.chambers.each.with_index do |chamber, cidx| %>
+          &emsp;&emsp; <%= chamber.size %> мм, <%= chamber.suspension.value %> взвесь, внутренняя поверхность <%= chamber.inner_surface.value %><%= ", #{chamber.comment}" unless chamber.comment.nil? || chamber.comment.empty? %>
+          <% if cidx != formation.chambers.size - 1 %><br /><% end %>
         <% end %>
+        <% unless formation.comment.nil? || formation.comment.empty? %>
+          <br /><%= formation.comment %>
+        <% end %>
+        <% if fidx != ovary.formations.size - 1 %><br /><% end %>
       <% end %>
     <% end %>
   <% end %>
