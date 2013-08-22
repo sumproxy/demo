@@ -1,11 +1,11 @@
 <p id="notice" class="noprint"><%= notice %></p>
 <h4>Протокол ультразвукового исследования
   на аппарате Sono Ace R3 фирмы Medison</h4>
-(ул. Розы Люксембург, д.77, тел. 46-15-10)<br />
+<p class="headline">(ул. Розы Люксембург, д.77, тел. 46-15-10)</p>
 <p>
-  <br />
-  <br />
+  <br/>
 </p>
+
 <p>
   Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
   <% unless @gyn_exam.menstruation_date.nil? %>
@@ -78,6 +78,27 @@
 <%= render :partial => "ovary_display", :locals => { :ovary => @gyn_exam.left_ovary, :orientation => "Левый" } %>
 <%= render :partial => "ovary_display", :locals => { :ovary => @gyn_exam.right_ovary, :orientation => "Правый" } %>
 
+<p>
+<% if @gyn_exam.is_pathologic_formation_present %>
+  Обнаружены патологические образования в полости малого таза.<br />
+<% else %>
+  Патологические образования в полости малого таза не определяются.<br />
+<% end %>
+Свободная жидкость <%= 'не определяется.' unless @gyn_exam.is_free_fluid_present %>
+  <% if @gyn_exam.is_free_fluid_present %>
+  определяется в <%= @gyn_exam.free_fluid_amount.value %> количестве.
+  <% end %>
+</p>
+
+<p>
+  <b><em><u>Заключение</u></em></b><br/>
+  <%= @gyn_exam.report %>
+</p>
+
+<p>
+  <%= l @gyn_exam.created_at.to_date, :format => :long %><br />
+  Врач:
+</p>
 <p class="noprint">
   <%= link_to 'Редактировать', edit_gynecologic_examination_path(@gyn_exam) %> |
   <%= link_to 'Удалить', @gyn_exam, method: :delete, data: { confirm: 'Вы уверены?' } %>

@@ -19,6 +19,6 @@ class GynecologicExamination::Ovary::Formation < ActiveRecord::Base
   attr_accessible :comment
   attr_accessible :chambers_attributes
   
-  #validates :size, :numericality => {:greater_than => 0}
-  #validates :wall_thickness, :numericality => {:greater_than => 0}
+  validates :size, :numericality => {:greater_than => 0}
+  validates :wall_thickness, :numericality => {:greater_than => 0}
 end

@@ -213,6 +213,10 @@ ru:
         endocervix_cyst_min_size: от
         endocervix_cyst_max_size: до
         is_endocervix_cyst_multiple: множественная
+        report: Заключение
+        is_pathologic_formation_present: Патологические образования в полости малого таза
+        is_free_fluid_present: Свободная жидкость
+        free_fluid_amount_id: количестве
       gynecologic_examination/ovary:
         visibility_id: визуализация
         length: длина
@@ -425,6 +429,8 @@ ru:
         size: Размеры образования в левом яичнике
         wall_thickness: Толщина стенки образования в левом яичнике
         comment: Комментарий к образованию в левом яичнике
+      gynecologic_examination/left_ovary/formations/chambers:
+        size: Размер камеры образования в левом яичнике
       gynecologic_examination/right_ovary:
         visibility: Визуализация правого яичника
         visibility_id: Визуализация правого яичника
@@ -450,3 +456,5 @@ ru:
         size: Размеры образования в правом яичнике
         wall_thickness: Толщина стенки образования в правом яичнике
         comment: Комментарий к образованию в правом яичнике
+      gynecologic_examination/right_ovary/formations/chambers:
+        size: Размер камеры образования в правом яичнике

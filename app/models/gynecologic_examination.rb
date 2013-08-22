@@ -19,6 +19,7 @@ class GynecologicExamination < ActiveRecord::Base
   belongs_to :endometrium_echostructure_change
   belongs_to :endometrium_echostructure_change_type
   belongs_to :myometric_structure_change
+  belongs_to :free_fluid_amount
   has_many :myometric_structure_nodes, :class_name => 'GynecologicExamination::MyometricStructureNode', :dependent => :destroy
   accepts_nested_attributes_for :myometric_structure_nodes, :allow_destroy => true
   has_many :endometrium_echostructure_hyperechoic_inclusions, :class_name => 'GynecologicExamination::EndometriumEchostructureHyperechoicInclusion', :dependent => :destroy
@@ -64,6 +65,10 @@ class GynecologicExamination < ActiveRecord::Base
   attr_accessible :right_ovary_id, :right_ovary
   attr_accessible :left_ovary_attributes
   attr_accessible :right_ovary_attributes
+  attr_accessible :is_pathologic_formation_present
+  attr_accessible :is_free_fluid_present
+  attr_accessible :free_fluid_amount_id, :free_fluid_amount
+  attr_accessible :report
   
   validate :uterine_attributes
   

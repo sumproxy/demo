@@ -168,3 +168,9 @@ if GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.all.empty?
   GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.create(value: "ровная")
   GynecologicExamination::Ovary::Formation::Chamber::InnerSurface.create(value: "неровная")
 end
+if GynecologicExamination::FreeFluidAmount.all.empty?
+  GynecologicExamination::FreeFluidAmount.create(value: "незначительном")
+  GynecologicExamination::FreeFluidAmount.create(value: "умеренном")
+  GynecologicExamination::FreeFluidAmount.create(value: "большом")
+  GynecologicExamination::FreeFluidAmount.create(value: "-- не задано --")
+end

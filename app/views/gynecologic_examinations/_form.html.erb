@@ -183,6 +183,75 @@
                              
     }
   }
+  
+  function toggle_ovary_structure(selector) {
+    pattern = new RegExp('#gynecologic_examination_([^_]+)_ovary_attributes');
+    orientation = selector.match(pattern)[1];
+    filter = new RegExp('^gynecologic_examination_' + orientation + '_ovary_attributes');
+    $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=' + orientation + '_ovary_formations_fields_blueprint]').hide();
+    var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
+      return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(filter) != null;
+    });
+    visible_remove_links.click();
+  }
+
+  
+  function toggle_ovary_formation(selector) {
+    var ovary_orientation = selector.match(/#gynecologic_examination_([^_]+)_ovary_attributes/)[1];
+    var add_link = $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=' + ovary_orientation + '_ovary_formations_fields_blueprint]');
+    if( $(selector + '_' + 'structure_id :selected').text() == 'изменена' ) {
+      add_link.show();
+      add_link.click();
+    }
+    else {
+      var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
+        var pattern = new RegExp('^gynecologic_examination_' + ovary_orientation + '_ovary_attributes_formations_attributes');
+        return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(pattern) != null;
+      });
+      visible_remove_links.click();
+      add_link.hide();
+    }
+  }
+  
+  function toggle_ovary_formation_chamber(event) {
+    current = event.target
+    var add_link = $(current).parent().parent().find('div.fieldset a.add_nested_fields[data-association=chambers]');
+    var remove_links = $(current).parent().parent().find('div.fieldset span.on_one_line a.remove_nested_fields[data-association=chambers]');
+    if( $('#' + current.id + ' :selected').html() == 'однокамерное' ) {
+      remove_links.click();
+      add_link.click();
+      $(current).parent().parent().find('div.fieldset span.on_one_line a.remove_nested_fields[data-association=chambers]').filter( function() { return $(this).parent().parent().css('display') != 'none' } ).hide();
+      add_link.hide();
+    }
+    else {
+      remove_links.click();
+      add_link.click();
+      add_link.click();
+      $(current).parent().parent().find('div.fieldset span.on_one_line a.remove_nested_fields[data-association=chambers]').filter( function() { return $(this).parent().parent().css('display') != 'none' } ).hide();
+      add_link.hide();
+      add_link.show();
+    }
+  }
+  
+  function toggle_free_fluid_condition() {
+    if( $(default_selector + '_' + 'is_free_fluid_present').is(':checked') ) {
+      set_disabled_attribute(default_selector,
+                             free_fluid,
+                             false);
+      set_option(default_selector, 
+                 free_fluid,
+                 'first');
+    }
+    else {
+      set_disabled_attribute(default_selector,
+                             free_fluid,
+                             true);
+      set_option(default_selector, 
+                 free_fluid,
+                 'last');
+    }
+  };
+
 
   $(document).ready(function() {
     default_selector = '#gynecologic_examination';
@@ -210,6 +279,7 @@
     follicle_attributes = {'min_size': '', 'max_size': '', 'amount': 0};
     ovary_attributes = {'length': '', 'thickness': '', 'width': ''};
     ovary_options = {'size_id': '', 'structure_id': ''};
+    free_fluid = {'free_fluid_amount_id': ''};
     
     /////////////////////////////////////
     // initial consistensy
@@ -289,12 +359,19 @@
                              true);
     }
     
+    $.each($('div.fieldset div.fields span.on_one_line select[id^=gynecologic_examination_left_ovary_attributes_formations_attributes][id$=content_id]'), function() {
+      var elem = $(this).parent().parent();
+      if( $('#' + this.id + ' :selected').text() == 'однокамерное' ) {
+        elem.find('div.fieldset a.add_nested_fields[data-association=chambers]').hide();
+        elem.find('div.fieldset div.fields span.on_one_line a.remove_nested_fields[data-association=chambers]').hide();
+      }
+      else {
+        elem.find('div.fieldset div.fields span.on_one_line a.remove_nested_fields[data-association=chambers]').slice(0, 2).hide();
+      }
+    });
+        
     if( $(left_ovary_selector + '_' + 'structure_id :selected').text() != 'изменена' ) {
-      $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=left_ovary_formations_fields_blueprint]').hide();
-      var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
-        return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(/^gynecologic_examination_left_ovary_attributes/) != null;
-      });
-      visible_remove_links.click();
+      toggle_ovary_structure(left_ovary_selector);
     }
 
     // правый яичник
@@ -313,12 +390,23 @@
                              true);
     }
 
+    $.each($('div.fieldset div.fields span.on_one_line select[id^=gynecologic_examination_right_ovary_attributes_formations_attributes][id$=content_id]'), function() {
+      var elem = $(this).parent().parent();
+      if( $('#' + this.id + ' :selected').text() == 'однокамерное' ) {
+        elem.find('div.fieldset a.add_nested_fields[data-association=chambers]').hide();
+        elem.find('div.fieldset div.fields span.on_one_line a.remove_nested_fields[data-association=chambers]').hide();
+      }
+      else {
+        elem.find('div.fieldset div.fields span.on_one_line a.remove_nested_fields[data-association=chambers]').slice(0, 2).hide();
+      }
+    });
+
     if( $(right_ovary_selector + '_' + 'structure_id :selected').text() != 'изменена' ) {
-      $('a[class=add_nested_fields][data-association=formations][data-blueprint-id=right_ovary_formations_fields_blueprint]').hide();
-      var visible_remove_links = $('a[class=remove_nested_fields][data-association=formations]').filter(function() {
-        return $(this).parent().parent().css('display') != 'none' && $(this).prev().prop('id').match(/^gynecologic_examination_right_ovary_attributes/) != null;
-      });
-      visible_remove_links.click();
+      toggle_ovary_structure(right_ovary_selector);
+    }
+    
+    if( !$(default_selector + '_' + 'is_free_fluid_present').is(":checked") ) {
+      toggle_free_fluid_condition();
     }
     
     /////////////////////////////////////
@@ -357,6 +445,33 @@
     $(cervix_selector + '_' + 'cervix_visibility_id').change(function() {
       toggle_cervix_condition();
     });
+
+    $(document).on('nested:fieldAdded:formations', function(e) {
+      add_link = e.field.find('div.fieldset a');
+      add_link.click();
+      add_link.hide();
+    });
+
+    $(document).on('nested:fieldAdded:chambers', function(e) {
+      var formation = e.field.parent().parent().parent().find('div.fields span.on_one_line select[id^=gynecologic_examination_left_ovary_attributes_formations_attributes][id$=content_id] :selected').text() || e.field.parent().parent().parent().find('div.fields span.on_one_line select[id^=gynecologic_examination_right_ovary_attributes_formations_attributes][id$=content_id] :selected').text();
+      var visible_chambers = e.field.parent().find('div.fields').filter(function() { return $(this).css('display') != 'none' });
+      if( formation == 'однокамерное' ) {
+        $.each(visible_chambers.slice(0,1), function(idx, elem) {
+          $(elem).find('span.on_one_line a.remove_nested_fields[data-association=chambers]').hide();
+        });
+        $.each(visible_chambers.slice(1), function(idx, elem) {
+          $(elem).find('span.on_one_line a.remove_nested_fields[data-association=chambers]').show();
+        });
+      }
+      else {
+        $.each(visible_chambers.slice(0,2), function(idx, elem) {
+          $(elem).find('span.on_one_line a.remove_nested_fields[data-association=chambers]').hide();
+        });
+        $.each(visible_chambers.slice(2), function(idx, elem) {
+          $(elem).find('span.on_one_line a.remove_nested_fields[data-association=chambers]').show();
+        });
+      }
+    });
     
     // левый яичник
     $(left_ovary_selector + '_' + 'is_follicle_visible').change(function() {
@@ -370,10 +485,13 @@
     });
     
     $(left_ovary_selector + '_' + 'structure_id').change(function() {
-      //toggle_ovary_formation_condition();
-      //TODO
+      toggle_ovary_formation(left_ovary_selector);
     });
     
+    $('fieldset div.fields div.fieldset').on('change', 'div.fields span.on_one_line select[id^=gynecologic_examination_left_ovary_attributes_formations_attributes][id$=content_id]', function(e) {
+      toggle_ovary_formation_chamber(e);
+    });
+
     // правый яичник
     $(right_ovary_selector + '_' + 'is_follicle_visible').change(function(){
       toggle_follicle_condition(right_ovary_selector + '_' + 'follicle_attributes',
@@ -386,9 +504,18 @@
     });
     
     $(right_ovary_selector + '_' + 'structure_id').change(function() {
-      //TODO
+      toggle_ovary_formation(right_ovary_selector);
     });
     
+    $('fieldset div.fields div.fieldset').on('change', 'div.fields span.on_one_line select[id^=gynecologic_examination_right_ovary_attributes_formations_attributes][id$=content_id]', function(e) {
+      toggle_ovary_formation_chamber(e);
+    });
+    
+    // заключение
+    $(default_selector + '_' + 'is_free_fluid_present').change(function() {
+      toggle_free_fluid_condition();
+    });
+
     /////////////////////////////////////
     // reenable attributes before submit
     /////////////////////////////////////
@@ -439,6 +566,11 @@
                              
       set_disabled_attribute(right_ovary_selector,
                              $.extend({'is_follicle_visible': ''}, ovary_attributes, ovary_options),
+                             false);
+
+      // заключение
+      set_disabled_attribute(default_selector,
+                             free_fluid,
                              false);
     })
   })
@@ -611,6 +743,27 @@
     <%= f.fields_for :right_ovary do |builder| %>
       <%= render "ovary", :f => builder %>
     <% end %>
+  </fieldset>
+  <br />
+  <fieldset>
+    <legend><%= f.label :report %></legend>
+    <div class="fieldset">
+      <%= f.label :is_pathologic_formation_present %>
+      <%= f.check_box :is_pathologic_formation_present %>
+    </div>
+    <div class="fieldset">
+      <span class="on_one_line">
+        <%= f.label :is_free_fluid_present %> определяется
+        <%= f.check_box :is_free_fluid_present %>
+      </span>
+      <span class="on_one_line">
+        в <%= f.collection_select :free_fluid_amount_id, GynecologicExamination::FreeFluidAmount.all, :id, :value %>
+        <%= f.label :free_fluid_amount_id %>
+      </span>
+    </div>
+    <div class="fieldset">
+      <%= f.text_area :report, :size => "70x10" %>
+    </div>
   </fieldset>
   <%= hidden_field_tag 'patient_id', params[:patient_id] %>
   <br />
