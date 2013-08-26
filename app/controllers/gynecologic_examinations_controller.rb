@@ -3,7 +3,10 @@ class GynecologicExaminationsController < ApplicationController
   # GET /gynecologic_examinations
   # GET /gynecologic_examinations.json
   def index
-    @gyn_exams = GynecologicExamination.all
+    @gyn_exams = GynecologicExamination.find(
+      :all,
+      :joins => [:patient_examinations, :patients],
+      :order => ['patients.last_name, patients.first_name, patients.patronymic, patients.dob', :created_at])
 
     respond_to do |format|
       format.html # index.html.erb
