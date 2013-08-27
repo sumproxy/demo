@@ -13,4 +13,5 @@
  *= require jquery.ui.datepicker
  *= require ./screen/scaffolds.css.scss
  *= require ./screen/patients.css.scss
+ *= require ./screen/gynecologic_examinations.css.scss
  */

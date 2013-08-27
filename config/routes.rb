@@ -1,6 +1,14 @@
 Demo::Application.routes.draw do
+  get 'admin' => "admin#index"
   get "search/index"
 
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  resources :users
   resources :gynecologic_examinations
   resources :patients
 

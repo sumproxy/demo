@@ -12,6 +12,11 @@ body {
   line-height: 18px;
 }
 
+h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 11px;
@@ -43,6 +48,13 @@ div {
 
 #notice {
   color: green;
+}
+
+#logout_link {
+  position:absolute;
+  top:0;
+  right:0;
+  margin-right: 2px;
 }
 
 .field_with_errors {

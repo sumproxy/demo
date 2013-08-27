@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class GynecologicExaminationsController < ApplicationController
+  skip_before_filter :authorize_root, :only => [:show, :new, :edit, :create, :update]
   # GET /gynecologic_examinations
   # GET /gynecologic_examinations.json
   def index

@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 class SearchController < ApplicationController
+  skip_before_filter :authorize_root
   def index
     if params[:term]
       args = params[:term].split
