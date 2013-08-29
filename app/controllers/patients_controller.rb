@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 class PatientsController < ApplicationController
+  skip_before_filter :authorize_root, :only => [:show, :new, :edit, :create, :update]
   # GET /patients
   # GET /patients.json
   def index

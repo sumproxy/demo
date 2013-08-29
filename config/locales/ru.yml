@@ -181,6 +181,14 @@ ru:
         street: Улица
         house: Номер дома
         appartment: Квартира
+      user:
+        login: Логин
+        last_name: Фамилия
+        first_name: Имя
+        patronymic: Отчество
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        is_root: Администратор
       gynecologic_examination:
         menstruation_date: Дата последней менструации
         menstruation_day: День менструального цикла
@@ -343,7 +351,16 @@ ru:
     models:
       gynecologic_examination: гинекологическое обследование
       patient: пациент
+      user: пользователь
     attributes:
+      user:
+        login: Логин
+        last_name: Фамилия
+        first_name: Имя
+        patronymic: Отчество
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        is_root: Администратор
       gynecologic_examination:
         menstruation_date: Дата последней менструации
         menstruation_day: День менструального цикла
