@@ -97,7 +97,7 @@
 
 <p>
   <%= l @gyn_exam.created_at.to_date, :format => :long %><br />
-  Врач:
+  Врач: <%= format_name(current_user, :format => :abbr) %>
 </p>
 <p class="noprint">
   <%= link_to 'Редактировать', edit_gynecologic_examination_path(@gyn_exam) %>

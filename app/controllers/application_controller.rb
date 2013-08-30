@@ -13,8 +13,12 @@ class ApplicationController < ActionController::Base
   
   def authorize_root
     if user = User.find_by_id(session[:user_id])
-      unless user.is_root
-        redirect_to :back, :notice => "У вас нет прав администратора."
+      unless user.is_root?
+        begin
+          redirect_to :back, :notice => "У вас нет прав администратора."
+        rescue ActionController::RedirectBackError
+          redirect_to root_path
+        end
       end
     else
       redirect_to login_url, :notice => "Пожалуйста залогиньтесь."

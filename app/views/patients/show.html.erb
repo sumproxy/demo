@@ -29,9 +29,11 @@
   
 </p>
 
+<% if @patient.sex.value == 'женский' %>
 <p class="noprint">
   <%= link_to 'Новое гинекологическое обследование', new_gynecologic_examination_path(:patient_id => @patient.id) %>
 <p>
+<% end %>
 
 <p class="noprint">
   <%= link_to 'Редактировать', edit_patient_path(@patient) %>

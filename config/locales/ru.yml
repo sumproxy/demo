@@ -350,8 +350,8 @@ ru:
       <<: *errors
     models:
       gynecologic_examination: гинекологическое обследование
-      patient: пациент
-      user: пользователь
+      patient: пациента
+      user: пользователя
     attributes:
       user:
         login: Логин

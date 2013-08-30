@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826083240) do
+ActiveRecord::Schema.define(:version => 20130830075227) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20130826083240) do
     t.boolean  "is_free_fluid_present"
     t.boolean  "is_pathologic_formation_present"
     t.integer  "free_fluid_amount_id"
+    t.integer  "user_id"
   end
 
   create_table "patient_examinations", :force => true do |t|

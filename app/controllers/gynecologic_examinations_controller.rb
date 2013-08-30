@@ -51,6 +51,7 @@ class GynecologicExaminationsController < ApplicationController
   # POST /gynecologic_examinations.json
   def create
     @gyn_exam = GynecologicExamination.new(params[:gynecologic_examination])
+    @gyn_exam.user_id = session[:user_id]
     if params[:patient_id]
       respond_to do |format|
         if @gyn_exam.save
