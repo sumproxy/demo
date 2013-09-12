@@ -201,6 +201,7 @@ ru:
         uterine_length: длина
         uterine_anteroposterior: передне-задний
         uterine_width: ширина
+        uterine_volume: объем
         myometric_structure_change_id: структура
         myometrium_anterior_wall_thickness: толщина передней стенки
         myometrium_posterior_wall_thickness: толщина задней стенки
@@ -361,6 +362,13 @@ ru:
         password: Пароль
         password_confirmation: Подтверждение пароля
         is_root: Администратор
+      patient:
+        last_name: Фамилия
+        first_name: Имя
+        patronymic: Отчество
+        phone: Телефон
+        dob: Дата рождения
+        sex: Пол
       gynecologic_examination:
         menstruation_date: Дата последней менструации
         menstruation_day: День менструального цикла
@@ -379,6 +387,7 @@ ru:
         uterine_length: Длина матки
         uterine_anteroposterior: Передне-задний матки
         uterine_width: Ширина матки
+        uterine_volume: Объем тела матки
         myometric_structure_change_id: Изменения в структуре миометрия
         myometric_structure_change: Изменения в структуре миометрия
         myometrium_anterior_wall_thickness: Толщина передней стенки миометрия

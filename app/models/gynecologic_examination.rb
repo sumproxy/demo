@@ -39,6 +39,7 @@ class GynecologicExamination < ActiveRecord::Base
   attr_accessible :uterine_length
   attr_accessible :uterine_anteroposterior
   attr_accessible :uterine_width
+  attr_accessible :uterine_volume
   attr_accessible :myometric_structure_change_id, :myometric_structure_change
   attr_accessible :myometric_structure_nodes_attributes
   attr_accessible :myometrium_anterior_wall_thickness
@@ -104,7 +105,9 @@ class GynecologicExamination < ActiveRecord::Base
       if uterine_width.nil? || uterine_width == 0
         errors.add(:uterine_width, "Значение не задано или недопустимо")
       end
-      
+      if uterine_volume.nil? || uterine_volume == 0
+        errors.add(:uterine_volume, "Значение не задано или недопустимо")
+      end      
       if uterine_cavity_size_change.value == 'расширена'
         if uterine_cavity_size.nil? && !is_uterine_cavity_node_present
           errors.add(:uterine_cavity_size, "Не задано значение")

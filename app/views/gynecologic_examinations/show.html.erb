@@ -14,7 +14,7 @@
   <% end %>
 </p>
 <p>
-  Тело матки: <%= @gyn_exam.uterine_body_visibility.value %>
+  <b><i>Тело матки</i></b>: <%= @gyn_exam.uterine_body_visibility.value %>
   <%= @gyn_exam.uterine_body_detection_position.value if @gyn_exam.uterine_body_visibility.value == 'определяется' %>
   <% if @gyn_exam.uterine_body_visibility.value == 'определяется' %>
     <p>
@@ -24,15 +24,16 @@
     </p>
     <p>
       Размеры <%= @gyn_exam.uterine_size.value %>:<br />
-      длина: <%= @gyn_exam.uterine_length %><br />
-      передне-задний: <%= @gyn_exam.uterine_anteroposterior %><br />
-      ширина: <%= @gyn_exam.uterine_width %>
+      длина: <%= @gyn_exam.uterine_length %> мм<br />
+      передне-задний: <%= @gyn_exam.uterine_anteroposterior %> мм<br />
+      ширина: <%= @gyn_exam.uterine_width %> мм<br />
+      объем: <%= @gyn_exam.uterine_volume %> мм<small><sup>3</sup></small>
     </p>
     <p>
-      Структура миометрия: <%= @gyn_exam.myometric_structure_change.value -%>
-      <%- if @gyn_exam.myometric_structure_change.value == 'изменена' %>:<br />
+      <u>Структура миометрия</u>: <%= @gyn_exam.myometric_structure_change.value -%>
+      <%- if @gyn_exam.myometric_structure_change.value == 'изменена' %>, <%= @gyn_exam.myometric_structure_nodes.size == 1 ? 'узел' : 'узлы' %>:<br />
         <% @gyn_exam.myometric_structure_nodes.each do |node| %>
-          &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, <%= node.size %> мм<%= ", #{node.comment}" unless node.comment.nil? || node.comment.empty? %><br />
+          &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, диаметром <%= node.size %> мм<%= ", #{node.comment}" unless node.comment.nil? || node.comment.empty? %><br />
         <% end %>
         <% unless @gyn_exam.myometric_structure_change.value == 'изменена' %><br /><% end %>
         Толщина передней стенки <%= @gyn_exam.myometrium_anterior_wall_thickness %> мм.<br />
@@ -40,7 +41,7 @@
       <% end %>
     </p>
     <p>
-      М-эхо: толщина <%= @gyn_exam.endometrial_thickness %> мм,
+      <b><i>М-эхо</i></b>: толщина <%= @gyn_exam.endometrial_thickness %> мм,
       границы <%= @gyn_exam.endometrial_boundary.value %>,
       контуры <%= @gyn_exam.endometrial_adumbration.value %>,
       эхоструктура <%= @gyn_exam.endometrium_echostructure_change.value %>
@@ -64,7 +65,7 @@
       <% end %>
     </p>
     <p>
-      Шейка матки <%= @gyn_exam.cervix_visibility.value %>
+      <u>Шейка матки</u> <%= @gyn_exam.cervix_visibility.value %>
       <% if @gyn_exam.cervix_visibility.value == 'определяется' %>
         <%= ', обычных размеров' if @gyn_exam.is_cervix_of_normal_size %> <%= @gyn_exam.cervix_size %> мм.
         Структура <%= @gyn_exam.cervix_structure_change.value %> 

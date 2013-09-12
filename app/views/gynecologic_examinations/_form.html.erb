@@ -254,6 +254,7 @@
 
 
   $(document).ready(function() {
+    submit_flag = false;
     default_selector = '#gynecologic_examination';
     uterus_selector = default_selector;
     uterus_attributes = {'endometrial_thickness': '', 'uterine_anteroposterior': '',
@@ -572,7 +573,15 @@
       set_disabled_attribute(default_selector,
                              free_fluid,
                              false);
-    })
+    });
+    
+    $('input[name=commit][type=submit]').click(function(e) {
+      submit_flag = true;
+    });
+  
+    $(window).on('beforeunload', function() {
+      return (submit_flag)? null: "Вы собираетесь покинуть страницу. Все несохраненные данные будут потеряны.";
+    });
   })
 </script>
 <%= nested_form_for(@gyn_exam) do |f| %>
@@ -642,7 +651,10 @@
         <%= f.label :uterine_anteroposterior %><br />
         <%= f.number_field :uterine_anteroposterior, :style => "width:50px;", :step => "any" %>
       </span>
-    </div>
+      <span class="on_one_line">
+        <%= f.label :uterine_volume %><br />
+        <%= f.number_field :uterine_volume, :style => "width:50px;", :step => "any" %>
+      </span>    </div>
     <br />
     <fieldset>
       <legend>Миометрий</legend>
@@ -661,6 +673,9 @@
         </span>
       </div>
       <div class="fieldset">
+        <span class="on_one_line">
+          Узлы:
+        </span>
         <%= f.fields_for :myometric_structure_nodes do |node_form| %>
           <%= render "myometric_structure_node", :f => node_form %>
         <% end %>
