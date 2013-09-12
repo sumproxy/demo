@@ -23,7 +23,7 @@
 <p>
   <b>Предыдущие обследования:</b><br />
   <% @patient.patient_examinations.order(:created_at).each do |pe| %>
-    <%= link_to pe.examination_type.to_s, gynecologic_examination_path(pe.examination) %>
+    <%= link_to t(pe.examination_type, scope: [:activerecord, :models]), self.send("#{pe.examination_type.to_s}_path", pe.examination) %>
     <%= l pe.created_at, :format => :long %><br />
   <% end %>
   
