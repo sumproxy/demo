@@ -22,4 +22,17 @@ class SearchController < ApplicationController
       format.json { render :json => @patients }
     end
   end
+  
+  def street
+    @streets = []
+    @@streets_cache ||= YAML::load_file(Rails.root + 'db/streets.yml')
+    if term = params[:term]
+      re = Regexp.new(term)
+      @streets = @@streets_cache.grep(re).first(5)
+    end
+    
+    respond_to do |format|
+      format.json { render :json => @streets }      
+    end
+  end
 end

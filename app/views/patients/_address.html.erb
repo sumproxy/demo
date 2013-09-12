@@ -1,3 +1,18 @@
+<script>
+  $(function() {
+    $("#autocomplete").autocomplete({
+      autoFocus: false,
+      delay: 0,
+      source: "<%= search_street_path(:json) %>", // то же самое что и "/search/street.json",
+      minLength: 0
+    });
+  });
+</script>
+<style>
+ul.ui-autocomplete li.ui-menu-item {
+  text-align: left;
+}
+</style>
 <div class="field">
   <span class="on_one_line">
     <%= f.label :city %><br />
@@ -5,7 +20,7 @@
   </span>
   <span class="on_one_line">
     <%= f.label :street %><br />
-    <%= f.text_field :street %>
+    <%= f.text_field :street, :id => "autocomplete", :size => 30 %>
   </span>
   <span class="on_one_line">
     <%= f.label :house %><br />
@@ -13,6 +28,6 @@
   </span>
   <span class="on_one_line">
     <%= f.label :appartment %><br />
-    <%= f.text_field :appartment, :size => 2 %>
+    <%= f.text_field :appartment, :size => 3 %>
   </span>
 </div>

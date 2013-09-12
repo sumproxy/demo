@@ -27,7 +27,7 @@
       {
         var val = $("#autocomplete").val();
         // создание нового пациента: GET /patients/new + параметр term
-        url = "<%= new_patient_path %>"
+        var url = "<%= new_patient_path %>"
         url = encode_url(url, {term: val});
         $(location).attr("href", url);
       }
@@ -47,7 +47,7 @@ body {
   margin-top: -150px;
 }
 ul.ui-autocomplete li.ui-menu-item {
-  text-align:left;
+  text-align: left;
 }
 </style>
 

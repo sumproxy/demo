@@ -1,6 +1,7 @@
 Demo::Application.routes.draw do
   get 'admin' => "admin#index"
   get "search/index"
+  get "search/street"
 
   controller :sessions do
     get 'login' => :new
