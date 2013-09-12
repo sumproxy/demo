@@ -102,14 +102,14 @@ if GynecologicExamination::MyometricStructureChange.all.empty?
   GynecologicExamination::MyometricStructureChange.create(value: '-- не задано --')
 end
 if GynecologicExamination::MyometricStructureNode::Localization.all.empty?
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в передней стенке')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в задней стенке')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в правом ребре')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в левом ребре')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в дне')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в области перешейка')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в передней поверхности шейки')
-  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'в задней поверхности шейки')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'передняя стенка')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'задняя стенка')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'правое ребро')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'левое ребро')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'дно')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'область перешейка')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'передняя поверхность шейки')
+  GynecologicExamination::MyometricStructureNode::Localization.create(value: 'задняя поверхность шейки')
 end
 if GynecologicExamination::MyometricStructureNode::DepthLocalization.all.empty?
   GynecologicExamination::MyometricStructureNode::DepthLocalization.create(value: 'субсерозно')
