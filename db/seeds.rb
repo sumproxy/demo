@@ -46,11 +46,12 @@ if GynecologicExamination::EndometrialAdumbration.all.empty?
   GynecologicExamination::EndometrialAdumbration.create(value: '-- не задано --')
 end
 if GynecologicExamination::EndometriumPhase.all.empty?
-  GynecologicExamination::EndometriumPhase.create(value: 'I-й')
-  GynecologicExamination::EndometriumPhase.create(value: 'периовуляторной')
-  GynecologicExamination::EndometriumPhase.create(value: 'II-й')
-  GynecologicExamination::EndometriumPhase.create(value: 'не соответствует')
-  GynecologicExamination::EndometriumPhase.create(value: ' -- не задано --')
+  GynecologicExamination::EndometriumPhase.create(value: 'I-й фазе менструального цикла')
+  GynecologicExamination::EndometriumPhase.create(value: 'периовуляторной фазе менструального цикла')
+  GynecologicExamination::EndometriumPhase.create(value: 'II-й фазе менструального цикла')
+  GynecologicExamination::EndometriumPhase.create(value: 'не соответствует фазе менструального цикла')
+  GynecologicExamination::EndometriumPhase.create(value: 'менопаузе')
+  GynecologicExamination::EndometriumPhase.create(value: '-- не задано --')
 end
 if GynecologicExamination::UterineCavityDeformation.all.empty?
   GynecologicExamination::UterineCavityDeformation.create(value: 'не деформирована')

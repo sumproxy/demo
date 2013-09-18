@@ -55,8 +55,7 @@
       <% end %>
     </p>
     <p>
-      Эндометрий <%= 'не' if @gyn_exam.endometrium_phase.value == 'не соответствует' %> соответствует
-      <%= @gyn_exam.endometrium_phase.value unless @gyn_exam.endometrium_phase.value == 'не соответствует' %> фазе менструального цикла.
+      Эндометрий <%= 'соответствует' if @gyn_exam.endometrium_phase.value !~ /^не соответствует/ %> <%= @gyn_exam.endometrium_phase.value %>.
     </p>
     <p>
       Полость матки <%= @gyn_exam.uterine_cavity_deformation.value %>, <%= @gyn_exam.uterine_cavity_size_change.value %><%= '.' if @gyn_exam.uterine_cavity_size_change.value == 'не расширена' %>

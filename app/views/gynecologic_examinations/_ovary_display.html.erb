@@ -6,8 +6,10 @@
     Толщина <%= ovary.thickness %> мм.<br />
     Ширина <%= ovary.width %> мм.<br />
     Структура <%= ovary.structure.value %>.<br />
-    <% if ovary.structure.value == 'обычная' && ovary.is_follicle_visible %>
-      Фолликул<%= "ы (#{ovary.follicle.amount}) от #{ovary.follicle.min_size} до " if ovary.follicle.is_multiple? %> <%= ovary.follicle.max_size || ovary.follicle.min_size %> мм.
+    <% if ovary.is_follicle_visible %>
+    Фолликул<%= "ы (#{ovary.follicle.amount}) от #{ovary.follicle.min_size} до " if ovary.follicle.is_multiple? %> <%= ovary.follicle.max_size || ovary.follicle.min_size %> мм.<br />
+    <% else %>
+    Фолликулярный аппарат не выражен.<br />
     <% end %>
     <% if ovary.structure.value == 'изменена' %>
     Образования:<br />
