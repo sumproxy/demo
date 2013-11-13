@@ -20,7 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'nested_form', :git => 'https://github.com/ryanb/nested_form.git'
+gem 'russian', '~> 0.6.0'
+gem 'nested_form'
 gem "debugger", "~> 1.6.1"
 
 gem 'jquery-rails'

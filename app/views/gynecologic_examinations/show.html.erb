@@ -7,7 +7,7 @@
 </p>
 
 <p>
-  Ф.И.О. <%= format_name(@patient) %>, возраст <%= age(@patient.dob) %> лет.<br />
+  Ф.И.О. <%= format_name(@patient) %>, возраст <%= patient_age = age(@patient.dob)%> <%= Russian.p(patient_age, 'год', 'года', 'лет') %>.<br />
   <% unless @gyn_exam.menstruation_date.nil? %>
     Дата последней менструации <%= l @gyn_exam.menstruation_date, :format => :long %>
     (<%= @gyn_exam.menstruation_day %>-й день).
