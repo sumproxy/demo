@@ -30,14 +30,15 @@
       объем: <%= @gyn_exam.uterine_volume %> мм<small><sup>3</sup></small>
     </p>
     <p>
-      <u>Структура миометрия</u>: <%= @gyn_exam.myometric_structure_change.value -%>
-      <%- if @gyn_exam.myometric_structure_change.value == 'изменена' %>, <%= @gyn_exam.myometric_structure_nodes.size == 1 ? 'узел' : 'узлы' %>:<br />
+      <u>Структура миометрия</u>:
+      <%- if @gyn_exam.myometric_structure_change.value == 'изменена' %>изменена, <%= @gyn_exam.myometric_structure_nodes.size == 1 ? 'узел' : 'узлы' %>:<br />
         <% @gyn_exam.myometric_structure_nodes.each do |node| %>
           &bull; <%= node.localization.value %> <%= node.depth_localization.value %>, диаметром <%= node.size %> мм<%= ", #{node.comment}" unless node.comment.nil? || node.comment.empty? %><br />
         <% end %>
         <% unless @gyn_exam.myometric_structure_change.value == 'изменена' %><br /><% end %>
         Толщина передней стенки <%= @gyn_exam.myometrium_anterior_wall_thickness %> мм.<br />
         Толщина задней стенки <%= @gyn_exam.myometrium_posterior_wall_thickness %> мм.
+      <% else %>не изменена.
       <% end %>
     </p>
     <p>
