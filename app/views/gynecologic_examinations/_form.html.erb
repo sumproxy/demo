@@ -580,14 +580,19 @@
     });
   
     $(window).on('beforeunload', function() {
-      return (submit_flag)? null: "Вы собираетесь покинуть страницу. Все несохраненные данные будут потеряны.";
+      if(submit_flag) {
+        return;
+      }
+      else {
+        return "Вы собираетесь покинуть страницу. Все несохраненные данные будут потеряны.";
+      }
     });
   })
 </script>
 <%= nested_form_for(@gyn_exam) do |f| %>
   <% if @gyn_exam.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@gyn_exam.errors.count, "error") %> prohibited this gynecologic_examination from being saved:</h2>
+      <h2><%= ec = @gyn_exam.errors.count%> <%= Russian.p(ec, "ошибка", "ошибки", "ошибок") %> prohibited this gynecologic_examination from being saved:</h2>
 
       <ul>
       <% @gyn_exam.errors.full_messages.each do |msg| %>
@@ -654,7 +659,8 @@
       <span class="on_one_line">
         <%= f.label :uterine_volume %><br />
         <%= f.number_field :uterine_volume, :style => "width:50px;", :step => "any" %>
-      </span>    </div>
+      </span>
+    </div>
     <br />
     <fieldset>
       <legend>Миометрий</legend>

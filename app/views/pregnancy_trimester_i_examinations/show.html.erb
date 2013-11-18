@@ -1,0 +1,36 @@
+<p id="notice" class="noprint"><%= notice %></p>
+<h4>Ультразвуковая диагностика в I триместре беременности</h4>
+<h4>на аппарате Sono Ace R3 фирмы Medison</h4>
+<p class="headline">(ул. Розы Люксембург, д.77, тел. 46-15-10)</p>
+<p>
+  <br/>
+</p>
+<p>
+  Ф.И.О. <%= format_name(@patient) %>, возраст <%= patient_age = age(@patient.dob)%> <%= Russian.p(patient_age, 'год', 'года', 'лет') %>.<br />
+</p>
+<p>
+  Особенности:
+  размеры матки (длина <%= @pregnancy_trimester_i_examination.uterus_length %> мм,
+  передне-задний размер <%= @pregnancy_trimester_i_examination.uterus_anteroposterior %> мм,
+  поперечный размер <%= @pregnancy_trimester_i_examination.uterus_transverse_size %> мм) соответствуют
+  <%= @pregnancy_trimester_i_examination.gestation_age_in_weeks %> неделям беременности.
+</p>
+
+<p>
+  <b><em><u>Заключение и рекомендации</u></em></b><br/>
+  <%= @pregnancy_trimester_i_examination.comments %>
+</p>
+
+<p>
+  <%= l @pregnancy_trimester_i_examination.created_at.to_date, :format => :long %><br />
+  Врач: <%= format_name(current_user, :format => :abbr) %>
+</p>
+
+<p class="noprint">
+  <%= link_to 'Редактировать', edit_pregnancy_trimester_i_examination_path(@pregnancy_trimester_i_examination) %>
+  <% link_to 'Back', pregnancy_trimester_i_examinations_path %>
+</p>
+
+<p class="noprint">
+  <input type="button" id="print" onclick="javascript:print()" value="Печать" />
+</p>

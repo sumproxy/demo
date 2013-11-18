@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    submit_flag = false;
+
+    $('input[name=commit][type=submit]').click(function(e) {
+      submit_flag = true;
+    });
+
+    $(window).on('beforeunload', function() {
+      if(submit_flag) {
+        return;
+      }
+      else {
+        return "Вы собираетесь покинуть страницу. Все несохраненные данные будут потеряны.";
+      }
+    })
+  })
+</script>
+<%= form_for(@pregnancy_trimester_i_examination) do |f| %>
+  <% if @pregnancy_trimester_i_examination.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= ec = @pregnancy_trimester_i_examination.errors.count %> <%= Russian.p(ec, "ошибка", "ошибки", "ошибок") %> помешали сохранению данного отчета:</h2>
+
+      <ul>
+      <% @pregnancy_trimester_i_examination.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Размеры матки:</legend>
+      <div class="fieldset">
+        <span class="on_one_line">
+          <%= f.label :uterus_length %><br />
+          <%= f.number_field :uterus_length, :style => "width:50px;", :step => "any" %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :uterus_anteroposterior %><br />
+          <%= f.number_field :uterus_anteroposterior, :style => "width:50px;", :step => "any" %>
+        </span>
+        <span class="on_one_line">
+          <%= f.label :uterus_transverse_size %><br />
+          <%= f.number_field :uterus_transverse_size, :style => "width:50px;", :step => "any" %>
+        </span>
+      </div>
+      <div class="field">соответствуют
+        <%= f.number_field :gestation_age_in_weeks, :style => "width:50px;" %> <%= f.label :gestation_age_in_weeks %>
+      </div>
+      <div class="field">
+        <%= f.label :comments %><br />
+        <%= f.text_area :comments %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+  </fieldset>
+  <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+<% end %>

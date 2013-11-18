@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918122241) do
+ActiveRecord::Schema.define(:version => 20131118140733) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -316,12 +316,14 @@ ActiveRecord::Schema.define(:version => 20130918122241) do
 
   create_table "patient_examinations", :force => true do |t|
     t.integer  "patient_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "gynecologic_examination_id"
+    t.integer  "pregnancy_trimester_i_examination_id"
   end
 
   add_index "patient_examinations", ["patient_id", "gynecologic_examination_id"], :name => "index_on_patient_id_and_gynecologic_examination_id"
+  add_index "patient_examinations", ["patient_id", "pregnancy_trimester_i_examination_id"], :name => "index_on_patient_id_and_pregnancy_trimester_i_examination_id"
 
   create_table "patients", :force => true do |t|
     t.string   "last_name"
@@ -337,6 +339,19 @@ ActiveRecord::Schema.define(:version => 20130918122241) do
 
   add_index "patients", ["address_id"], :name => "index_patients_on_address_id"
   add_index "patients", ["sex_id"], :name => "index_patients_on_sex_id"
+
+  create_table "pregnancy_trimester_i_examinations", :force => true do |t|
+    t.float    "uterus_length"
+    t.float    "uterus_anteroposterior"
+    t.float    "uterus_transverse_size"
+    t.integer  "gestation_age_in_weeks"
+    t.integer  "left_ovary_id"
+    t.integer  "right_ovary_id"
+    t.text     "comments"
+    t.integer  "user_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
 
   create_table "sexes", :force => true do |t|
     t.string   "value"

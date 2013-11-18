@@ -261,6 +261,12 @@ ru:
         size: размер
         localization_id: локализация
         comment: комментарий
+      pregnancy_trimester_i_examination:
+        uterus_length: длина
+        uterus_anteroposterior: передне-задний
+        uterus_transverse_size: поперечный размер
+        gestation_age_in_weeks: неделям беременности
+        comments: особенности
   number:
     currency:
       format:
@@ -351,6 +357,7 @@ ru:
       <<: *errors
     models:
       gynecologic_examination: гинекологическое обследование
+      pregnancy_trimester_i_examination: обследование на беременность в I-ом триместре
       patient: пациента
       user: пользователя
     attributes:
@@ -484,3 +491,9 @@ ru:
         comment: Комментарий к образованию в правом яичнике
       gynecologic_examination/right_ovary/formations/chambers:
         size: Размер камеры образования в правом яичнике
+      pregnancy_trimester_i_examination:
+        uterus_length: Длина матки
+        uterus_anteroposterior: Передне-задний матки
+        uterus_transverse_size: Поперечный размер матки
+        gestation_age_in_weeks: Срок беременности в неделях
+        comments: Особенности

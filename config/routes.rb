@@ -1,4 +1,7 @@
 Demo::Application.routes.draw do
+  resources :pregnancy_trimester_i_examinations
+
+
   get 'admin' => "admin#index"
   get "search/index"
   get "search/street"

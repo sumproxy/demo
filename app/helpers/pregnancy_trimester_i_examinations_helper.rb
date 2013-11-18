@@ -1,0 +1,2 @@
+module PregnancyTrimesterIExaminationsHelper
+end
