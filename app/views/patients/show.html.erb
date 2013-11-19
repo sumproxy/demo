@@ -31,8 +31,9 @@
 
 <% if @patient.sex.value == 'женский' %>
 <p class="noprint">
-  <%= link_to 'Новое гинекологическое обследование', new_gynecologic_examination_path(:patient_id => @patient.id) %><br />
-  <%= link_to 'Новое обследование на беременность в I-ом триместре', new_pregnancy_trimester_i_examination_path(:patient_id => @patient.id) %>
+  <% PatientExamination.examinations.each do |pe| %>
+    <%= link_to 'Новое ' + t(pe, scope: [:activerecord, :models]), self.send("new_#{pe.to_s}_path", :patient_id => @patient.id) %><br />
+  <% end %>
 <p>
 <% end %>
 
