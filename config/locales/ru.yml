@@ -268,6 +268,12 @@ ru:
         gestation_age_in_weeks: неделям беременности
         comments: особенности
         findings_and_recommendations: Заключение и рекомендации
+      pregnancy_trimester_i_examination/ovum:
+        localization_id: локализация
+        length: длина
+        anteroposterior: передне-задний
+        median_inner_diameter: СВДПЯ
+        gestation_age_in_weeks: неделям беременности
   number:
     currency:
       format:
@@ -499,3 +505,9 @@ ru:
         gestation_age_in_weeks: Срок беременности в неделях
         comments: Особенности
         findings_and_recommendations: Заключение и рекомендации
+      pregnancy_trimester_i_examination/ovums:
+        localization_id: Локализация плодного яйца
+        length: Длина плодного яйца
+        anteroposterior: Передне-задний размер плодного яйца
+        median_inner_diameter: СВДПЯ
+        gestation_age_in_weeks: Срок беременности исходя из размеров плодного яйца

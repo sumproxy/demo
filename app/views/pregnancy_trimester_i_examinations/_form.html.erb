@@ -16,7 +16,7 @@
     })
   })
 </script>
-<%= form_for(@pregnancy_trimester_i_examination) do |f| %>
+<%= nested_form_for(@pregnancy_trimester_i_examination) do |f| %>
   <% if @pregnancy_trimester_i_examination.errors.any? %>
     <div id="error_explanation">
       <h2>Из-за <%= ec = @pregnancy_trimester_i_examination.errors.count %> <%= Russian.p(ec, "ошибки", "ошибок", "ошибок") %> отчет сохранить не удалось:</h2>
@@ -28,6 +28,10 @@
       </ul>
     </div>
   <% end %>
+  <%= f.fields_for :ovums do |builder| %>
+    <%= render 'ovum', :o => builder %>
+  <% end %>
+  <%= f.link_to_add '[+] плодное яйцо', :ovums %>
   <fieldset>
     <legend>Размеры матки:</legend>
       <div class="fieldset">
@@ -45,7 +49,7 @@
         </span>
       </div>
       <div class="field">соответствуют
-        <%= f.number_field :gestation_age_in_weeks, :style => "width:30px;" %> <%= f.label :gestation_age_in_weeks %>
+        <%= f.number_field :gestation_age_in_weeks, :style => "width:40px;" %> <%= f.label :gestation_age_in_weeks %>
       </div>
   </fieldset>
   <div class="field">

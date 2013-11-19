@@ -1,6 +1,9 @@
+# encoding: UTF-8
 class PregnancyTrimesterIExamination < ActiveRecord::Base
   has_many :patient_examinations
   has_many :patients, :through => :patient_examinations
+  has_many :ovums, :dependent => :destroy
+  accepts_nested_attributes_for :ovums, :allow_destroy => true
   attr_accessible :comments
   attr_accessible :gestation_age_in_weeks
   attr_accessible :left_ovary_id
@@ -10,6 +13,7 @@ class PregnancyTrimesterIExamination < ActiveRecord::Base
   attr_accessible :uterus_length
   attr_accessible :uterus_transverse_size
   attr_accessible :findings_and_recommendations
+  attr_accessible :ovums_attributes
 
   validate :uterine_attributes
   

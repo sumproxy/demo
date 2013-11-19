@@ -1,0 +1,18 @@
+<span class="on_one_line">
+  <%= o.label :length %><br />
+  <%= o.number_field :length, :style => "width:50px;", :step => "any" %>
+</span>
+<span class="on_one_line">
+  <%= o.label :anteroposterior %><br />
+  <%= o.number_field :anteroposterior, :style => "width:50px;", :step => "any" %>
+</span>
+<span class="on_one_line">
+  <%= o.label :median_inner_diameter %><br />
+  <%= o.number_field :median_inner_diameter, :style => "width:50px;", :step => "any" %>
+</span>
+<span class="on_one_line"><br/>
+  соответствуют <%= o.number_field :gestation_age_in_weeks, :style => "width:50px;" %> <%= o.label :gestation_age_in_weeks %>
+</span>
+<span class="on_one_line">
+  <br /><%= o.link_to_remove '[-]' %>
+</span>

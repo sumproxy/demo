@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pregnancy_trimester_i_examination: 
+  localization_id: 1
+  length: 1.5
+  anteroposterior: 1.5
+  median_inner_diameter: 1.5
+  gestation_age_in_weeks: 1
+
+two:
+  pregnancy_trimester_i_examination: 
+  localization_id: 1
+  length: 1.5
+  anteroposterior: 1.5
+  median_inner_diameter: 1.5
+  gestation_age_in_weeks: 1

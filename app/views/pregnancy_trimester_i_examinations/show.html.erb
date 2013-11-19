@@ -9,6 +9,18 @@
   Ф.И.О. <%= format_name(@patient) %>, возраст <%= patient_age = age(@patient.dob)%> <%= Russian.p(patient_age, 'год', 'года', 'лет') %>.<br />
 </p>
 <p>
+  Имеется <%= amount = @pregnancy_trimester_i_examination.ovums.size %> <%= Russian.p(amount, 'плодное яйцо', 'плодных яйца', 'плодных яиц') %>.
+  <% if amount == 1 then ovum = @pregnancy_trimester_i_examination.ovums.first %>
+    Размеры плодного яйца (длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм,
+СВДПЯ <%= ovum.median_inner_diameter %> мм) соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.
+  <% else %><br />
+    <% @pregnancy_trimester_i_examination.ovums.each do |ovum| %>
+      &bull; Размеры: длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм,
+СВДПЯ <%= ovum.median_inner_diameter %> мм, соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.<br />
+    <% end %>
+  <% end %>
+</p>
+<p>
   Особенности:
   размеры матки (длина <%= @pregnancy_trimester_i_examination.uterus_length %> мм,
   передне-задний размер <%= @pregnancy_trimester_i_examination.uterus_anteroposterior %> мм,
