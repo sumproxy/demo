@@ -7,8 +7,12 @@ class PatientExamination < ActiveRecord::Base
   attr_accessible :gynecologic_examination_id
   attr_accessible :pregnancy_trimester_i_examination_id
   
+  def self.examinations
+    self.reflections.collect{|k,v| k if v.macro == :belongs_to }.reject{|v| v == :patient }
+  end
+  
   def examination_type
-    examinations = PatientExamination.reflections.collect{|k,v| k if v.macro == :belongs_to }.reject{|v| v == :patient }
+    examinations = self.class.examinations
     examinations.each do |exam|
       return exam unless self.send((exam.to_s + "_id").to_sym).nil?
     end
