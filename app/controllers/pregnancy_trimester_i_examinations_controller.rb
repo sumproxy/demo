@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class PregnancyTrimesterIExaminationsController < ApplicationController
+  skip_before_filter :authorize_root, :only => [:show, :new, :edit, :create, :update]
   # GET /pregnancy_trimester_i_examinations
   # GET /pregnancy_trimester_i_examinations.json
   def index
