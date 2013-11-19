@@ -267,6 +267,7 @@ ru:
         uterus_transverse_size: поперечный размер
         gestation_age_in_weeks: неделям беременности
         comments: особенности
+        findings_and_recommendations: Заключение и рекомендации
   number:
     currency:
       format:
@@ -497,3 +498,4 @@ ru:
         uterus_transverse_size: Поперечный размер матки
         gestation_age_in_weeks: Срок беременности в неделях
         comments: Особенности
+        findings_and_recommendations: Заключение и рекомендации

@@ -28,7 +28,6 @@
       </ul>
     </div>
   <% end %>
-
   <fieldset>
     <legend>Размеры матки:</legend>
       <div class="fieldset">
@@ -46,15 +45,21 @@
         </span>
       </div>
       <div class="field">соответствуют
-        <%= f.number_field :gestation_age_in_weeks, :style => "width:50px;" %> <%= f.label :gestation_age_in_weeks %>
-      </div>
-      <div class="field">
-        <%= f.label :comments %><br />
-        <%= f.text_area :comments %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
+        <%= f.number_field :gestation_age_in_weeks, :style => "width:30px;" %> <%= f.label :gestation_age_in_weeks %>
       </div>
   </fieldset>
+  <div class="field">
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments, :size => "71x7" %>
+  </div>
+  <fieldset>
+    <legend><%= f.label :findings_and_recommendations %></legend>
+    <div class="field">
+      <%= f.text_area :findings_and_recommendations, :size => "70x7" %>
+    </div>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
   <%= hidden_field_tag 'patient_id', params[:patient_id] %>
 <% end %>

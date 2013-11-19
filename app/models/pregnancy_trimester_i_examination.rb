@@ -9,4 +9,5 @@ class PregnancyTrimesterIExamination < ActiveRecord::Base
   attr_accessible :uterus_anteroposterior
   attr_accessible :uterus_length
   attr_accessible :uterus_transverse_size
+  attr_accessible :findings_and_recommendations
 end

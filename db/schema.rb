@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118140733) do
+ActiveRecord::Schema.define(:version => 20131119095357) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -349,8 +349,9 @@ ActiveRecord::Schema.define(:version => 20131118140733) do
     t.integer  "right_ovary_id"
     t.text     "comments"
     t.integer  "user_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.text     "findings_and_recommendations"
   end
 
   create_table "sexes", :force => true do |t|
