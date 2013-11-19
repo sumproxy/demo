@@ -28,8 +28,7 @@
 
 <p class="noprint">
   <%= link_to 'Редактировать', edit_pregnancy_trimester_i_examination_path(@pregnancy_trimester_i_examination) %> |
-  <%= link_to 'К пациенту', patient_path(@patient) %> |
-  <%= link_to 'На главную', root_path %>
+  <%= link_to 'К пациенту', patient_path(@patient) %>
   <% if current_user.is_root? %> |
     <%= link_to 'Удалить', @pregnancy_trimester_i_examination, method: :delete, data: { confirm: 'Вы уверены?' } %>
   <% end %>

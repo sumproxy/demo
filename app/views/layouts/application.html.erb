@@ -10,7 +10,7 @@
 <body>
 <% if session[:user_id] %>
   <div id="logout_link" class="noprint">
-    <%= link_to "Выйти", logout_url, :method => :delete %>
+    <%= link_to 'На главную', root_path %> | <%= link_to "Выйти", logout_url, :method => :delete %>
   </div>
 <% end %>
 
