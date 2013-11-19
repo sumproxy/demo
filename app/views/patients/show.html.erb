@@ -7,7 +7,7 @@
 
 <p>
   <b>Возраст:</b>
-  <%= age(@patient.dob) %>
+  <%= a = age(@patient.dob) %> <%= Russian.p(a, 'год', 'года', 'лет') %>
 </p>
 
 <p>
