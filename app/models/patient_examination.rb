@@ -8,7 +8,7 @@ class PatientExamination < ActiveRecord::Base
   attr_accessible :pregnancy_trimester_i_examination_id
   
   def self.examinations
-    self.reflections.collect{|k,v| k if v.macro == :belongs_to }.reject{|v| v == :patient }
+    @@cache ||= self.reflections.collect{|k,v| k if v.macro == :belongs_to }.reject{|v| v == :patient }
   end
   
   def examination_type
