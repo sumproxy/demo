@@ -29,13 +29,11 @@
   
 </p>
 
-<% if @patient.sex.value == 'женский' %>
 <p class="noprint">
   <% PatientExamination.examinations.each do |pe| %>
     <%= link_to 'Новое ' + t(pe, scope: [:activerecord, :models]), self.send("new_#{pe.to_s}_path", :patient_id => @patient.id) %><br />
   <% end %>
 <p>
-<% end %>
 
 <p class="noprint">
   <%= link_to 'Редактировать', edit_patient_path(@patient) %>
