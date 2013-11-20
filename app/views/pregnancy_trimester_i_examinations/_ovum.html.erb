@@ -1,4 +1,8 @@
 <span class="on_one_line">
+  <%= o.label :localization_id %><br />
+  <%= o.collection_select :localization_id, PregnancyTrimesterIExamination::Ovum::Localization.all, :id, :value %>
+</span>
+<span class="on_one_line">
   <%= o.label :length %><br />
   <%= o.number_field :length, :style => "width:50px;", :step => "any" %>
 </span>

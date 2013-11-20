@@ -175,6 +175,11 @@ if GynecologicExamination::FreeFluidAmount.all.empty?
   GynecologicExamination::FreeFluidAmount.create(value: "большом")
   GynecologicExamination::FreeFluidAmount.create(value: "-- не задано --")
 end
+if PregnancyTrimesterIExamination::Ovum::Localization.all.empty?
+  PregnancyTrimesterIExamination::Ovum::Localization.create(value: 'в дне')
+  PregnancyTrimesterIExamination::Ovum::Localization.create(value: 'в среднем отделе полости матки')
+  PregnancyTrimesterIExamination::Ovum::Localization.create(value: 'в нижнем отделе полости матки')
+end
 if User.where('is_root = ?', true).count.zero?
   User.create(login: 'admin', last_name: '1', first_name: '1', patronymic: '1', password: 'admin', is_root: true)
 end

@@ -1,7 +1,8 @@
 # encoding: UTF-8
 class PregnancyTrimesterIExamination::Ovum < ActiveRecord::Base
   belongs_to :pregnancy_trimester_i_examination
-  attr_accessible :localization_id
+  belongs_to :localization
+  attr_accessible :localization_id, :localization
   attr_accessible :length
   attr_accessible :anteroposterior
   attr_accessible :median_inner_diameter
