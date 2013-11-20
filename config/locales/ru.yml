@@ -274,6 +274,10 @@ ru:
         anteroposterior: передне-задний
         median_inner_diameter: СВДПЯ
         gestation_age_in_weeks: неделям беременности
+      pregnancy_trimester_i_examination/ovum/fetus:
+        biparietal_size: бипариетальный размер
+        coccyx_parietal_size: копчико-теменной размер
+        is_fetal_cardiac_activity_manifested: сердечная деятельность плода определяется
   number:
     currency:
       format:
@@ -511,3 +515,7 @@ ru:
         anteroposterior: Передне-задний размер плодного яйца
         median_inner_diameter: СВДПЯ
         gestation_age_in_weeks: Срок беременности исходя из размеров плодного яйца
+      pregnancy_trimester_i_examination/ovums/fetuses:
+        biparietal_size: Бипариетальный размер плода
+        coccyx_parietal_size: Копчико-теменной размер плода
+        is_fetal_cardiac_activity_manifested: Сердечная деятельность плода определяется

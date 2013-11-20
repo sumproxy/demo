@@ -18,5 +18,30 @@
   соответствуют <%= o.number_field :gestation_age_in_weeks, :style => "width:50px;" %> <%= o.label :gestation_age_in_weeks %>
 </span>
 <span class="on_one_line">
-  <br /><%= o.link_to_remove '[-]' %>
+  <br /><%= o.link_to_remove '[-] Удалить плодное яйцо' %>
 </span>
+<div>
+  Эмбрионы:
+</div>
+<%= o.fields_for :fetuses do |builder| %>
+  <span class="on_one_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+  <span class="on_one_line">
+    <%= builder.label :coccyx_parietal_size %><br />
+    <%= builder.number_field :coccyx_parietal_size, :style => "width:50px;", :step => "any"  %>
+  </span>
+  <span class="on_one_line">
+    <%= builder.label :biparietal_size %><br />
+    <%= builder.number_field :biparietal_size, :style => "width:50px;", :step => "any"  %>
+  </span>
+  <span class="on_one_line"><br />
+    <%= builder.label :is_fetal_cardiac_activity_manifested %>
+    <%= builder.check_box :is_fetal_cardiac_activity_manifested  %>
+  </span>
+  <span class="on_one_line">
+    <br /><%= builder.link_to_remove "[-] Удалить эмбрион" %>
+  </span>
+<% end %>
+<div>
+  <%= o.link_to_add "[+] эмбрион", :fetuses %>
+</div>

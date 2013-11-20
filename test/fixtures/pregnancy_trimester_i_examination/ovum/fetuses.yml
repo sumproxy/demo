@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ovum: 
+  coccyx_parietal_size: 1.5
+  biparietal_size: 1.5
+  is_fetal_cardiac_activity_manifested: false
+
+two:
+  ovum: 
+  coccyx_parietal_size: 1.5
+  biparietal_size: 1.5
+  is_fetal_cardiac_activity_manifested: false

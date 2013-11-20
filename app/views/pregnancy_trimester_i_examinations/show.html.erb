@@ -12,12 +12,32 @@
   Имеется <%= amount = @pregnancy_trimester_i_examination.ovums.size %> <%= Russian.p(amount, 'плодное яйцо', 'плодных яйца', 'плодных яиц') %>.
   <% if amount == 1 then ovum = @pregnancy_trimester_i_examination.ovums.first %>
     Расположено <%= ovum.localization.value %>.
-    Размеры плодного яйца (длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм, СВДПЯ <%= ovum.median_inner_diameter %> мм) соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.
-  <% else %><br />
-    <% @pregnancy_trimester_i_examination.ovums.each do |ovum| %>
-      &bull; Локализация: <%= ovum.localization.value %>. Размеры: длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм,
-СВДПЯ <%= ovum.median_inner_diameter %> мм, соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.<br />
+    Размеры плодного яйца (длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм, СВДПЯ <%= ovum.median_inner_diameter %> мм) соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.<br />
+    <% if ovum.fetuses.size == 1 then fetus = ovum.fetuses.first %>
+      Копчико-теменной размер <%= fetus.coccyx_parietal_size %> мм, бипариетальный размер <%= fetus.biparietal_size %> мм. Сердечная деятельность <%= 'не' unless fetus.is_fetal_cardiac_activity_manifested? %> определяется.
+    <% else %>Эмбрионы:
+      <ol>
+      <% ovum.fetuses.each do |fetus| %>
+        <li>Копчико-теменной размер <%= fetus.coccyx_parietal_size %> мм, бипариетальный размер <%= fetus.biparietal_size %> мм. Сердечная деятельность <%= 'не' unless fetus.is_fetal_cardiac_activity_manifested? %> определяется.</li>
+      <% end %>
+      </ol>
     <% end %>
+  <% else %><br />
+    <ul>
+    <% @pregnancy_trimester_i_examination.ovums.each do |ovum| %>
+      <li><%= l = ovum.localization.value; l[0] = 'В'; l %>. Размеры: длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм, СВДПЯ <%= ovum.median_inner_diameter %> мм, соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.
+      <% if ovum.fetuses.size == 1 then fetus = ovum.fetuses.first %>
+        Копчико-теменной размер <%= fetus.coccyx_parietal_size %> мм, бипариетальный размер <%= fetus.biparietal_size %> мм. Сердечная деятельность <%= 'не' unless fetus.is_fetal_cardiac_activity_manifested? %> определяется.
+      <% else %>Эмбрионы:
+        <ol>
+        <% ovum.fetuses.each do |fetus| %>
+        <li>Копчико-теменной размер <%= fetus.coccyx_parietal_size %> мм, бипариетальный размер <%= fetus.biparietal_size %> мм. Сердечная деятельность <%= 'не' unless fetus.is_fetal_cardiac_activity_manifested? %> определяется.</li>
+        <% end %>
+        </ol>
+      <% end %>
+      </li>
+    <% end %>
+    </ul>
   <% end %>
 </p>
 <p>
