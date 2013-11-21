@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120140647) do
+ActiveRecord::Schema.define(:version => 20131121113212) do
 
   create_table "addresses", :force => true do |t|
     t.string   "city"
@@ -339,6 +339,17 @@ ActiveRecord::Schema.define(:version => 20131120140647) do
 
   add_index "patients", ["address_id"], :name => "index_patients_on_address_id"
   add_index "patients", ["sex_id"], :name => "index_patients_on_sex_id"
+
+  create_table "pregnancy_trimester_i_examination_ovaries", :force => true do |t|
+    t.boolean  "is_visible"
+    t.float    "length"
+    t.float    "width"
+    t.float    "anteroposterior"
+    t.boolean  "is_yellow_body_present"
+    t.float    "yellow_body_diameter"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
 
   create_table "pregnancy_trimester_i_examination_ovum_fetuses", :force => true do |t|
     t.integer  "ovum_id"

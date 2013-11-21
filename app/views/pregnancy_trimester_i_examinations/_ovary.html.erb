@@ -1,0 +1,26 @@
+<div class="fieldset">
+  <span class="on_one_line"><br />
+    <%= o.label :is_visible %>
+    <%= o.check_box :is_visible %>
+  </span>
+  <span class="on_one_line">
+    <%= o.label :length %><br />
+    <%= o.number_field :length, :style => "width:50px;", :step => "any" %>
+  </span>
+  <span class="on_one_line">
+    <%= o.label :width %><br />
+    <%= o.number_field :width, :style => "width:50px;", :step => "any" %>
+  </span>
+  <span class="on_one_line">
+    <%= o.label :anteroposterior %><br />
+    <%= o.number_field :anteroposterior, :style => "width:50px;", :step => "any" %>
+  </span>
+  <span class="on_one_line"><br />
+    <%= o.label :is_yellow_body_present %>
+    <%= o.check_box :is_yellow_body_present %>
+  </span>
+  <span class="on_one_line">
+    <%= o.label :yellow_body_diameter %><br />
+    <%= o.number_field :yellow_body_diameter, :style => "width:50px;", :step => "any" %>
+  </span>
+</div>

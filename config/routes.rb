@@ -1,6 +1,4 @@
 Demo::Application.routes.draw do
-  resources :pregnancy_trimester_i_examinations
-
 
   get 'admin' => "admin#index"
   get "search/index"
@@ -14,6 +12,7 @@ Demo::Application.routes.draw do
 
   resources :users
   resources :gynecologic_examinations
+  resources :pregnancy_trimester_i_examinations
   resources :patients
 
 

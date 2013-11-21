@@ -28,10 +28,10 @@
       </ul>
     </div>
   <% end %>
-    <div>
-      Плодные яйца:
-    </div>
-    <%= f.fields_for :ovums do |builder| %>
+  <div>
+    Плодные яйца:
+  </div>
+  <%= f.fields_for :ovums do |builder| %>
     <%= render 'ovum', :o => builder %>
   <% end %>
   <%= f.link_to_add '[+] плодное яйцо', :ovums %>
@@ -56,6 +56,18 @@
       <div class="field">соответствуют
         <%= f.number_field :gestation_age_in_weeks, :style => "width:40px;" %> <%= f.label :gestation_age_in_weeks %>
       </div>
+  </fieldset>
+  <fieldset>
+    <legend>Левый яичник</legend>
+    <%= f.fields_for :left_ovary do |builder| %>
+      <%= render "ovary", :o => builder %>
+    <% end %>
+  </fieldset>
+  <fieldset>
+    <legend>Правый яичник</legend>
+    <%= f.fields_for :right_ovary do |builder| %>
+      <%= render "ovary", :o => builder %>
+    <% end %>
   </fieldset>
   <div class="field">
     <%= f.label :comments %><br />

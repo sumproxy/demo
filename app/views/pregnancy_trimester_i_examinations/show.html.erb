@@ -49,6 +49,19 @@
 </p>
 
 <p>
+  <% lo = @pregnancy_trimester_i_examination.left_ovary; ro = @pregnancy_trimester_i_examination.right_ovary %>
+  Левый яичник: длина <%= lo.length %> мм, ширина <%= lo.width %> мм, передне-задний <%= lo.anteroposterior %> мм.<br />
+  Правый яичник: длина <%= ro.length %> мм, ширина <%= ro.width %> мм, передне-задний <%= ro.anteroposterior %> мм.<br />
+  <% if lo.is_yellow_body_present? && ro.is_yellow_body_present? %>
+    Желтое тело в обоих яичниках, диаметр левого <%= lo.yellow_body_diameter %> мм, правого - <%= ro.yellow_body_diameter %> мм.
+  <% elsif lo.is_yellow_body_present? || ro.is_yellow_body_present? %>
+    Желтое тело в <%= yb = (lo.is_yellow_body_present?) ? ['левом', lo.yellow_body_diameter] : ['правом', ro.yellow_body_diameter]; yb.first %> яичнике, диаметр <%= yb.last %> мм.
+  <% else %>
+    Желтое тело не обнаружено.
+  <% end %>
+</p>
+
+<p>
   <%= @pregnancy_trimester_i_examination.comments %>
 </p>
 

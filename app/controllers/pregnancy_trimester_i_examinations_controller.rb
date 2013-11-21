@@ -31,6 +31,8 @@ class PregnancyTrimesterIExaminationsController < ApplicationController
   # GET /pregnancy_trimester_i_examinations/new.json
   def new
     @pregnancy_trimester_i_examination = PregnancyTrimesterIExamination.new
+    @pregnancy_trimester_i_examination.build_left_ovary
+    @pregnancy_trimester_i_examination.build_right_ovary
 
     respond_to do |format|
       format.html # new.html.erb

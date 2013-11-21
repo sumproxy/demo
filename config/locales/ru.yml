@@ -278,6 +278,13 @@ ru:
         biparietal_size: бипариетальный размер
         coccyx_parietal_size: копчико-теменной размер
         is_fetal_cardiac_activity_manifested: сердечная деятельность плода определяется
+      pregnancy_trimester_i_examination/ovary:
+        is_visible: определяется
+        length: длина
+        width: ширина
+        anteroposterior: передне-задний
+        is_yellow_body_present: желтое тело
+        yellow_body_diameter: диаметр
   number:
     currency:
       format:
@@ -509,6 +516,20 @@ ru:
         gestation_age_in_weeks: Срок беременности в неделях
         comments: Особенности
         findings_and_recommendations: Заключение и рекомендации
+      pregnancy_trimester_i_examination/left_ovary:
+        is_visibile: Визуализация левого яичника
+        length: Длина левого яичника
+        width: Ширина левого яичника
+        anteroposterior: Передне-задний левого яичника
+        is_yellow_body_present: Желтое тело в левом яичнике
+        yellow_body_diameter: Диаметр желтого тела в левом яичнике
+      pregnancy_trimester_i_examination/right_ovary:
+        is_visible: Визуализация правого яичника
+        length: Длина правого яичника
+        width: Ширина правого яичника
+        anteroposterior: Передне-задний правого яичника
+        is_yellow_body_present: Желтое тело в правом яичнике
+        yellow_body_diameter: Диаметр желтого тела в правом яичнике
       pregnancy_trimester_i_examination/ovums:
         localization_id: Локализация плодного яйца
         length: Длина плодного яйца

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  is_visible: false
+  length: 1.5
+  width: 1.5
+  anteroposterior: 1.5
+  is_yellow_body_present: false
+  yellow_body_diameter: 1.5
+
+two:
+  is_visible: false
+  length: 1.5
+  width: 1.5
+  anteroposterior: 1.5
+  is_yellow_body_present: false
+  yellow_body_diameter: 1.5
