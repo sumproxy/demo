@@ -1,3 +1,4 @@
+<% @pti_exam = @pregnancy_trimester_i_examination %>
 <p id="notice" class="noprint"><%= notice %></p>
 <h4>Ультразвуковая диагностика в I триместре беременности</h4>
 <h4>на аппарате Sono Ace R3 фирмы Medison</h4>
@@ -9,8 +10,9 @@
   Ф.И.О. <%= format_name(@patient) %>, возраст <%= patient_age = age(@patient.dob)%> <%= Russian.p(patient_age, 'год', 'года', 'лет') %>.<br />
 </p>
 <p>
-  Имеется <%= amount = @pregnancy_trimester_i_examination.ovums.size %> <%= Russian.p(amount, 'плодное яйцо', 'плодных яйца', 'плодных яиц') %>.
-  <% if amount == 1 then ovum = @pregnancy_trimester_i_examination.ovums.first %>
+  Имеется <%= amount = @pti_exam.ovums.size %> <%= Russian.p(amount, 'плодное яйцо', 'плодных яйца', 'плодных яиц') %>.
+  <% if amount == 1 then ovum = @pti_exam.ovums.first %>
+    <!-- 1 плодное яйцо -->
     Расположено <%= ovum.localization.value %>.
     Размеры плодного яйца (длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм, СВДПЯ <%= ovum.median_inner_diameter %> мм) соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.<br />
     <% if ovum.fetuses.size == 1 then fetus = ovum.fetuses.first %>
@@ -23,8 +25,9 @@
       </ol>
     <% end %>
   <% else %><br />
+    <!-- несколько плодных яиц -->
     <ul>
-    <% @pregnancy_trimester_i_examination.ovums.each do |ovum| %>
+    <% @pti_exam.ovums.each do |ovum| %>
       <li><%= l = ovum.localization.value; l[0] = 'В'; l %>. Размеры: длина <%= ovum.length %> мм, передне-задний размер <%= ovum.anteroposterior %> мм, СВДПЯ <%= ovum.median_inner_diameter %> мм, соответствуют <%= oga = ovum.gestation_age_in_weeks %> <%= Russian.p(oga, 'неделе', 'неделям', 'неделям') %> беременности.
       <% if ovum.fetuses.size == 1 then fetus = ovum.fetuses.first %>
         Копчико-теменной размер <%= fetus.coccyx_parietal_size %> мм, бипариетальный размер <%= fetus.biparietal_size %> мм. Сердечная деятельность <%= 'не' unless fetus.is_fetal_cardiac_activity_manifested? %> определяется.
@@ -42,16 +45,26 @@
 </p>
 <p>
   Особенности:
-  размеры матки (длина <%= @pregnancy_trimester_i_examination.uterus_length %> мм,
-  передне-задний размер <%= @pregnancy_trimester_i_examination.uterus_anteroposterior %> мм,
-  поперечный размер <%= @pregnancy_trimester_i_examination.uterus_transverse_size %> мм) соответствуют
-  <%= ga = @pregnancy_trimester_i_examination.gestation_age_in_weeks %> <%= Russian.p(ga, 'неделе', 'неделям', 'неделям') %> беременности.
+  размеры матки (длина <%= @pti_exam.uterus_length %> мм,
+  передне-задний размер <%= @pti_exam.uterus_anteroposterior %> мм,
+  поперечный размер <%= @pti_exam.uterus_transverse_size %> мм) соответствуют
+  <%= ga = @pti_exam.gestation_age_in_weeks %> <%= Russian.p(ga, 'неделе', 'неделям', 'неделям') %> беременности.
 </p>
 
 <p>
-  <% lo = @pregnancy_trimester_i_examination.left_ovary; ro = @pregnancy_trimester_i_examination.right_ovary %>
-  Левый яичник: длина <%= lo.length %> мм, ширина <%= lo.width %> мм, передне-задний <%= lo.anteroposterior %> мм.<br />
-  Правый яичник: длина <%= ro.length %> мм, ширина <%= ro.width %> мм, передне-задний <%= ro.anteroposterior %> мм.<br />
+  <% lo = @pti_exam.left_ovary; ro = @pti_exam.right_ovary %>
+  Левый яичник:
+    <% if lo.is_visible? %>
+      длина <%= lo.length %> мм, ширина <%= lo.width %> мм, передне-задний <%= lo.anteroposterior %> мм.<br />
+    <% else %>
+      не определяется.<br />
+    <% end %>
+  Правый яичник: 
+    <% if ro.is_visible? %>
+      длина <%= ro.length %> мм, ширина <%= ro.width %> мм, передне-задний <%= ro.anteroposterior %> мм.<br />
+    <% else %>
+      не определяется.<br />
+    <% end %>
   <% if lo.is_yellow_body_present? && ro.is_yellow_body_present? %>
     Желтое тело в обоих яичниках, диаметр левого <%= lo.yellow_body_diameter %> мм, правого - <%= ro.yellow_body_diameter %> мм.
   <% elsif lo.is_yellow_body_present? || ro.is_yellow_body_present? %>
@@ -62,24 +75,24 @@
 </p>
 
 <p>
-  <%= @pregnancy_trimester_i_examination.comments %>
+  <%= @pti_exam.comments %>
 </p>
 
 <p>
   <b><em><u>Заключение и рекомендации</u></em></b><br/>
-  <%= @pregnancy_trimester_i_examination.findings_and_recommendations %>
+  <%= @pti_exam.findings_and_recommendations %>
 </p>
 
 <p>
-  <%= l @pregnancy_trimester_i_examination.created_at.to_date, :format => :long %><br />
+  <%= l @pti_exam.created_at.to_date, :format => :long %><br />
   Врач: <%= format_name(current_user, :format => :abbr) %>
 </p>
 
 <p class="noprint">
-  <%= link_to 'Редактировать', edit_pregnancy_trimester_i_examination_path(@pregnancy_trimester_i_examination) %> |
+  <%= link_to 'Редактировать', edit_pregnancy_trimester_i_examination_path(@pti_exam) %> |
   <%= link_to 'К пациенту', patient_path(@patient) %>
   <% if current_user.is_root? %> |
-    <%= link_to 'Удалить', @pregnancy_trimester_i_examination, method: :delete, data: { confirm: 'Вы уверены?' } %>
+    <%= link_to 'Удалить', @pti_exam, method: :delete, data: { confirm: 'Вы уверены?' } %>
   <% end %>
 </p>
 
