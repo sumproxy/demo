@@ -18,7 +18,7 @@
   соответствуют <%= o.number_field :gestation_age_in_weeks, :style => "width:50px;" %> <%= o.label :gestation_age_in_weeks %>
 </span>
 <span class="on_one_line">
-  <br /><%= o.link_to_remove '[-] Удалить плодное яйцо' %>
+  <br /><%= o.link_to_remove '[-] удалить' %>
 </span>
 <div>
   Эмбрионы:
@@ -39,7 +39,7 @@
     <%= builder.check_box :is_fetal_cardiac_activity_manifested  %>
   </span>
   <span class="on_one_line">
-    <br /><%= builder.link_to_remove "[-] Удалить эмбрион" %>
+    <br /><%= builder.link_to_remove "[-] удалить" %>
   </span>
 <% end %>
 <div>
