@@ -1,6 +1,126 @@
 <script type="text/javascript">
+  function set_disabled_attribute(selector, attributes, state) {
+    $.each(attributes, function(attribute, value) {
+      $(selector + '_' + attribute).prop('disabled', state);
+    });
+  };
+
+  function set_value(selector, attributes) {
+    $.each(attributes, function(attribute, value) {
+      var sel = selector + '_' + attribute;
+      if($(sel).prop('type') == 'checkbox') {
+        $(sel).prop('checked', value);
+      }
+      else {
+        $(sel).val(value);
+      }
+    });
+  };
+  
+  function set_option(selector, options, position) {
+    $.each(options, function(option, value) {
+      $(selector + '_' + option + ' :' + position).prop('selected', true);
+    });
+  };
+  
+  function toggle_yellow_body_condition(is_checked, selector, attributes) {
+    if(is_checked) {
+      set_disabled_attribute(selector, attributes, false);
+    }
+    else {
+      set_disabled_attribute(selector, attributes, true);
+      set_value(selector, attributes);
+    }
+  }
+  
+  function toggle_ovary_condition(is_checked, selector, attributes) {
+    if(is_checked) {
+      set_disabled_attribute(selector, attributes, false);
+      toggle_yellow_body_condition(false, selector, yellow_body_attributes);
+    }
+    else {
+      set_disabled_attribute(selector, attributes, true);
+      toggle_yellow_body_condition(false, selector, yellow_body_attributes);
+      set_value(selector, attributes);
+    }
+  }
+  
   $(document).ready(function() {
     submit_flag = false;
+
+    default_selector = '#pregnancy_trimester_i_examination';
+    left_ovary_selector = default_selector + '_' + 'left_ovary_attributes';
+    right_ovary_selector = default_selector + '_' + 'right_ovary_attributes';
+    ovary_attributes = {'length': '', 'width': '', 'anteroposterior': '', 'is_yellow_body_present': false};
+    yellow_body_attributes = {'yellow_body_diameter': ''};
+    
+    /////////////////////////////////////
+    // initial consistensy
+    /////////////////////////////////////
+
+    // left ovary
+    if( !$(left_ovary_selector + '_' + 'is_yellow_body_present').is(':checked') ) {
+      set_disabled_attribute(left_ovary_selector, yellow_body_attributes, true);
+    }
+    
+    if( !$(left_ovary_selector + '_' + 'is_visible').is(':checked') ) {
+      set_disabled_attribute(left_ovary_selector, ovary_attributes, true);      
+    }
+    
+    // right ovary
+    if( !$(right_ovary_selector + '_' + 'is_yellow_body_present').is(':checked') ) {
+      set_disabled_attribute(right_ovary_selector, yellow_body_attributes, true);
+    }
+
+    if( !$(right_ovary_selector + '_' + 'is_visible').is(':checked') ) {
+      set_disabled_attribute(right_ovary_selector, ovary_attributes, true);      
+    }
+    
+    /////////////////////////////////////
+    // change detectors
+    /////////////////////////////////////
+
+    // left ovary
+    $(left_ovary_selector + '_' + 'is_yellow_body_present').change(function(e) {
+      toggle_yellow_body_condition(e.currentTarget.checked, left_ovary_selector, yellow_body_attributes);
+    });
+    
+    $(left_ovary_selector + '_' + 'is_visible').change(function(e) {
+      toggle_ovary_condition(e.currentTarget.checked, left_ovary_selector, ovary_attributes)
+    });
+    
+     // right ovary
+    $(right_ovary_selector + '_' + 'is_yellow_body_present').change(function(e) {
+      toggle_yellow_body_condition(e.currentTarget.checked, right_ovary_selector, yellow_body_attributes);
+    });
+    
+    $(right_ovary_selector + '_' + 'is_visible').change(function(e) {
+      toggle_ovary_condition(e.currentTarget.checked, right_ovary_selector, ovary_attributes)
+    });    
+
+    /////////////////////////////////////
+    // reenable attributes before submit
+    /////////////////////////////////////
+    
+    $('form').submit(function(){
+      // left ovary
+      set_disabled_attribute(left_ovary_selector,
+                             yellow_body_attributes,
+                             false);
+
+      set_disabled_attribute(left_ovary_selector,
+                             ovary_attributes,
+                             false);
+
+      // right ovary
+      set_disabled_attribute(right_ovary_selector,
+                             yellow_body_attributes,
+                             false);
+
+      set_disabled_attribute(right_ovary_selector,
+                             ovary_attributes,
+                             false);
+    });
 
     $('input[name=commit][type=submit]').click(function(e) {
       submit_flag = true;
@@ -13,8 +133,8 @@
       else {
         return "Вы собираетесь покинуть страницу. Все несохраненные данные будут потеряны.";
       }
-    })
-  })
+    });
+  });
 </script>
 <%= nested_form_for(@pregnancy_trimester_i_examination) do |f| %>
   <% if @pregnancy_trimester_i_examination.errors.any? %>
@@ -38,7 +158,7 @@
   <br />
   <br />
   <fieldset>
-    <legend>Размеры матки:</legend>
+    <legend>Размеры матки</legend>
       <div class="fieldset">
         <span class="on_one_line">
           <%= f.label :uterus_length %><br />
