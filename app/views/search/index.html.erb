@@ -12,10 +12,10 @@
     $("#autocomplete").autocomplete({
       autoFocus: false,
       delay: 1,
-      source: "<%= search_index_path(:json) %>", // то же самое что и "/search/index.json",
+      source: "<%= search_index_path(:json) %>", // the same as "/search/index.json",
       minLength: 2,
       select: function( event, ui ) {
-        // просмотр данных существующего пациента: GET /patients/:id
+        // redirect to existing patient: GET /patients/:id
         var url = "<%= patients_path %>" + "/" + ui.item.id;
         $(location).attr("href", url);
       }
@@ -26,7 +26,7 @@
       if(keycode == 13)
       {
         var val = $("#autocomplete").val();
-        // создание нового пациента: GET /patients/new + параметр term
+        // create new patient: GET /patients/new + term
         var url = "<%= new_patient_path %>"
         url = encode_url(url, {term: val});
         $(location).attr("href", url);
