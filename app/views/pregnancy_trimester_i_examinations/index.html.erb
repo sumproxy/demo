@@ -4,17 +4,16 @@
     <th>Ф.И.О.</th>
     <th>Дата</th>
     <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% @pregnancy_trimester_i_examinations.each do |exam| %>
   <tr class="<%= cycle('', 'alt') %>">
     <td><%= link_to format_name(exam.patients.first), patient_path(exam.patients.first) %></td>
     <td><%= l exam.created_at, :format => :long %></td>
-    <td><%= link_to 'Показать', exam %></td>
-    <td><%= link_to 'Редактировать', edit_gynecologic_examination_path(exam) %></td>
-    <td><%= link_to 'Удалить', exam, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+    <td><%= link_to 'Показать', exam %> |
+        <%= link_to 'Редактировать', edit_gynecologic_examination_path(exam) %> |
+        <%= link_to 'Удалить', exam, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
   </tr>
 <% end %>
 </table>
