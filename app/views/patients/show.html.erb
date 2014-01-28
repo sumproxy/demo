@@ -33,18 +33,10 @@
     <%= l pe.created_at, :format => :long %>
     <%= link_to t(pe.examination_type, scope: [:activerecord, :models]), self.send("#{pe.examination_type.to_s}_path", pe.examination) %><br />
   <% end %>
-  
 </p>
 
 <p class="noprint">
-  Новое: 
-  <select id="new_examination">
-    <% PatientExamination.examinations.each do |pe| %>
-    <option value="<%= self.send("new_#{pe.to_s}_path", :patient_id => @patient.id) %>">
-      <%= t(pe, scope: [:activerecord, :models]) %>
-    </option>
-    <% end %>
-  </select>
+  Новое: <%= select(nil, nil, PatientExamination.examinations.collect{|pe| [t(pe, scope: [:activerecord, :models]), self.send("new_#{pe.to_s}_path", :patient_id => @patient.id)]}, {}, {:id => "new_examination"}) %>
   <input id="submit_examination_select" type="submit" value="Создать" />
 <p>
 
