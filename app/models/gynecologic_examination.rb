@@ -70,16 +70,19 @@ class GynecologicExamination < ActiveRecord::Base
   attr_accessible :is_free_fluid_present
   attr_accessible :free_fluid_amount_id, :free_fluid_amount
   attr_accessible :report
-  
+
   validate :uterine_attributes
-  
+
   def uterine_attributes
     if uterine_body_visibility.value == 'определяется'
       # дата последней менструации
       if !menstruation_date.nil? && menstruation_day.nil?
         errors.add(:menstruation_day, "Не задано значение")
       end
-      
+      if menstruation_date > Date.today
+        errors.add(:menstruation_date, "не может быть больше текущей")
+      end
+
       # тело матки
       if uterine_body_detection_position.value == '-- не задано --'
         errors.add(:uterine_body_detection_position_id, "Не задано значение")
@@ -107,14 +110,14 @@ class GynecologicExamination < ActiveRecord::Base
       end
       if uterine_volume.nil? || uterine_volume == 0
         errors.add(:uterine_volume, "Значение не задано или недопустимо")
-      end      
+      end
       if uterine_cavity_size_change.value == 'расширена'
         if uterine_cavity_size.nil? && !is_uterine_cavity_node_present
           errors.add(:uterine_cavity_size, "Не задано значение")
           errors.add(:is_uterine_cavity_node_present, "Не задано значение")
         end
       end
-      
+
       # миометрий
       if myometric_structure_change.value == 'изменена'
         if myometrium_anterior_wall_thickness.nil? || myometrium_anterior_wall_thickness == 0
@@ -124,7 +127,7 @@ class GynecologicExamination < ActiveRecord::Base
           errors.add(:myometrium_posterior_wall_thickness, "Значение не задано или недопустимо")
         end
       end
-      
+
       # эндометрий
       if endometrium_echostructure_change.value == '-- не задано --'
         errors.add(:endometrium_echostructure_change_id, "Не задано значение")
@@ -144,7 +147,7 @@ class GynecologicExamination < ActiveRecord::Base
       if endometrial_thickness.nil? || endometrial_thickness == 0
         errors.add(:endometrial_thickness, "Не задано значение")
       end
-      
+
       # полость матки
       if uterine_cavity_deformation.value == '-- не задано --'
         errors.add(:uterine_cavity_deformation_id, "Не задано значение")
@@ -154,7 +157,7 @@ class GynecologicExamination < ActiveRecord::Base
       end
 
       # шейка
-      if cervix_visibility.value == 'определяется' 
+      if cervix_visibility.value == 'определяется'
         if cervix_size.nil? || cervix_size == 0
           errors.add(:cervix_size, "Значение не задано или недопустимо")
         end
@@ -162,7 +165,7 @@ class GynecologicExamination < ActiveRecord::Base
           errors.add(:cervix_structure_change_id, "Не задано значение")
         end
         if cervix_structure_change.value == 'изменена'
-          if (endocervix_cyst_min_size.nil? || endocervix_cyst_min_size == 0 ) && 
+          if (endocervix_cyst_min_size.nil? || endocervix_cyst_min_size == 0 ) &&
              (endocervix_cyst_max_size.nil? || endocervix_cyst_max_size == 0 )
             errors.add(:endocervix_cyst_min_size, "Значение не задано или недопустимо")
             errors.add(:endocervix_cyst_max_size, "Значение не задано или недопустимо")
