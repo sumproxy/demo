@@ -9,15 +9,15 @@ the Ist trimester.
 0. Get the latest version of the application from the github.
 
 1. At the command prompt change directory to the application directory:
-       <tt>cd demo</tt> (use full path to <tt>demo</tt>)
+       cd demo (use full path to demo)
 
 2. At the command prompt run:
-       <tt>bundle install</tt>
-       <tt>bundle exec rake db:schema:load</tt>
-       <tt>bundle exec rake db:seed</tt>
+       bundle install
+       bundle exec rake db:schema:load>
+       bundle exec rake db:seed
 
 3. At the same command prompt start the web server:
-       <tt>rails server</tt>
+       rails server
 
 4. Go to http://localhost:3000/ in your browser and you'll see a login screen,
 login with admin:admin.
