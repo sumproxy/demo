@@ -19,8 +19,7 @@ the Ist trimester.
 3. At the same command prompt start the web server:
        rails server
 
-4. Go to http://localhost:3000/ in your browser and you'll see a login screen,
-login with admin:admin.
+4. Go to http://localhost:3000/ in your browser and you'll see a login screen, login with admin:admin.
 
 5. Click on the patients link and then on the link to create your first patient.
 Once the patient is created you will be redirected to his/her record page.
