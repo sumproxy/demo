@@ -99,16 +99,16 @@ class GynecologicExamination < ActiveRecord::Base
       if uterine_size.value == '-- не задано --'
         errors.add(:uterine_size_id, "Не задано значение")
       end
-      if uterine_length.nil? || uterine_length == 0
+      if uterine_length.nil? || uterine_length <= 0
         errors.add(:uterine_length, "Значение не задано или недопустимо")
       end
-      if uterine_anteroposterior.nil? || uterine_anteroposterior == 0
+      if uterine_anteroposterior.nil? || uterine_anteroposterior <= 0
         errors.add(:uterine_anteroposterior, "Значение не задано или недопустимо")
       end
-      if uterine_width.nil? || uterine_width == 0
+      if uterine_width.nil? || uterine_width <= 0
         errors.add(:uterine_width, "Значение не задано или недопустимо")
       end
-      if uterine_volume.nil? || uterine_volume == 0
+      if uterine_volume.nil? || uterine_volume <= 0
         errors.add(:uterine_volume, "Значение не задано или недопустимо")
       end
       if uterine_cavity_size_change.value == 'расширена'
@@ -120,10 +120,10 @@ class GynecologicExamination < ActiveRecord::Base
 
       # миометрий
       if myometric_structure_change.value == 'изменена'
-        if myometrium_anterior_wall_thickness.nil? || myometrium_anterior_wall_thickness == 0
+        if myometrium_anterior_wall_thickness.nil? || myometrium_anterior_wall_thickness <= 0
           errors.add(:myometrium_anterior_wall_thickness, "Значение не задано или недопустимо")
         end
-        if myometrium_posterior_wall_thickness.nil? || myometrium_posterior_wall_thickness == 0
+        if myometrium_posterior_wall_thickness.nil? || myometrium_posterior_wall_thickness <= 0
           errors.add(:myometrium_posterior_wall_thickness, "Значение не задано или недопустимо")
         end
       end
@@ -144,7 +144,7 @@ class GynecologicExamination < ActiveRecord::Base
       if endometrial_adumbration.value == '-- не задано --'
         errors.add(:endometrial_adumbration_id, "Не задано значение")
       end
-      if endometrial_thickness.nil? || endometrial_thickness == 0
+      if endometrial_thickness.nil? || endometrial_thickness <= 0
         errors.add(:endometrial_thickness, "Не задано значение")
       end
 
@@ -158,15 +158,15 @@ class GynecologicExamination < ActiveRecord::Base
 
       # шейка
       if cervix_visibility.value == 'определяется'
-        if cervix_size.nil? || cervix_size == 0
+        if cervix_size.nil? || cervix_size <= 0
           errors.add(:cervix_size, "Значение не задано или недопустимо")
         end
         if cervix_structure_change.value == '-- не задано --'
           errors.add(:cervix_structure_change_id, "Не задано значение")
         end
         if cervix_structure_change.value == 'изменена'
-          if (endocervix_cyst_min_size.nil? || endocervix_cyst_min_size == 0 ) &&
-             (endocervix_cyst_max_size.nil? || endocervix_cyst_max_size == 0 )
+          if (endocervix_cyst_min_size.nil? || endocervix_cyst_min_size <= 0 ) &&
+             (endocervix_cyst_max_size.nil? || endocervix_cyst_max_size <= 0 )
             errors.add(:endocervix_cyst_min_size, "Значение не задано или недопустимо")
             errors.add(:endocervix_cyst_max_size, "Значение не задано или недопустимо")
           end

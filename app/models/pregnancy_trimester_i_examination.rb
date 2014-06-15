@@ -25,16 +25,16 @@ class PregnancyTrimesterIExamination < ActiveRecord::Base
   validate :uterine_attributes
   
   def uterine_attributes
-    if gestation_age_in_weeks.nil? || gestation_age_in_weeks == 0
+    if gestation_age_in_weeks.nil? || gestation_age_in_weeks <= 0
       errors.add(:gestation_age_in_weeks, "Значение не задано или недопустимо")
     end
-    if uterus_anteroposterior.nil? || uterus_anteroposterior == 0
+    if uterus_anteroposterior.nil? || uterus_anteroposterior <= 0
       errors.add(:uterus_anteroposterior, "Значение не задано или недопустимо")
     end
-    if uterus_length.nil? || uterus_length == 0
+    if uterus_length.nil? || uterus_length <= 0
       errors.add(:uterus_length, "Значение не задано или недопустимо")
     end
-    if uterus_transverse_size.nil? || uterus_transverse_size == 0
+    if uterus_transverse_size.nil? || uterus_transverse_size <= 0
       errors.add(:uterus_transverse_size, "Значение не задано или недопустимо")
     end
   end

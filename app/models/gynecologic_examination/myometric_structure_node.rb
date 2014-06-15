@@ -13,7 +13,7 @@ class GynecologicExamination::MyometricStructureNode < ActiveRecord::Base
   validate :check_attributes_presence
   
   def check_attributes_presence
-    if size.nil? || size == 0
+    if size.nil? || size <= 0
       errors.add(:size, "Значение не задано или недопустимо")
     end
   end

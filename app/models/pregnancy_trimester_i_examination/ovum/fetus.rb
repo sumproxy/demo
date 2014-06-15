@@ -8,10 +8,10 @@ class PregnancyTrimesterIExamination::Ovum::Fetus < ActiveRecord::Base
   validate :check_attributes
   
   def check_attributes
-    if biparietal_size.nil? || biparietal_size == 0
+    if biparietal_size.nil? || biparietal_size <= 0
       errors.add(:biparietal_size, 'Значение не задано или недопустимо.')
     end
-    if coccyx_parietal_size.nil? || coccyx_parietal_size == 0
+    if coccyx_parietal_size.nil? || coccyx_parietal_size <= 0
       errors.add(:coccyx_parietal_size, 'Значение не задано или недопустимо.')
     end
   end

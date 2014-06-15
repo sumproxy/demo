@@ -24,17 +24,17 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
   validate :check_follicle_size_is_set
   
   def check_ovary_attributes
-    if visibility.value == 'определяется'
+    if visibility.value <= 'определяется'
       flag = false
-      if length.nil? || length == 0
+      if length.nil? || length <= 0
         errors.add(:length, "Значение не задано или недопустимо")
         flag = true
       end
-      if thickness.nil? || thickness == 0
+      if thickness.nil? || thickness <= 0
         errors.add(:thickness, "Значение не задано или недопустимо")
         flag = true
       end
-      if width.nil? || width == 0
+      if width.nil? || width <= 0
         errors.add(:width, "Значение не задано или недопустимо")
         flag = true
       end

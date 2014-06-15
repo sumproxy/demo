@@ -13,16 +13,16 @@ class PregnancyTrimesterIExamination::Ovum < ActiveRecord::Base
   validate :check_attributes
   
   def check_attributes
-    if length.nil? || length == 0
+    if length.nil? || length <= 0
       errors.add(:length, "Значение не задано или недопустимо")
     end
-    if anteroposterior.nil? || anteroposterior == 0
+    if anteroposterior.nil? || anteroposterior <= 0
       errors.add(:anteroposterior, "Значение не задано или недопустимо")
     end
-    if median_inner_diameter.nil? || median_inner_diameter == 0
+    if median_inner_diameter.nil? || median_inner_diameter <= 0
       errors.add(:median_inner_diameter, "Значение не задано или недопустимо")
     end
-    if gestation_age_in_weeks.nil? || gestation_age_in_weeks == 0
+    if gestation_age_in_weeks.nil? || gestation_age_in_weeks <= 0
       errors.add(:gestation_age_in_weeks, "Значение не задано или недопустимо")
     end
   end
