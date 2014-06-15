@@ -169,13 +169,14 @@
     });
   });
 </script>
-<%= nested_form_for(@pregnancy_trimester_i_examination) do |f| %>
-  <% if @pregnancy_trimester_i_examination.errors.any? %>
+<% @form = @pregnancy_trimester_i_examination %>
+<%= nested_form_for(@form) do |f| %>
+  <% if @form.errors.any? %>
     <div id="error_explanation">
-      <h2>Из-за <%= ec = @pregnancy_trimester_i_examination.errors.count %> <%= Russian.p(ec, "ошибки", "ошибок", "ошибок") %> отчет сохранить не удалось:</h2>
+      <h2>Из-за <%= ec = @form.errors.count %> <%= Russian.p(ec, "ошибки", "ошибок", "ошибок") %> отчет сохранить не удалось:</h2>
 
       <ul>
-      <% @pregnancy_trimester_i_examination.errors.full_messages.each do |msg| %>
+      <% @form.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
