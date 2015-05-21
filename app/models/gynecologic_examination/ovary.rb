@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 class GynecologicExamination::Ovary < ActiveRecord::Base
   has_one :gynecologic_examination
   belongs_to :visibility
@@ -24,31 +24,23 @@ class GynecologicExamination::Ovary < ActiveRecord::Base
   validate :check_follicle_size_is_set
   
   def check_ovary_attributes
-    if visibility.value <= 'определяется'
-      flag = false
+    if visibility.value == 'определяется'
       if length.nil? || length <= 0
         errors.add(:length, "Значение не задано или недопустимо")
-        flag = true
       end
       if thickness.nil? || thickness <= 0
         errors.add(:thickness, "Значение не задано или недопустимо")
-        flag = true
       end
       if width.nil? || width <= 0
         errors.add(:width, "Значение не задано или недопустимо")
-        flag = true
       end
       if structure.value == '-- не задано --'
         errors.add(:structure_id, "Не задано значение")
-        flag = true
       end
       if size.value == '-- не задано --'
         errors.add(:size_id, "Не задано значение")
-        flag = true
       end
-      return false if flag
     end
-    return true
   end
   
   def check_follicle_size_is_set
