@@ -11,16 +11,19 @@ the Ist trimester.
 1. At the command prompt change directory to the application directory:
        cd demo (use full path to demo)
 
-2. At the command prompt run:
+2. Install bundler if it hasn't been installed:
+       gem install bundle
+
+3. At the command prompt run:
        bundle install
        bundle exec rake db:schema:load>
        bundle exec rake db:seed
 
-3. At the same command prompt start the web server:
+4. At the same command prompt start the web server:
        rails server
 
-4. Go to http://localhost:3000/ in your browser and you'll see a login screen, login with admin:admin.
+5. Go to http://localhost:3000/ in your browser and you'll see a login screen, login with admin:admin.
 
-5. Click on the patients link and then on the link to create your first patient. Once the patient is created you will be redirected to his/her record page.
+6. Click on the patients link and then on the link to create your first patient. Once the patient is created you will be redirected to his/her record page.
 
-6. Select the type of examination you wish to file. Click create to proceed.
+7. Select the type of examination you wish to file. Click create to proceed.
