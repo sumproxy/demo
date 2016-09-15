@@ -22,7 +22,6 @@ end
 
 gem 'russian', '~> 0.6.0'
 gem 'nested_form'
-gem "debugger", "~> 1.6.1"
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
