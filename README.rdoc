@@ -16,7 +16,7 @@ the Ist trimester.
 
 3. At the command prompt run:
        bundle install
-       bundle exec rake db:schema:load>
+       bundle exec rake db:schema:load
        bundle exec rake db:seed
 
 4. At the same command prompt start the web server:
